@@ -27,13 +27,6 @@ export default defineConfig({
         rewrite: (path) =>
           path.replace(/^\/rs-runemetrics/, "/runemetrics/profile/profile"),
       },
-      // Weird Gloop RS3 GE latest prices (batch by ?name=A|B|C).
-      "/ge-price": {
-        target: "https://api.weirdgloop.org",
-        changeOrigin: true,
-        rewrite: (path) =>
-          path.replace(/^\/ge-price/, "/exchange/history/rs/latest"),
-      },
     },
   },
 });

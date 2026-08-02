@@ -11,11 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-
-# Diag scratch outputs (keep the .mjs scripts)
-scripts/diag/*.png
-scripts/diag/*.html
-scripts/diag/video-*/
+eng.traineddata
 
 # Editor / agent
 .cursor/

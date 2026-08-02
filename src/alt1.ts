@@ -9,7 +9,9 @@ declare global {
       rsLinked: boolean;
       rsWidth?: number;
       rsHeight?: number;
+      rsScaling?: number;
       rsActive?: boolean;
+      compatEnabled?: boolean;
       identifyAppUrl: (url: string) => unknown;
       bindRegion?: (x: number, y: number, w: number, h: number) => number;
       bindReadColorString?: (

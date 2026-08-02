@@ -77,6 +77,61 @@ export const materialCategory = (material: MaterialInfo): string => {
   )[0][0];
 };
 
+/** Dig sites / areas where a material is typically excavated. */
+const PRIMARY_DIG_SITES = new Set([
+  "Kharid-et",
+  "Everlight",
+  "Infernal Source",
+  "Orthen",
+  "Warforge",
+  "Stormguard Citadel",
+  "Senntisten",
+  "Daemonheim",
+  "Moonrise",
+  "Moonrise Dig Site",
+  "Archaeology Guild",
+]);
+
+const ALIGNMENT_DIG_SITE: Record<string, string> = {
+  Zarosian: "Kharid-et",
+  Zamorakian: "Infernal Source",
+  Saradominist: "Everlight",
+  Armadylean: "Stormguard Citadel",
+  Bandosian: "Warforge",
+  Dragonkin: "Orthen",
+  Guthixian: "Moonrise Dig Site",
+  Miscellaneous: "Archaeology Guild",
+};
+
+const digSitesByMaterial = ((): Map<string, string[]> => {
+  const sites = new Map<string, Set<string>>();
+  for (const artefact of archaeologyData.artefacts) {
+    for (const material of artefact.materials) {
+      if (material.name.includes("(damaged)")) continue;
+      const set = sites.get(material.name) ?? new Set<string>();
+      for (const source of artefact.sources) {
+        if (PRIMARY_DIG_SITES.has(source)) set.add(source === "Moonrise" ? "Moonrise Dig Site" : source);
+      }
+      sites.set(material.name, set);
+    }
+  }
+  return new Map(
+    [...sites.entries()].map(([name, set]) => [name, [...set].sort((a, b) => a.localeCompare(b))]),
+  );
+})();
+
+/** Where to excavate this material (dig sites). */
+export const materialFindSites = (material: MaterialInfo): string[] => {
+  const known = digSitesByMaterial.get(material.name);
+  if (known?.length) return known;
+  const category = materialCategory(material);
+  if (category === COMMON_MATERIALS_LABEL) {
+    return ["Most dig sites"];
+  }
+  const site = ALIGNMENT_DIG_SITE[category];
+  return site ? [site] : [];
+};
+
 export interface CollectionProgress {
   collection: Collection;
   completeSets: number;
@@ -86,6 +141,8 @@ export interface CollectionProgress {
   totalChronotes: number;
   totalTetracompassPieces: number;
   pendingRestoreXp: number;
+  /** Materials needed to restore owned unrestored sets (aggregated). */
+  restoreMaterials: { name: string; quantity: number }[];
   score: number;
 }
 
@@ -120,6 +177,25 @@ export const getCollectionProgress = (
     (total, artefact) => total + getCount(state, artefact.id).damaged * artefact.restoreXp,
     0,
   );
+
+  // Materials to restore enough damaged pieces so every owned set is restored.
+  const materialTotals = new Map<string, number>();
+  for (const artefact of entries) {
+    const count = getCount(state, artefact.id);
+    const shortfall = Math.max(0, potentialSets - count.restored);
+    const toRestore = Math.min(count.damaged, shortfall);
+    if (!toRestore) continue;
+    for (const material of artefact.materials) {
+      materialTotals.set(
+        material.name,
+        (materialTotals.get(material.name) ?? 0) + material.quantity * toRestore,
+      );
+    }
+  }
+  const restoreMaterials = [...materialTotals.entries()]
+    .map(([name, quantity]) => ({ name, quantity }))
+    .sort((a, b) => b.quantity - a.quantity || a.name.localeCompare(b.name));
+
   const totalChronotes =
     potentialSets * (collection.artefactChronotes + collection.bonusChronotes);
   const totalTetracompassPieces = potentialSets * collection.tetracompassPieces;
@@ -140,6 +216,7 @@ export const getCollectionProgress = (
     totalChronotes,
     totalTetracompassPieces,
     pendingRestoreXp,
+    restoreMaterials,
     score,
   };
 };

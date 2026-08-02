@@ -60,12 +60,6 @@ export interface PlayerState {
   xp: number;
   theme: ThemeName;
   compact: boolean;
-  debugScanOverlay: boolean;
-  // Outline thickness in pixels for the Alt1 scan debug overlay.
-  debugOverlayWidth: number;
-  /** Show the stitched storage PNG under scan results (debug). Off by default. */
-  debugStitchPreview: boolean;
-  advancedMatching: boolean;
   entryMode: EntryMode;
   setupComplete: boolean;
   inventory: Record<string, InventoryCount>;

@@ -18,6 +18,12 @@ import {
   materialLearnedKey,
   saveLearnedSprite,
 } from "./learned";
+import {
+  cleanOptionsText,
+  countOptionsInk,
+  fuzzyCatalogueName,
+  readOptionsStrip,
+} from "./options-ocr";
 
 type OcrFont = OCR.FontDefinition;
 
@@ -29,20 +35,17 @@ const unwrapFont = (value: unknown): OcrFont => {
   return current as OcrFont;
 };
 
-/**
- * Same fonts Alt1 TooltipReader / chat readers use.
- * 10px mono first (official bank tooltip), then nearby sizes for slight UI scale drift.
- */
+/** Tooltip fonts (fallback floating-tooltip OCR). */
 const FONTS = [
   unwrapFont(fontAa10Mono),
   unwrapFont(fontAa8),
   unwrapFont(fontAa12Mono),
 ];
 
-/** Official TooltipReader.readBankItem colours (+ a couple of modern golds). */
+/** TooltipReader bank colours (+ a couple of modern golds). */
 const BANK_COLS: OCR.ColortTriplet[] = [
-  [248, 213, 107], // members / gold item name
-  [184, 209, 209], // non-members silver
+  [248, 213, 107],
+  [184, 209, 209],
   [255, 255, 0],
   [255, 204, 0],
   [255, 187, 34],
@@ -53,10 +56,12 @@ const SLOT = 36;
 const MIN_NAME_LETTERS = 6;
 
 export type TaughtFromTooltip = {
+  /** Empty when the read name is not an archaeology artefact/material. */
   key: string;
   label: string;
   quantity: number;
   dataUrl: string;
+  trackable: boolean;
 };
 
 export type CellTeachGate = {
@@ -73,7 +78,6 @@ export type CellTeachCallbacks = {
   onTaught: (taught: TaughtFromTooltip) => void;
   onStatus?: (message: string) => void;
   onHud?: (line: string) => void;
-  onUntracked?: (rawName: string) => void;
 };
 
 type Rect = { x: number; y: number; width: number; height: number };
@@ -93,21 +97,7 @@ const cropUnderMouse = (mouse: { x: number; y: number }): string | null => {
   return canvas.toDataURL("image/png");
 };
 
-const cleanHoverName = (raw: string): string =>
-  raw
-    .replace(
-      /^\s*(withdraw|deposit|offer|buy|sell|use|wear|wield|eat|drink|empty|drop|examine|cast)-\d*\s*/i,
-      "",
-    )
-    .replace(
-      /^\s*(withdraw|deposit|offer|buy|sell|use|wear|wield|eat|drink|empty|drop|examine|cast)\s+/i,
-      "",
-    )
-    .replace(/\s*\/\s*\d+\s*more options.*$/i, "")
-    .replace(/\s*\+\d+\s*options.*$/i, "")
-    .replace(/\s*[*★]+\s*$/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
+const cleanHoverName = (raw: string): string => cleanOptionsText(raw);
 
 const letterScore = (text: string): number =>
   (text.match(/[A-Za-z]/g)?.length ?? 0);
@@ -171,7 +161,7 @@ export const parseItemName = (
 export const mouseInLinkedCell = (
   mouse: { x: number; y: number },
   gate: CellTeachGate,
-  slack = 36,
+  slack = 2,
 ): boolean =>
   mouse.x >= gate.screenLeft - slack &&
   mouse.x < gate.screenLeft + gate.screenWidth + slack &&
@@ -458,6 +448,10 @@ const catalogueHit = (raw: string): string => {
 
 /** Drop obvious OCR garbage; keep imperfect names for catalogue matching. */
 const softAccept = (raw: string): string => {
+  if (!raw) return "";
+  // bindReadStringEx JSON must never become a “name”.
+  if (raw.trimStart().startsWith("{")) return "";
+  if (/fragments|fontname|allowgap/i.test(raw) && /[{}]/.test(raw)) return "";
   const cleaned = cleanHoverName(raw);
   if (letterScore(cleaned) < 3) return "";
   const letters = cleaned.replace(/[^A-Za-z]/g, "");
@@ -468,12 +462,192 @@ const softAccept = (raw: string): string => {
 const acceptRead = (raw: string): string => {
   const cleaned = softAccept(raw);
   if (!cleaned) return "";
-  const hit = catalogueHit(cleaned);
+  const hit =
+    catalogueHit(cleaned) ||
+    fuzzyCatalogueName(cleaned) ||
+    fuzzyCatalogueName(raw);
   if (hit) return hit;
   if (isPlausibleItemName(cleaned)) return cleaned;
   // Allow shorter OCR for catalogue/manual flow.
   if (letterScore(cleaned) >= 6 && /[A-Za-z]{3,}/.test(cleaned)) return cleaned;
   return "";
+};
+
+/** Alt1 bindReadStringEx often returns JSON with text fragments. */
+const unwrapBindRead = (raw: string): string => {
+  if (!raw) return "";
+  const trimmed = raw.trim();
+  if (!trimmed.startsWith("{")) return raw;
+  try {
+    const parsed = JSON.parse(trimmed) as {
+      text?: string;
+      fragments?: { text?: string }[];
+    };
+    if (typeof parsed.text === "string" && parsed.text.trim()) {
+      return parsed.text;
+    }
+    if (Array.isArray(parsed.fragments)) {
+      return parsed.fragments.map((f) => f.text ?? "").join("");
+    }
+  } catch {
+    // not JSON
+  }
+  return raw;
+};
+
+/** Capture the top-left options strip (same buffer bank scan uses when possible). */
+const captureOptionsStrip = (
+  width: number,
+  height: number,
+): ImageData | null => {
+  try {
+    const hold = a1lib.captureHoldFullRs?.();
+    if (hold && typeof hold.toData === "function") {
+      const full = hold.toData(0, 0, width, height);
+      if (full?.data) return full;
+    }
+  } catch {
+    // fall through
+  }
+  try {
+    return a1lib.capture(0, 0, width, height);
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * Read the mouseover / options line at the top-left of the RS client.
+ * Sync Alt1/sprite OCR first; callers that can await should use the async path.
+ */
+export const readTopLeftOptionsName = (): {
+  name: string;
+  raw: string;
+  ink: number;
+} => {
+  const alt1 = typeof window !== "undefined" ? window.alt1 : undefined;
+  const rsW = alt1?.rsWidth ?? 800;
+  const width = Math.min(820, Math.max(400, rsW - 4));
+  const height = 36;
+
+  let bestRaw = "";
+  const consider = (text: string): void => {
+    const unwrapped = unwrapBindRead(text);
+    const soft = softAccept(unwrapped);
+    if (!soft) return;
+    if (letterScore(soft) > letterScore(bestRaw)) bestRaw = soft;
+  };
+
+  const img = captureOptionsStrip(width, height);
+  const ink = img?.data ? countOptionsInk(img) : 0;
+
+  // Shared JS OCR path.
+  if (img?.data) {
+    const js = readOptionsStrip(img, { maxAttempts: 100 });
+    consider(js.name);
+    consider(js.raw);
+    if (letterScore(bestRaw) >= 10) {
+      return { name: acceptRead(bestRaw), raw: bestRaw, ink };
+    }
+  }
+
+  // Native Alt1 OCR — prefer preset colours, then yellow/white singles.
+  if (alt1?.bindRegion) {
+    try {
+      const id = alt1.bindRegion(0, 0, width, height);
+      if (id > 0) {
+        const yellow = a1lib.mixColor(255, 255, 0);
+        const gold = a1lib.mixColor(248, 213, 107);
+        const white = a1lib.mixColor(255, 255, 255);
+        const cyan = a1lib.mixColor(0, 255, 255);
+        let attempts = 0;
+        outer: for (const font of ["chat", "chatmono"]) {
+          for (const y of [8, 10, 12, 14, 16, 18, 20]) {
+            for (const x of [8, 20, 40, 60, 80, 110, 150, 200]) {
+              attempts += 1;
+              if (attempts > 48) break outer;
+
+              // Default preset colours (often better than a hand-picked list).
+              if (alt1.bindReadString) {
+                consider(alt1.bindReadString(id, font, x, y) ?? "");
+              }
+              if (alt1.bindReadColorString) {
+                for (const color of [yellow, gold, white, cyan]) {
+                  consider(
+                    alt1.bindReadColorString(id, font, color, x, y) ?? "",
+                  );
+                }
+              }
+              if (alt1.bindReadStringEx) {
+                consider(
+                  alt1.bindReadStringEx(
+                    id,
+                    x,
+                    y,
+                    JSON.stringify({
+                      fontname: font,
+                      colors: [yellow, gold, white, cyan],
+                      allowgap: true,
+                    }),
+                  ) ?? "",
+                );
+              }
+              if (letterScore(bestRaw) >= 12 && catalogueHit(bestRaw)) {
+                break outer;
+              }
+            }
+          }
+        }
+      }
+    } catch {
+      // ignore
+    }
+  }
+
+  return { name: acceptRead(bestRaw), raw: bestRaw, ink };
+};
+
+/**
+ * Same as readTopLeftOptionsName, then tesseract + catalogue fuzzy match
+ * (the offline recipe that reads Yurkolgokh from screenshots).
+ */
+export const readTopLeftOptionsNameAsync = async (): Promise<{
+  name: string;
+  raw: string;
+  ink: number;
+}> => {
+  const sync = readTopLeftOptionsName();
+  if (sync.name && parseItemName(sync.name)) return sync;
+  if (sync.name && letterScore(sync.name) >= 10) return sync;
+
+  const alt1 = typeof window !== "undefined" ? window.alt1 : undefined;
+  const rsW = alt1?.rsWidth ?? 800;
+  const width = Math.min(820, Math.max(400, rsW - 4));
+  const height = 36;
+  const img = captureOptionsStrip(width, height);
+  if (!img?.data) return sync;
+
+  try {
+    const { readOptionsStripTesseract } = await import("./options-tesseract");
+    const tess = await readOptionsStripTesseract(img);
+    const softRaw = softAccept(tess.raw) || softAccept(tess.name) || tess.raw;
+    const name =
+      acceptRead(tess.name) ||
+      acceptRead(tess.raw) ||
+      fuzzyCatalogueName(tess.name) ||
+      fuzzyCatalogueName(tess.raw) ||
+      fuzzyCatalogueName(softRaw);
+    if (name || letterScore(softRaw) > letterScore(sync.raw)) {
+      return {
+        name: name || acceptRead(softRaw),
+        raw: softRaw || sync.raw,
+        ink: Math.max(sync.ink, tess.inkCount),
+      };
+    }
+  } catch {
+    // keep sync result
+  }
+  return sync;
 };
 
 /** Y of the densest name-ink row in the title band. */
@@ -609,20 +783,72 @@ export type TooltipProbe = {
   raw: string;
   /** True when a dark tooltip panel was located near the cursor. */
   boxFound: boolean;
+  /** Where the usable name came from. */
+  source: "options" | "tooltip" | "none";
+  /** Gold/white ink pixels in the options strip (0 = text not in capture). */
+  optionsInk?: number;
+};
+
+const finalizeProbeName = (
+  bestName: string,
+  bestRaw: string,
+): string => {
+  const fromRaw = catalogueHit(bestRaw) || acceptRead(bestRaw);
+  return (
+    (bestName &&
+    (parseItemName(bestName) ||
+      isPlausibleItemName(bestName) ||
+      letterScore(bestName) >= 6)
+      ? bestName
+      : "") ||
+    (fromRaw &&
+    (parseItemName(fromRaw) ||
+      isPlausibleItemName(fromRaw) ||
+      letterScore(fromRaw) >= 6)
+      ? fromRaw
+      : "")
+  );
 };
 
 /**
- * Chatbox-style probe: locate tooltip box near the mouse, then read its name.
+ * Primary teach reader: top-left mouseover / options strip.
+ */
+export const probeTopLeftOptions = (): TooltipProbe => {
+  const read = readTopLeftOptionsName();
+  const name = finalizeProbeName(read.name, read.raw);
+  return {
+    name,
+    raw: read.raw,
+    boxFound: Boolean(read.raw) || read.ink >= 20,
+    source: name ? "options" : read.raw || read.ink >= 20 ? "options" : "none",
+    optionsInk: read.ink,
+  };
+};
+
+/** Async options reader — includes in-app tesseract + fuzzy catalogue match. */
+export const probeTopLeftOptionsAsync = async (): Promise<TooltipProbe> => {
+  const read = await readTopLeftOptionsNameAsync();
+  const name = finalizeProbeName(read.name, read.raw);
+  return {
+    name,
+    raw: read.raw,
+    boxFound: Boolean(read.raw) || read.ink >= 20,
+    source: name ? "options" : read.raw || read.ink >= 20 ? "options" : "none",
+    optionsInk: read.ink,
+  };
+};
+
+/**
+ * Fallback: locate tooltip box near the mouse, then read its name.
  */
 export const probeBankTooltip = (
   mouse: { x: number; y: number } | null,
 ): TooltipProbe => {
-  if (!mouse) return { name: "", raw: "", boxFound: false };
+  if (!mouse) return { name: "", raw: "", boxFound: false, source: "none" };
 
   const bands = [
-    { x: mouse.x - 40, y: mouse.y - 110, w: 440, h: 130 }, // above cursor
-    { x: mouse.x + 8, y: mouse.y - 40, w: 400, h: 100 }, // right of cursor
-    { x: mouse.x - 40, y: mouse.y + 18, w: 420, h: 100 }, // below cursor
+    { x: mouse.x - 40, y: mouse.y - 110, w: 440, h: 130 },
+    { x: mouse.x + 8, y: mouse.y - 40, w: 400, h: 100 },
   ];
 
   let boxFound = false;
@@ -642,7 +868,6 @@ export const probeBankTooltip = (
 
     const realBox = findTooltipBox(img);
     if (realBox) boxFound = true;
-    // If locate missed, still try OCR on a title-sized band near the cursor.
     const useBox =
       realBox ??
       ({
@@ -658,44 +883,86 @@ export const probeBankTooltip = (
     if (realBox || letterScore(bestRaw) >= 6) break;
   }
 
-  const fromRaw = catalogueHit(bestRaw) || acceptRead(bestRaw);
-  const usable =
-    (bestName &&
-    (parseItemName(bestName) ||
-      isPlausibleItemName(bestName) ||
-      letterScore(bestName) >= 6)
-      ? bestName
-      : "") ||
-    (fromRaw &&
-    (parseItemName(fromRaw) ||
-      isPlausibleItemName(fromRaw) ||
-      letterScore(fromRaw) >= 6)
-      ? fromRaw
-      : "");
-
+  const usable = finalizeProbeName(bestName, bestRaw);
   return {
     name: usable,
     raw: bestRaw,
     boxFound: boxFound || Boolean(bestRaw),
+    source: usable ? "tooltip" : "none",
+  };
+};
+
+/** Options strip first (async tesseract); floating tooltip only if that misses. */
+export const probeHoverItemAsync = async (
+  mouse: { x: number; y: number } | null,
+): Promise<TooltipProbe> => {
+  const options = await probeTopLeftOptionsAsync();
+  if (options.name && parseItemName(options.name)) return options;
+  if (options.name && letterScore(options.name) >= 8) return options;
+  if (letterScore(options.raw) >= 6) {
+    return { ...options, name: "", source: "options" };
+  }
+
+  const tip = probeBankTooltip(mouse);
+  if (tip.name) return tip;
+
+  return {
+    name: "",
+    raw: tip.raw || options.raw,
+    boxFound: tip.boxFound || options.boxFound,
+    source: options.raw || (options.optionsInk ?? 0) >= 20
+      ? "options"
+      : tip.boxFound
+        ? "tooltip"
+        : "none",
+    optionsInk: options.optionsInk,
+  };
+};
+
+/** Options strip first; floating tooltip only if that misses. */
+export const probeHoverItem = (
+  mouse: { x: number; y: number } | null,
+): TooltipProbe => {
+  const options = probeTopLeftOptions();
+  if (options.name && parseItemName(options.name)) return options;
+  if (options.name && letterScore(options.name) >= 8) return options;
+  // Show partial options OCR in the HUD before spending time on tooltips.
+  if (letterScore(options.raw) >= 6) {
+    return { ...options, name: "", source: "options" };
+  }
+
+  const tip = probeBankTooltip(mouse);
+  if (tip.name) return tip;
+
+  return {
+    name: "",
+    raw: tip.raw || options.raw,
+    boxFound: tip.boxFound || options.boxFound,
+    source: options.raw || (options.optionsInk ?? 0) >= 20
+      ? "options"
+      : tip.boxFound
+        ? "tooltip"
+        : "none",
+    optionsInk: options.optionsInk,
   };
 };
 
 export const readBankTooltipName = (
   mouse: { x: number; y: number } | null,
-): string => probeBankTooltip(mouse).name;
+): string => probeHoverItem(mouse).name;
 
-export const readTopLeftHoverName = (): string => readBankTooltipName(null);
+export const readTopLeftHoverName = (): string => probeTopLeftOptions().name;
 
 export type HoverNameRead = {
   name: string;
-  source: "tooltip" | "none";
+  source: "options" | "tooltip" | "none";
 };
 
 export const readHoverItemName = (
   mouse: { x: number; y: number } | null,
 ): HoverNameRead => {
-  const name = readBankTooltipName(mouse);
-  if (isPlausibleItemName(name)) return { name, source: "tooltip" };
+  const probe = probeHoverItem(mouse);
+  if (probe.name) return { name: probe.name, source: probe.source };
   return { name: "", source: "none" };
 };
 
@@ -734,7 +1001,7 @@ const safeMousePosition = (): { x: number; y: number } | null => {
 };
 
 const beginPoll = (
-  tick: () => void,
+  tick: () => void | Promise<void>,
   onStatus?: (message: string) => void,
 ): boolean => {
   stopHoverTeach();
@@ -751,26 +1018,32 @@ const beginPoll = (
       "Enable “Get game state” in Alt1 settings so the mouse can be tracked.",
     );
   }
+  void import("./options-tesseract")
+    .then((mod) => mod.warmOptionsTesseract())
+    .catch(() => {
+      // OCR worker is optional until the first read.
+    });
   const safeTick = (): void => {
     if (pollBusy) return;
     pollBusy = true;
-    try {
-      tick();
-    } catch (error) {
-      const raw = error instanceof Error ? error.message : String(error);
-      if (/No permission|permission/i.test(raw)) {
-        onStatus?.(
-          "Enable “View screen” and “Get game state” in Alt1 settings.",
-        );
-        return;
-      }
-      onStatus?.("Couldn’t read the tooltip — try hovering again.");
-    } finally {
-      pollBusy = false;
-    }
+    void Promise.resolve()
+      .then(() => tick())
+      .catch((error: unknown) => {
+        const raw = error instanceof Error ? error.message : String(error);
+        if (/No permission|permission/i.test(raw)) {
+          onStatus?.(
+            "Enable “View screen” and “Get game state” in Alt1 settings.",
+          );
+          return;
+        }
+        onStatus?.("Couldn’t read the tooltip — try hovering again.");
+      })
+      .finally(() => {
+        pollBusy = false;
+      });
   };
-  // Slow enough that capture+OCR can’t stack and freeze Alt1.
-  pollTimer = window.setInterval(safeTick, 450);
+  // Tesseract needs a bit more room between captures than sprite OCR alone.
+  pollTimer = window.setInterval(safeTick, 700);
   window.setTimeout(safeTick, 80);
   return true;
 };
@@ -788,16 +1061,17 @@ export const startHoverTeach = (
   onStatus?: (message: string) => void,
 ): void => {
   if (
-    !beginPoll(() => {
+    !beginPoll(async () => {
       const mouse = safeMousePosition();
       if (!mouse) return;
 
-      const { name: cleaned } = readHoverItemName(mouse);
+      const probe = await probeHoverItemAsync(mouse);
+      const cleaned = probe.name;
       if (!cleaned) return;
 
       const parsed = parseItemName(cleaned);
       if (!parsed) {
-        onStatus?.(`“${cleaned}” isn’t a tracked artefact or material.`);
+        onStatus?.(`“${cleaned}” isn’t a trackable item — pick a name below.`);
         return;
       }
 
@@ -815,13 +1089,14 @@ export const startHoverTeach = (
         label: parsed.label,
         quantity: 1,
         dataUrl,
+        trackable: true,
       });
     }, onStatus)
   ) {
     return;
   }
 
-  onStatus?.("Hover an unmatched icon so its tooltip appears.");
+  onStatus?.("Hover an unmatched icon so the top-left name appears.");
 };
 
 export const startCellHoverTeach = (
@@ -836,7 +1111,7 @@ export const startCellHoverTeach = (
       : onTaughtOrCallbacks;
 
   if (
-    !beginPoll(() => {
+    !beginPoll(async () => {
       const mouse = safeMousePosition();
       if (!mouse) {
         pushHud(callbacks, "Hover the matching slot in your bank.");
@@ -848,50 +1123,48 @@ export const startCellHoverTeach = (
         return;
       }
 
-      const probe = probeBankTooltip(mouse);
-      if (!probe.name) {
-        if (probe.raw) {
-          pushHud(
-            callbacks,
-            `Saw “${probe.raw}” — pick the matching name below if needed.`,
-          );
-        } else if (probe.boxFound) {
-          pushHud(
-            callbacks,
-            "Found a tooltip panel but couldn’t OCR the name — use the pick list below.",
-          );
+      pushHud(callbacks, "Reading top-left name…");
+      const probe = await probeHoverItemAsync(mouse);
+      const label = softAccept(probe.name) || softAccept(probe.raw);
+      if (!label || letterScore(label) < 6) {
+        if (probe.raw && letterScore(softAccept(probe.raw)) >= 3) {
+          pushHud(callbacks, `Saw “${softAccept(probe.raw)}” — keep hovering…`);
+        } else if ((probe.optionsInk ?? 0) >= 20) {
+          pushHud(callbacks, "Top-left text is visible but unread — keep hovering…");
         } else {
-          pushHud(callbacks, "Waiting for the item tooltip…");
+          pushHud(
+            callbacks,
+            "Hover the slot until the top-left options text shows the item name…",
+          );
         }
         return;
       }
 
-      const parsed = parseItemName(probe.name);
-      if (!parsed) {
-        pushHud(
-          callbacks,
-          "Tooltip read, but it isn’t a tracked item — pick a name below.",
-        );
-        return;
-      }
-
-      pushHud(callbacks, `Found “${parsed.label}”`);
-
+      const parsed = parseItemName(label);
       const now = performance.now();
-      if (parsed.key === lastTaughtKey && now - lastTaughtAt < 2500) return;
+      const dedupeKey = parsed?.key ?? `raw:${label.toLowerCase()}`;
+      if (dedupeKey === lastTaughtKey && now - lastTaughtAt < 2500) return;
 
-      lastTaughtKey = parsed.key;
+      lastTaughtKey = dedupeKey;
       lastTaughtAt = now;
+      pushHud(
+        callbacks,
+        parsed ? `Found “${parsed.label}”` : `Read “${label}”`,
+      );
       callbacks.onTaught({
-        key: parsed.key,
-        label: parsed.label,
+        key: parsed?.key ?? "",
+        label: parsed?.label ?? label,
         quantity: 1,
         dataUrl: gate.cropDataUrl,
+        trackable: Boolean(parsed),
       });
     }, callbacks.onStatus)
   ) {
     return;
   }
 
-  pushHud(callbacks, "Hover that bank slot until the tooltip appears.");
+  pushHud(
+    callbacks,
+    "Hover that bank slot — watch for the name in the top-left of the game.",
+  );
 };
