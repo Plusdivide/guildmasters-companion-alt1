@@ -1,0 +1,998 @@
+{
+  "artefacts": {
+    "centurion-s-dress-sword": {
+      "restored": "centurion-s-dress-sword-restored.png",
+      "damaged": "centurion-s-dress-sword-damaged.png"
+    },
+    "venator-dagger": {
+      "restored": "venator-dagger-restored.png",
+      "damaged": "venator-dagger-damaged.png"
+    },
+    "venator-light-crossbow": {
+      "restored": "venator-light-crossbow-restored.png",
+      "damaged": "venator-light-crossbow-damaged.png"
+    },
+    "centurion-s-seal": {
+      "restored": "centurion-s-seal-restored.png",
+      "damaged": "centurion-s-seal-damaged.png"
+    },
+    "primis-elementis-standard": {
+      "restored": "primis-elementis-standard-restored.png",
+      "damaged": "primis-elementis-standard-damaged.png"
+    },
+    "legionary-gladius": {
+      "restored": "legionary-gladius-restored.png",
+      "damaged": "legionary-gladius-damaged.png"
+    },
+    "legionary-square-shield": {
+      "restored": "legionary-square-shield-restored.png",
+      "damaged": "legionary-square-shield-damaged.png"
+    },
+    "zaros-effigy": {
+      "restored": "zaros-effigy-restored.png",
+      "damaged": "zaros-effigy-damaged.png"
+    },
+    "zarosian-training-dummy": {
+      "restored": "zarosian-training-dummy-restored.png",
+      "damaged": "zarosian-training-dummy-damaged.png"
+    },
+    "hookah-pipe": {
+      "restored": "hookah-pipe-restored.png",
+      "damaged": "hookah-pipe-damaged.png"
+    },
+    "opulent-wine-goblet": {
+      "restored": "opulent-wine-goblet-restored.png",
+      "damaged": "opulent-wine-goblet-damaged.png"
+    },
+    "crest-of-dagon": {
+      "restored": "crest-of-dagon-restored.png",
+      "damaged": "crest-of-dagon-damaged.png"
+    },
+    "disorder-painting": {
+      "restored": "disorder-painting-restored.png",
+      "damaged": "disorder-painting-damaged.png"
+    },
+    "legatus-maximus-figurine": {
+      "restored": "legatus-maximus-figurine-restored.png",
+      "damaged": "legatus-maximus-figurine-damaged.png"
+    },
+    "solem-in-umbra-painting": {
+      "restored": "solem-in-umbra-painting-restored.png",
+      "damaged": "solem-in-umbra-painting-damaged.png"
+    },
+    "imp-mask": {
+      "restored": "imp-mask-restored.png",
+      "damaged": "imp-mask-damaged.png"
+    },
+    "lesser-demon-mask": {
+      "restored": "lesser-demon-mask-restored.png",
+      "damaged": "lesser-demon-mask-damaged.png"
+    },
+    "greater-demon-mask": {
+      "restored": "greater-demon-mask-restored.png",
+      "damaged": "greater-demon-mask-damaged.png"
+    },
+    "teleportation-crystal": {
+      "restored": "teleportation-crystal-restored.png",
+      "damaged": "teleportation-crystal-damaged.png"
+    },
+    "order-of-dis-robes": {
+      "restored": "order-of-dis-robes-restored.png",
+      "damaged": "order-of-dis-robes-damaged.png"
+    },
+    "ritual-dagger": {
+      "restored": "ritual-dagger-restored.png",
+      "damaged": "ritual-dagger-damaged.png"
+    },
+    "frying-pan": {
+      "restored": "frying-pan-restored.png",
+      "damaged": "frying-pan-damaged.png"
+    },
+    "hallowed-lantern": {
+      "restored": "hallowed-lantern-restored.png",
+      "damaged": "hallowed-lantern-damaged.png"
+    },
+    "branding-iron": {
+      "restored": "branding-iron-restored.png",
+      "damaged": "branding-iron-damaged.png"
+    },
+    "manacles": {
+      "restored": "manacles-restored.png",
+      "damaged": "manacles-damaged.png"
+    },
+    "ancient-timepiece": {
+      "restored": "ancient-timepiece-restored.png",
+      "damaged": "ancient-timepiece-damaged.png"
+    },
+    "legatus-pendant": {
+      "restored": "legatus-pendant-restored.png",
+      "damaged": "legatus-pendant-damaged.png"
+    },
+    "ceremonial-unicorn-ornament": {
+      "restored": "ceremonial-unicorn-ornament-restored.png",
+      "damaged": "ceremonial-unicorn-ornament-damaged.png"
+    },
+    "ceremonial-unicorn-saddle": {
+      "restored": "ceremonial-unicorn-saddle-restored.png",
+      "damaged": "ceremonial-unicorn-saddle-damaged.png"
+    },
+    "dragonkin-device": {
+      "restored": "dragonkin-device-restored.png",
+      "damaged": "dragonkin-device-damaged.png"
+    },
+    "dragonkin-tablet": {
+      "restored": "dragonkin-tablet-restored.png",
+      "damaged": "dragonkin-tablet-damaged.png"
+    },
+    "everlight-harp": {
+      "restored": "everlight-harp-restored.png",
+      "damaged": "everlight-harp-damaged.png"
+    },
+    "everlight-trumpet": {
+      "restored": "everlight-trumpet-restored.png",
+      "damaged": "everlight-trumpet-damaged.png"
+    },
+    "everlight-violin": {
+      "restored": "everlight-violin-restored.png",
+      "damaged": "everlight-violin-damaged.png"
+    },
+    "lunar-calendar": {
+      "restored": "lunar-calendar-restored.png",
+      "damaged": "lunar-calendar-damaged.png"
+    },
+    "wolf-statuette": {
+      "restored": "wolf-statuette-restored.png",
+      "damaged": "wolf-statuette-damaged.png"
+    },
+    "ivory-sickle": {
+      "restored": "ivory-sickle-restored.png",
+      "damaged": "ivory-sickle-damaged.png"
+    },
+    "folded-arm-figurine-female": {
+      "restored": "folded-arm-figurine-female-restored.png",
+      "damaged": "folded-arm-figurine-female-damaged.png"
+    },
+    "folded-arm-figurine-male": {
+      "restored": "folded-arm-figurine-male-restored.png",
+      "damaged": "folded-arm-figurine-male-damaged.png"
+    },
+    "incite-fear-spell-scroll": {
+      "restored": "incite-fear-spell-scroll-restored.png",
+      "damaged": "incite-fear-spell-scroll-damaged.png"
+    },
+    "pontifex-signet-ring": {
+      "restored": "pontifex-signet-ring-restored.png",
+      "damaged": "pontifex-signet-ring-damaged.png"
+    },
+    "nakkirian-seal": {
+      "restored": "nakkirian-seal-restored.png",
+      "damaged": "nakkirian-seal-damaged.png"
+    },
+    "royal-game-of-ba": {
+      "restored": "royal-game-of-ba-restored.png",
+      "damaged": "royal-game-of-ba-damaged.png"
+    },
+    "apex-cap": {
+      "restored": "apex-cap-restored.png",
+      "damaged": "apex-cap-damaged.png"
+    },
+    "curse-tablet": {
+      "restored": "curse-tablet-restored.png",
+      "damaged": "curse-tablet-damaged.png"
+    },
+    "funerary-urn-of-shadow": {
+      "restored": "funerary-urn-of-shadow-restored.png",
+      "damaged": "funerary-urn-of-shadow-damaged.png"
+    },
+    "dominion-discus": {
+      "restored": "dominion-discus-restored.png",
+      "damaged": "dominion-discus-damaged.png"
+    },
+    "dominion-javelin": {
+      "restored": "dominion-javelin-restored.png",
+      "damaged": "dominion-javelin-damaged.png"
+    },
+    "dominion-pelte-shield": {
+      "restored": "dominion-pelte-shield-restored.png",
+      "damaged": "dominion-pelte-shield-damaged.png"
+    },
+    "infula-robes": {
+      "restored": "infula-robes-restored.png",
+      "damaged": "infula-robes-damaged.png"
+    },
+    "funerary-urn-of-smoke": {
+      "restored": "funerary-urn-of-smoke-restored.png",
+      "damaged": "funerary-urn-of-smoke-damaged.png"
+    },
+    "hand-of-the-ancients": {
+      "restored": "hand-of-the-ancients-restored.png",
+      "damaged": "hand-of-the-ancients-damaged.png"
+    },
+    "decorative-amphora": {
+      "restored": "decorative-amphora-restored.png",
+      "damaged": "decorative-amphora-damaged.png"
+    },
+    "funerary-urn-of-ice": {
+      "restored": "funerary-urn-of-ice-restored.png",
+      "damaged": "funerary-urn-of-ice-damaged.png"
+    },
+    "loarnab-rod": {
+      "restored": "loarnab-rod-restored.png",
+      "damaged": "loarnab-rod-damaged.png"
+    },
+    "inquisitor-s-ceremonial-armour": {
+      "restored": "inquisitor-s-ceremonial-armour-restored.png",
+      "damaged": "inquisitor-s-ceremonial-armour-damaged.png"
+    },
+    "inquisitor-s-ceremonial-mask": {
+      "restored": "inquisitor-s-ceremonial-mask-restored.png",
+      "damaged": "inquisitor-s-ceremonial-mask-damaged.png"
+    },
+    "inquisitor-s-seal": {
+      "restored": "inquisitor-s-seal-restored.png",
+      "damaged": "inquisitor-s-seal-damaged.png"
+    },
+    "the-lake-of-fire-painting": {
+      "restored": "the-lake-of-fire-painting-restored.png",
+      "damaged": "the-lake-of-fire-painting-damaged.png"
+    },
+    "lust-metal-sculpture": {
+      "restored": "lust-metal-sculpture-restored.png",
+      "damaged": "lust-metal-sculpture-damaged.png"
+    },
+    "backstrap-loom": {
+      "restored": "backstrap-loom-restored.png",
+      "damaged": "backstrap-loom-damaged.png"
+    },
+    "animal-doll": {
+      "restored": "animal-doll-restored.png",
+      "damaged": "animal-doll-damaged.png"
+    },
+    "initiate-s-kaunake": {
+      "restored": "initiate-s-kaunake-restored.png",
+      "damaged": "initiate-s-kaunake-damaged.png"
+    },
+    "gladiator-helmet": {
+      "restored": "gladiator-helmet-restored.png",
+      "damaged": "gladiator-helmet-damaged.png"
+    },
+    "gladiator-sword": {
+      "restored": "gladiator-sword-restored.png",
+      "damaged": "gladiator-sword-damaged.png"
+    },
+    "funerary-urn-of-blood": {
+      "restored": "funerary-urn-of-blood-restored.png",
+      "damaged": "funerary-urn-of-blood-damaged.png"
+    },
+    "funerary-urn-of-miasma": {
+      "restored": "funerary-urn-of-miasma-restored.png",
+      "damaged": "funerary-urn-of-miasma-damaged.png"
+    },
+    "model-chariot": {
+      "restored": "model-chariot-restored.png",
+      "damaged": "model-chariot-damaged.png"
+    },
+    "the-serpent-s-fall-carving": {
+      "restored": "the-serpent-s-fall-carving-restored.png",
+      "damaged": "the-serpent-s-fall-carving-damaged.png"
+    },
+    "chaos-star": {
+      "restored": "chaos-star-restored.png",
+      "damaged": "chaos-star-damaged.png"
+    },
+    "spiked-dog-collar": {
+      "restored": "spiked-dog-collar-restored.png",
+      "damaged": "spiked-dog-collar-damaged.png"
+    },
+    "bronze-dominion-medal": {
+      "restored": "bronze-dominion-medal-restored.png",
+      "damaged": "bronze-dominion-medal-damaged.png"
+    },
+    "silver-dominion-medal": {
+      "restored": "silver-dominion-medal-restored.png",
+      "damaged": "silver-dominion-medal-damaged.png"
+    },
+    "dominion-torch": {
+      "restored": "dominion-torch-restored.png",
+      "damaged": "dominion-torch-damaged.png"
+    },
+    "ikovian-gerege": {
+      "restored": "ikovian-gerege-restored.png",
+      "damaged": "ikovian-gerege-damaged.png"
+    },
+    "toy-glider": {
+      "restored": "toy-glider-restored.png",
+      "damaged": "toy-glider-damaged.png"
+    },
+    "toy-war-golem": {
+      "restored": "toy-war-golem-restored.png",
+      "damaged": "toy-war-golem-damaged.png"
+    },
+    "ceremonial-dragonkin-device": {
+      "restored": "ceremonial-dragonkin-device-restored.png",
+      "damaged": "ceremonial-dragonkin-device-damaged.png"
+    },
+    "decorative-vase": {
+      "restored": "decorative-vase-restored.png",
+      "damaged": "decorative-vase-damaged.png"
+    },
+    "kantharos-cup": {
+      "restored": "kantharos-cup-restored.png",
+      "damaged": "kantharos-cup-damaged.png"
+    },
+    "patera-bowl": {
+      "restored": "patera-bowl-restored.png",
+      "damaged": "patera-bowl-damaged.png"
+    },
+    "castle-gatestone": {
+      "restored": "castle-gatestone-restored.png",
+      "damaged": "castle-gatestone-damaged.png"
+    },
+    "engraved-ring-of-kinship": {
+      "restored": "engraved-ring-of-kinship-restored.png",
+      "damaged": "engraved-ring-of-kinship-damaged.png"
+    },
+    "ceremonial-mace": {
+      "restored": "ceremonial-mace-restored.png",
+      "damaged": "ceremonial-mace-damaged.png"
+    },
+    "pontifex-maximus-figurine": {
+      "restored": "pontifex-maximus-figurine-restored.png",
+      "damaged": "pontifex-maximus-figurine-damaged.png"
+    },
+    "consensus-ad-idem-painting": {
+      "restored": "consensus-ad-idem-painting-restored.png",
+      "damaged": "consensus-ad-idem-painting-damaged.png"
+    },
+    "offering-bowl": {
+      "restored": "offering-bowl-restored.png",
+      "damaged": "offering-bowl-damaged.png"
+    },
+    "incense-burner": {
+      "restored": "incense-burner-restored.png",
+      "damaged": "incense-burner-damaged.png"
+    },
+    "wingsuit-v1": {
+      "restored": "wingsuit-v1-restored.png",
+      "damaged": "wingsuit-v1-damaged.png"
+    },
+    "avian-song-egg-player": {
+      "restored": "avian-song-egg-player-restored.png",
+      "damaged": "avian-song-egg-player-damaged.png"
+    },
+    "keshik-drum": {
+      "restored": "keshik-drum-restored.png",
+      "damaged": "keshik-drum-damaged.png"
+    },
+    "morin-khuur": {
+      "restored": "morin-khuur-restored.png",
+      "damaged": "morin-khuur-damaged.png"
+    },
+    "ekeleshuun-blinder-mask": {
+      "restored": "ekeleshuun-blinder-mask-restored.png",
+      "damaged": "ekeleshuun-blinder-mask-damaged.png"
+    },
+    "narogoshuun-hob-da-gob-ball": {
+      "restored": "narogoshuun-hob-da-gob-ball-restored.png",
+      "damaged": "narogoshuun-hob-da-gob-ball-damaged.png"
+    },
+    "rekeshuun-war-tether": {
+      "restored": "rekeshuun-war-tether-restored.png",
+      "damaged": "rekeshuun-war-tether-damaged.png"
+    },
+    "exploratory-totem": {
+      "restored": "exploratory-totem-restored.png",
+      "damaged": "exploratory-totem-damaged.png"
+    },
+    "excavator-portal-mine": {
+      "restored": "excavator-portal-mine-restored.png",
+      "damaged": "excavator-portal-mine-damaged.png"
+    },
+    "storage-totem": {
+      "restored": "storage-totem-restored.png",
+      "damaged": "storage-totem-damaged.png"
+    },
+    "plant-seed-satchel": {
+      "restored": "plant-seed-satchel-restored.png",
+      "damaged": "plant-seed-satchel-damaged.png"
+    },
+    "snuff-box": {
+      "restored": "snuff-box-restored.png",
+      "damaged": "snuff-box-damaged.png"
+    },
+    "aviansie-dreamcoat": {
+      "restored": "aviansie-dreamcoat-restored.png",
+      "damaged": "aviansie-dreamcoat-damaged.png"
+    },
+    "ceremonial-plume": {
+      "restored": "ceremonial-plume-restored.png",
+      "damaged": "ceremonial-plume-damaged.png"
+    },
+    "peacocking-parasol": {
+      "restored": "peacocking-parasol-restored.png",
+      "damaged": "peacocking-parasol-damaged.png"
+    },
+    "ogre-kyzaj-axe": {
+      "restored": "ogre-kyzaj-axe-restored.png",
+      "damaged": "ogre-kyzaj-axe-damaged.png"
+    },
+    "ork-cleaver-sword": {
+      "restored": "ork-cleaver-sword-restored.png",
+      "damaged": "ork-cleaver-sword-damaged.png"
+    },
+    "larupia-trophy": {
+      "restored": "larupia-trophy-restored.png",
+      "damaged": "larupia-trophy-damaged.png"
+    },
+    "lion-trophy": {
+      "restored": "lion-trophy-restored.png",
+      "damaged": "lion-trophy-damaged.png"
+    },
+    "she-wolf-trophy": {
+      "restored": "she-wolf-trophy-restored.png",
+      "damaged": "she-wolf-trophy-damaged.png"
+    },
+    "pontifex-censer": {
+      "restored": "pontifex-censer-restored.png",
+      "damaged": "pontifex-censer-damaged.png"
+    },
+    "pontifex-crozier": {
+      "restored": "pontifex-crozier-restored.png",
+      "damaged": "pontifex-crozier-damaged.png"
+    },
+    "pontifex-mitre": {
+      "restored": "pontifex-mitre-restored.png",
+      "damaged": "pontifex-mitre-damaged.png"
+    },
+    "bloodwine": {
+      "restored": "bloodwine-restored.png",
+      "damaged": "bloodwine-damaged.png"
+    },
+    "reagent-jar": {
+      "restored": "reagent-jar-restored.png",
+      "damaged": "reagent-jar-damaged.png"
+    },
+    "ninbaradari-mural": {
+      "restored": "ninbaradari-mural-restored.png",
+      "damaged": "ninbaradari-mural-damaged.png"
+    },
+    "thorobshuun-battle-standard": {
+      "restored": "thorobshuun-battle-standard-restored.png",
+      "damaged": "thorobshuun-battle-standard-damaged.png"
+    },
+    "yurkolgokh-stink-grenade": {
+      "restored": "yurkolgokh-stink-grenade-restored.png",
+      "damaged": "yurkolgokh-stink-grenade-damaged.png"
+    },
+    "dominarian-device": {
+      "restored": "dominarian-device-restored.png",
+      "damaged": "dominarian-device-damaged.png"
+    },
+    "fishing-trident": {
+      "restored": "fishing-trident-restored.png",
+      "damaged": "fishing-trident-damaged.png"
+    },
+    "hawkeye-lens-multi-vision-scope": {
+      "restored": "hawkeye-lens-multi-vision-scope-restored.png",
+      "damaged": "hawkeye-lens-multi-vision-scope-damaged.png"
+    },
+    "talon-3-razor-wing": {
+      "restored": "talon-3-razor-wing-restored.png",
+      "damaged": "talon-3-razor-wing-damaged.png"
+    },
+    "exsanguinate-spell-scroll": {
+      "restored": "exsanguinate-spell-scroll-restored.png",
+      "damaged": "exsanguinate-spell-scroll-damaged.png"
+    },
+    "necromantic-focus": {
+      "restored": "necromantic-focus-restored.png",
+      "damaged": "necromantic-focus-damaged.png"
+    },
+    "spent-summoning-charm": {
+      "restored": "spent-summoning-charm-restored.png",
+      "damaged": "spent-summoning-charm-damaged.png"
+    },
+    "friendship-bracelet": {
+      "restored": "friendship-bracelet-restored.png",
+      "damaged": "friendship-bracelet-damaged.png"
+    },
+    "homely-totem": {
+      "restored": "homely-totem-restored.png",
+      "damaged": "homely-totem-damaged.png"
+    },
+    "bloodletting-dagger": {
+      "restored": "bloodletting-dagger-restored.png",
+      "damaged": "bloodletting-dagger-damaged.png"
+    },
+    "fang-of-kayazu": {
+      "restored": "fang-of-kayazu-restored.png",
+      "damaged": "fang-of-kayazu-damaged.png"
+    },
+    "high-priest-crozier": {
+      "restored": "high-priest-crozier-restored.png",
+      "damaged": "high-priest-crozier-damaged.png"
+    },
+    "high-priest-mitre": {
+      "restored": "high-priest-mitre-restored.png",
+      "damaged": "high-priest-mitre-damaged.png"
+    },
+    "high-priest-orb": {
+      "restored": "high-priest-orb-restored.png",
+      "damaged": "high-priest-orb-damaged.png"
+    },
+    "torment-metal-sculpture": {
+      "restored": "torment-metal-sculpture-restored.png",
+      "damaged": "torment-metal-sculpture-damaged.png"
+    },
+    "pandemonium-tapestry": {
+      "restored": "pandemonium-tapestry-restored.png",
+      "damaged": "pandemonium-tapestry-damaged.png"
+    },
+    "ceremonial-dragonkin-tablet": {
+      "restored": "ceremonial-dragonkin-tablet-restored.png",
+      "damaged": "ceremonial-dragonkin-tablet-damaged.png"
+    },
+    "pasaha": {
+      "restored": "pasaha-restored.png",
+      "damaged": "pasaha-damaged.png"
+    },
+    "ritual-bell": {
+      "restored": "ritual-bell-restored.png",
+      "damaged": "ritual-bell-damaged.png"
+    },
+    "prototype-gravimeter": {
+      "restored": "prototype-gravimeter-restored.png",
+      "damaged": "prototype-gravimeter-damaged.png"
+    },
+    "songbird-recorder": {
+      "restored": "songbird-recorder-restored.png",
+      "damaged": "songbird-recorder-damaged.png"
+    },
+    "amphora": {
+      "restored": "amphora-restored.png",
+      "damaged": "amphora-damaged.png"
+    },
+    "rod-of-asclepius": {
+      "restored": "rod-of-asclepius-restored.png",
+      "damaged": "rod-of-asclepius-damaged.png"
+    },
+    "zarosian-ewer": {
+      "restored": "zarosian-ewer-restored.png",
+      "damaged": "zarosian-ewer-damaged.png"
+    },
+    "zarosian-stein": {
+      "restored": "zarosian-stein-restored.png",
+      "damaged": "zarosian-stein-damaged.png"
+    },
+    "beastkeeper-helm": {
+      "restored": "beastkeeper-helm-restored.png",
+      "damaged": "beastkeeper-helm-damaged.png"
+    },
+    "idithuun-horn-ring": {
+      "restored": "idithuun-horn-ring-restored.png",
+      "damaged": "idithuun-horn-ring-damaged.png"
+    },
+    "nosorog-sculpture": {
+      "restored": "nosorog-sculpture-restored.png",
+      "damaged": "nosorog-sculpture-damaged.png"
+    },
+    "dayguard-shield": {
+      "restored": "dayguard-shield-restored.png",
+      "damaged": "dayguard-shield-damaged.png"
+    },
+    "stormguard-gerege": {
+      "restored": "stormguard-gerege-restored.png",
+      "damaged": "stormguard-gerege-damaged.png"
+    },
+    "kilaya": {
+      "restored": "kilaya-restored.png",
+      "damaged": "kilaya-damaged.png"
+    },
+    "vazara": {
+      "restored": "vazara-restored.png",
+      "damaged": "vazara-damaged.png"
+    },
+    "ourg-megahitter": {
+      "restored": "ourg-megahitter-restored.png",
+      "damaged": "ourg-megahitter-damaged.png"
+    },
+    "ourg-tower-goblin-cower-shield": {
+      "restored": "ourg-tower-goblin-cower-shield-restored.png",
+      "damaged": "ourg-tower-goblin-cower-shield-damaged.png"
+    },
+    "garagorshuun-anchor": {
+      "restored": "garagorshuun-anchor-restored.png",
+      "damaged": "garagorshuun-anchor-damaged.png"
+    },
+    "golem-heart": {
+      "restored": "golem-heart-restored.png",
+      "damaged": "golem-heart-damaged.png"
+    },
+    "golem-instruction": {
+      "restored": "golem-instruction-restored.png",
+      "damaged": "golem-instruction-damaged.png"
+    },
+    "hellfire-haladie": {
+      "restored": "hellfire-haladie-restored.png",
+      "damaged": "hellfire-haladie-damaged.png"
+    },
+    "hellfire-katar": {
+      "restored": "hellfire-katar-restored.png",
+      "damaged": "hellfire-katar-damaged.png"
+    },
+    "hellfire-zaghnal": {
+      "restored": "hellfire-zaghnal-restored.png",
+      "damaged": "hellfire-zaghnal-damaged.png"
+    },
+    "death-mask": {
+      "restored": "death-mask-restored.png",
+      "damaged": "death-mask-damaged.png"
+    },
+    "dragonkin-calendar": {
+      "restored": "dragonkin-calendar-restored.png",
+      "damaged": "dragonkin-calendar-damaged.png"
+    },
+    "dragonkin-staff": {
+      "restored": "dragonkin-staff-restored.png",
+      "damaged": "dragonkin-staff-damaged.png"
+    },
+    "dorgeshuun-spear": {
+      "restored": "dorgeshuun-spear-restored.png",
+      "damaged": "dorgeshuun-spear-damaged.png"
+    },
+    "forged-in-war-sculpture": {
+      "restored": "forged-in-war-sculpture-restored.png",
+      "damaged": "forged-in-war-sculpture-damaged.png"
+    },
+    "kopis-dagger": {
+      "restored": "kopis-dagger-restored.png",
+      "damaged": "kopis-dagger-damaged.png"
+    },
+    "xiphos-short-sword": {
+      "restored": "xiphos-short-sword-restored.png",
+      "damaged": "xiphos-short-sword-damaged.png"
+    },
+    "smoke-cloud-spell-scroll": {
+      "restored": "smoke-cloud-spell-scroll-restored.png",
+      "damaged": "smoke-cloud-spell-scroll-damaged.png"
+    },
+    "vigorem-vial": {
+      "restored": "vigorem-vial-restored.png",
+      "damaged": "vigorem-vial-damaged.png"
+    },
+    "dragon-scalpel": {
+      "restored": "dragon-scalpel-restored.png",
+      "damaged": "dragon-scalpel-damaged.png"
+    },
+    "protective-goggles": {
+      "restored": "protective-goggles-restored.png",
+      "damaged": "protective-goggles-damaged.png"
+    },
+    "dragon-burner": {
+      "restored": "dragon-burner-restored.png",
+      "damaged": "dragon-burner-damaged.png"
+    },
+    "orthenglass-flask": {
+      "restored": "orthenglass-flask-restored.png",
+      "damaged": "orthenglass-flask-damaged.png"
+    },
+    "blackfire-lance": {
+      "restored": "blackfire-lance-restored.png",
+      "damaged": "blackfire-lance-damaged.png"
+    },
+    "nightguard-shield": {
+      "restored": "nightguard-shield-restored.png",
+      "damaged": "nightguard-shield-damaged.png"
+    },
+    "projection-attuner": {
+      "restored": "projection-attuner-restored.png",
+      "damaged": "projection-attuner-damaged.png"
+    },
+    "golden-projection-needle": {
+      "restored": "golden-projection-needle-restored.png",
+      "damaged": "golden-projection-needle-damaged.png"
+    },
+    "huzamogaarb-chaos-crown": {
+      "restored": "huzamogaarb-chaos-crown-restored.png",
+      "damaged": "huzamogaarb-chaos-crown-damaged.png"
+    },
+    "saragorgak-star-crown": {
+      "restored": "saragorgak-star-crown-restored.png",
+      "damaged": "saragorgak-star-crown-damaged.png"
+    },
+    "possession-metal-sculpture": {
+      "restored": "possession-metal-sculpture-restored.png",
+      "damaged": "possession-metal-sculpture-damaged.png"
+    },
+    "trishula": {
+      "restored": "trishula-restored.png",
+      "damaged": "trishula-damaged.png"
+    },
+    "tsutsaroth-piercing": {
+      "restored": "tsutsaroth-piercing-restored.png",
+      "damaged": "tsutsaroth-piercing-damaged.png"
+    },
+    "hallowed-be-the-everlight-painting": {
+      "restored": "hallowed-be-the-everlight-painting-restored.png",
+      "damaged": "hallowed-be-the-everlight-painting-damaged.png"
+    },
+    "the-lord-of-light-painting": {
+      "restored": "the-lord-of-light-painting-restored.png",
+      "damaged": "the-lord-of-light-painting-damaged.png"
+    },
+    "the-pride-of-padosan-painting": {
+      "restored": "the-pride-of-padosan-painting-restored.png",
+      "damaged": "the-pride-of-padosan-painting-damaged.png"
+    },
+    "meditation-pipe": {
+      "restored": "meditation-pipe-restored.png",
+      "damaged": "meditation-pipe-damaged.png"
+    },
+    "personal-totem": {
+      "restored": "personal-totem-restored.png",
+      "damaged": "personal-totem-damaged.png"
+    },
+    "singing-bowl": {
+      "restored": "singing-bowl-restored.png",
+      "damaged": "singing-bowl-damaged.png"
+    },
+    "ancient-magic-tablet": {
+      "restored": "ancient-magic-tablet-restored.png",
+      "damaged": "ancient-magic-tablet-damaged.png"
+    },
+    "animate-dead-spell-scroll": {
+      "restored": "animate-dead-spell-scroll-restored.png",
+      "damaged": "animate-dead-spell-scroll-damaged.png"
+    },
+    "portable-phylactery": {
+      "restored": "portable-phylactery-restored.png",
+      "damaged": "portable-phylactery-damaged.png"
+    },
+    "comfort-gatestone": {
+      "restored": "comfort-gatestone-restored.png",
+      "damaged": "comfort-gatestone-damaged.png"
+    },
+    "halak-s-cube": {
+      "restored": "halak-s-cube-restored.png",
+      "damaged": "halak-s-cube-damaged.png"
+    },
+    "lingam-stone": {
+      "restored": "lingam-stone-restored.png",
+      "damaged": "lingam-stone-damaged.png"
+    },
+    "master-control": {
+      "restored": "master-control-restored.png",
+      "damaged": "master-control-damaged.png"
+    },
+    "the-enlightened-soul-scroll": {
+      "restored": "the-enlightened-soul-scroll-restored.png",
+      "damaged": "the-enlightened-soul-scroll-damaged.png"
+    },
+    "the-eudoxian-elements-tablet": {
+      "restored": "the-eudoxian-elements-tablet-restored.png",
+      "damaged": "the-eudoxian-elements-tablet-damaged.png"
+    },
+    "drogokishuun-hook-sword": {
+      "restored": "drogokishuun-hook-sword-restored.png",
+      "damaged": "drogokishuun-hook-sword-damaged.png"
+    },
+    "hobgoblin-mansticker": {
+      "restored": "hobgoblin-mansticker-restored.png",
+      "damaged": "hobgoblin-mansticker-damaged.png"
+    },
+    "chaos-elemental-trophy": {
+      "restored": "chaos-elemental-trophy-restored.png",
+      "damaged": "chaos-elemental-trophy-damaged.png"
+    },
+    "virius-trophy": {
+      "restored": "virius-trophy-restored.png",
+      "damaged": "virius-trophy-damaged.png"
+    },
+    "flat-cap": {
+      "restored": "flat-cap-restored.png",
+      "damaged": "flat-cap-damaged.png"
+    },
+    "night-owl-flight-goggles": {
+      "restored": "night-owl-flight-goggles-restored.png",
+      "damaged": "night-owl-flight-goggles-damaged.png"
+    },
+    "prototype-godbow": {
+      "restored": "prototype-godbow-restored.png",
+      "damaged": "prototype-godbow-damaged.png"
+    },
+    "prototype-godstaff": {
+      "restored": "prototype-godstaff-restored.png",
+      "damaged": "prototype-godstaff-damaged.png"
+    },
+    "prototype-godsword": {
+      "restored": "prototype-godsword-restored.png",
+      "damaged": "prototype-godsword-damaged.png"
+    },
+    "xolo-hard-hat": {
+      "restored": "xolo-hard-hat-restored.png",
+      "damaged": "xolo-hard-hat-damaged.png"
+    },
+    "xolo-pickaxe": {
+      "restored": "xolo-pickaxe-restored.png",
+      "damaged": "xolo-pickaxe-damaged.png"
+    },
+    "portable-portal-generator": {
+      "restored": "portable-portal-generator-restored.png",
+      "damaged": "portable-portal-generator-damaged.png"
+    },
+    "warped-trinket": {
+      "restored": "warped-trinket-restored.png",
+      "damaged": "warped-trinket-damaged.png"
+    },
+    "praetorian-hood": {
+      "restored": "praetorian-hood-restored.png",
+      "damaged": "praetorian-hood-damaged.png"
+    },
+    "praetorian-robes": {
+      "restored": "praetorian-robes-restored.png",
+      "damaged": "praetorian-robes-damaged.png"
+    },
+    "praetorian-staff": {
+      "restored": "praetorian-staff-restored.png",
+      "damaged": "praetorian-staff-damaged.png"
+    },
+    "kal-i-kra-chieftain-crown": {
+      "restored": "kal-i-kra-chieftain-crown-restored.png",
+      "damaged": "kal-i-kra-chieftain-crown-damaged.png"
+    },
+    "kal-i-kra-mace": {
+      "restored": "kal-i-kra-mace-restored.png",
+      "damaged": "kal-i-kra-mace-damaged.png"
+    },
+    "kal-i-kra-warhorn": {
+      "restored": "kal-i-kra-warhorn-restored.png",
+      "damaged": "kal-i-kra-warhorn-damaged.png"
+    },
+    "tsutsaroth-helm": {
+      "restored": "tsutsaroth-helm-restored.png",
+      "damaged": "tsutsaroth-helm-damaged.png"
+    },
+    "tsutsaroth-pauldron": {
+      "restored": "tsutsaroth-pauldron-restored.png",
+      "damaged": "tsutsaroth-pauldron-damaged.png"
+    },
+    "tsutsaroth-urumi": {
+      "restored": "tsutsaroth-urumi-restored.png",
+      "damaged": "tsutsaroth-urumi-damaged.png"
+    },
+    "doru-spear": {
+      "restored": "doru-spear-restored.png",
+      "damaged": "doru-spear-damaged.png"
+    },
+    "kontos-lance": {
+      "restored": "kontos-lance-restored.png",
+      "damaged": "kontos-lance-damaged.png"
+    },
+    "chuluu-stone": {
+      "restored": "chuluu-stone-restored.png",
+      "damaged": "chuluu-stone-damaged.png"
+    },
+    "quintessence-counter": {
+      "restored": "quintessence-counter-restored.png",
+      "damaged": "quintessence-counter-damaged.png"
+    },
+    "spherical-astrolabe": {
+      "restored": "spherical-astrolabe-restored.png",
+      "damaged": "spherical-astrolabe-damaged.png"
+    },
+    "ancient-globe": {
+      "restored": "ancient-globe-restored.png",
+      "damaged": "ancient-globe-damaged.png"
+    },
+    "battle-plans": {
+      "restored": "battle-plans-restored.png",
+      "damaged": "battle-plans-damaged.png"
+    },
+    "prima-legio-painting": {
+      "restored": "prima-legio-painting-restored.png",
+      "damaged": "prima-legio-painting-damaged.png"
+    },
+    "da-boss-man-sculpture": {
+      "restored": "da-boss-man-sculpture-restored.png",
+      "damaged": "da-boss-man-sculpture-damaged.png"
+    },
+    "horogothgar-cooking-pot": {
+      "restored": "horogothgar-cooking-pot-restored.png",
+      "damaged": "horogothgar-cooking-pot-damaged.png"
+    },
+    "xolo-shield": {
+      "restored": "xolo-shield-restored.png",
+      "damaged": "xolo-shield-damaged.png"
+    },
+    "xolo-spear": {
+      "restored": "xolo-spear-restored.png",
+      "damaged": "xolo-spear-damaged.png"
+    },
+    "gold-dish": {
+      "restored": "gold-dish-restored.png",
+      "damaged": "gold-dish-damaged.png"
+    },
+    "raksha-idol": {
+      "restored": "raksha-idol-restored.png",
+      "damaged": "raksha-idol-damaged.png"
+    }
+  },
+  "materials": {
+    "goldrune": "mat-goldrune.png",
+    "white-oak": "mat-white-oak.png",
+    "third-age-iron": "mat-third-age-iron.png",
+    "ancient-vis": "mat-ancient-vis.png",
+    "samite-silk": "mat-samite-silk.png",
+    "orthenglass": "mat-orthenglass.png",
+    "leather-scraps": "mat-leather-scraps.png",
+    "zarosian-insignia": "mat-zarosian-insignia.png",
+    "dragon-metal": "mat-dragon-metal.png",
+    "orgone": "mat-orgone.png",
+    "soapstone": "mat-soapstone.png",
+    "vellum": "mat-vellum.png",
+    "imperial-steel": "mat-imperial-steel.png",
+    "tyrian-purple": "mat-tyrian-purple.png",
+    "blood-of-orcus": "mat-blood-of-orcus.png",
+    "compass-rose": "mat-compass-rose.png",
+    "hellfire-metal": "mat-hellfire-metal.png",
+    "everlight-silvthril": "mat-everlight-silvthril.png",
+    "warforged-bronze": "mat-warforged-bronze.png",
+    "eye-of-dagon": "mat-eye-of-dagon.png",
+    "chaotic-brimstone": "mat-chaotic-brimstone.png",
+    "malachite-green": "mat-malachite-green.png",
+    "star-of-saradomin": "mat-star-of-saradomin.png",
+    "armadylean-yellow": "mat-armadylean-yellow.png",
+    "cadmium-red": "mat-cadmium-red.png",
+    "felt": "mat-felt.png",
+    "stormguard-steel": "mat-stormguard-steel.png",
+    "wings-of-war": "mat-wings-of-war.png",
+    "aetherium-alloy": "mat-aetherium-alloy.png",
+    "animal-furs": "mat-animal-furs.png",
+    "mark-of-the-kyzaj": "mat-mark-of-the-kyzaj.png",
+    "quintessence": "mat-quintessence.png",
+    "vulcanised-rubber": "mat-vulcanised-rubber.png",
+    "carbon-black": "mat-carbon-black.png",
+    "fossilised-bone": "mat-fossilised-bone.png",
+    "keramos": "mat-keramos.png",
+    "yu-biusk-clay": "mat-yu-biusk-clay.png",
+    "banded-limestone": "mat-banded-limestone.png",
+    "burnt-umber": "mat-burnt-umber.png",
+    "cashmere": "mat-cashmere.png",
+    "cobalt-blue": "mat-cobalt-blue.png",
+    "ivory": "mat-ivory.png",
+    "triskelion": "mat-triskelion.png",
+    "white-marble": "mat-white-marble.png",
+    "demonhide": "mat-demonhide.png",
+    "dragonstone": "mat-dragonstone.png",
+    "death-rune": "mat-death-rune.png",
+    "clockwork": "mat-clockwork.png",
+    "diamond": "mat-diamond.png",
+    "ruby": "mat-ruby.png",
+    "sapphire": "mat-sapphire.png",
+    "black-mushroom-ink": "mat-black-mushroom-ink.png",
+    "bronze-bar": "mat-bronze-bar.png",
+    "emerald": "mat-emerald.png",
+    "grapes": "mat-grapes.png",
+    "imperial-iron": "mat-imperial-iron.png",
+    "molten-glass": "mat-molten-glass.png",
+    "phoenix-feather": "mat-phoenix-feather.png",
+    "purpleheart-wood": "mat-purpleheart-wood.png",
+    "rope": "mat-rope.png",
+    "silver-bar": "mat-silver-bar.png",
+    "soft-clay": "mat-soft-clay.png",
+    "weapon-poison-3": "mat-weapon-poison-3.png",
+    "white-candle": "mat-white-candle.png"
+  },
+  "ui": {
+    "archaeology": "archaeology.png",
+    "chronotes": "chronotes.png",
+    "tetracompass": "tetracompass.png",
+    "journal": "journal.png",
+    "bank": "bank.png",
+    "workbench": "workbench.png",
+    "materials": "materials.png",
+    "magnifying-glass": "magnifying-glass.png",
+    "slot-padlock": "slot-padlock.png",
+    "app-icon": "app-icon.png"
+  }
+}

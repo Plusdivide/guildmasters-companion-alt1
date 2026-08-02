@@ -1,0 +1,8269 @@
+{
+  "source": "https://runescape.wiki/w/Artefacts",
+  "generatedAt": "2026-07-30T00:21:41.784Z",
+  "artefacts": [
+    {
+      "id": "centurion-s-dress-sword",
+      "name": "Centurion's dress sword",
+      "damagedName": "Centurion's dress sword (damaged)",
+      "level": 1,
+      "restoreXp": 250,
+      "chronotes": 0,
+      "alignment": "Miscellaneous",
+      "sources": [
+        "Centurion remains",
+        "Archaeology Guild"
+      ],
+      "materials": [
+        {
+          "quantity": 5,
+          "name": "Imperial iron"
+        },
+        {
+          "quantity": 5,
+          "name": "Purpleheart wood"
+        }
+      ]
+    },
+    {
+      "id": "venator-dagger",
+      "name": "Venator dagger",
+      "damagedName": "Venator dagger (damaged)",
+      "level": 5,
+      "restoreXp": 305.1,
+      "chronotes": 206,
+      "alignment": "Zarosian",
+      "sources": [
+        "Venator remains",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 12,
+          "name": "Zarosian insignia"
+        }
+      ]
+    },
+    {
+      "id": "venator-light-crossbow",
+      "name": "Venator light crossbow",
+      "damagedName": "Venator light crossbow (damaged)",
+      "level": 5,
+      "restoreXp": 305.1,
+      "chronotes": 206,
+      "alignment": "Zarosian",
+      "sources": [
+        "Venator remains",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 12,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 16,
+          "name": "Zarosian insignia"
+        }
+      ]
+    },
+    {
+      "id": "centurion-s-seal",
+      "name": "Centurion's seal",
+      "damagedName": "Centurion's seal (damaged)",
+      "level": 12,
+      "restoreXp": 430.8,
+      "chronotes": 0,
+      "alignment": "Miscellaneous",
+      "sources": [
+        "None",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 6,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 2,
+          "name": "Zarosian insignia"
+        }
+      ]
+    },
+    {
+      "id": "primis-elementis-standard",
+      "name": "Primis Elementis standard",
+      "damagedName": "Primis Elementis standard (damaged)",
+      "level": 12,
+      "restoreXp": 430.8,
+      "chronotes": 220,
+      "alignment": "Zarosian",
+      "sources": [
+        "Legionary remains",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 12,
+          "name": "Third Age iron"
+        }
+      ]
+    },
+    {
+      "id": "legionary-gladius",
+      "name": "Legionary gladius",
+      "damagedName": "Legionary gladius (damaged)",
+      "level": 12,
+      "restoreXp": 430.8,
+      "chronotes": 220,
+      "alignment": "Zarosian",
+      "sources": [
+        "Legionary remains",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 10,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 6,
+          "name": "Zarosian insignia"
+        },
+        {
+          "quantity": 12,
+          "name": "Imperial steel"
+        }
+      ]
+    },
+    {
+      "id": "legionary-square-shield",
+      "name": "Legionary square shield",
+      "damagedName": "Legionary square shield (damaged)",
+      "level": 12,
+      "restoreXp": 430.8,
+      "chronotes": 220,
+      "alignment": "Zarosian",
+      "sources": [
+        "Legionary remains",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 8,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 8,
+          "name": "Zarosian insignia"
+        },
+        {
+          "quantity": 12,
+          "name": "Imperial steel"
+        }
+      ]
+    },
+    {
+      "id": "zaros-effigy",
+      "name": "Zaros effigy",
+      "damagedName": "Zaros effigy (damaged)",
+      "level": 17,
+      "restoreXp": 520.5,
+      "chronotes": 244,
+      "alignment": "Zarosian",
+      "sources": [
+        "Castra debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 8,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 10,
+          "name": "White oak"
+        },
+        {
+          "quantity": 12,
+          "name": "Zarosian insignia"
+        }
+      ]
+    },
+    {
+      "id": "zarosian-training-dummy",
+      "name": "Zarosian training dummy",
+      "damagedName": "Zarosian training dummy (damaged)",
+      "level": 17,
+      "restoreXp": 520.5,
+      "chronotes": 244,
+      "alignment": "Zarosian",
+      "sources": [
+        "Castra debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 14,
+          "name": "White oak"
+        }
+      ]
+    },
+    {
+      "id": "hookah-pipe",
+      "name": "Hookah pipe",
+      "damagedName": "Hookah pipe (damaged)",
+      "level": 20,
+      "restoreXp": 574.4,
+      "chronotes": 250,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Lodge bar storage",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 10,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 12,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 8,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "opulent-wine-goblet",
+      "name": "Opulent wine goblet",
+      "damagedName": "Opulent wine goblet (damaged)",
+      "level": 20,
+      "restoreXp": 574.4,
+      "chronotes": 250,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Lodge bar storage",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 14,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 16,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "crest-of-dagon",
+      "name": "Crest of Dagon",
+      "damagedName": "Crest of Dagon (damaged)",
+      "level": 24,
+      "restoreXp": 646.2,
+      "chronotes": 272,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Lodge art storage",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 14,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 18,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "disorder-painting",
+      "name": "'Disorder' painting",
+      "damagedName": "'Disorder' painting (damaged)",
+      "level": 24,
+      "restoreXp": 646.2,
+      "chronotes": 272,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Lodge art storage",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 6,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 6,
+          "name": "White oak"
+        },
+        {
+          "quantity": 6,
+          "name": "Vellum"
+        },
+        {
+          "quantity": 14,
+          "name": "Cadmium red"
+        }
+      ]
+    },
+    {
+      "id": "legatus-maximus-figurine",
+      "name": "Legatus Maximus figurine",
+      "damagedName": "Legatus Maximus figurine (damaged)",
+      "level": 25,
+      "restoreXp": 664.1,
+      "chronotes": 274,
+      "alignment": "Zarosian",
+      "sources": [
+        "Administratum debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 8,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 14,
+          "name": "Zarosian insignia"
+        },
+        {
+          "quantity": 10,
+          "name": "Ancient vis"
+        }
+      ]
+    },
+    {
+      "id": "solem-in-umbra-painting",
+      "name": "'Solem in Umbra' painting",
+      "damagedName": "'Solem in Umbra' painting (damaged)",
+      "level": 25,
+      "restoreXp": 664.1,
+      "chronotes": 274,
+      "alignment": "Zarosian",
+      "sources": [
+        "Administratum debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 8,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 10,
+          "name": "White oak"
+        },
+        {
+          "quantity": 14,
+          "name": "Tyrian purple"
+        }
+      ]
+    },
+    {
+      "id": "imp-mask",
+      "name": "Imp mask",
+      "damagedName": "Imp mask (damaged)",
+      "level": 29,
+      "restoreXp": 735.9,
+      "chronotes": 282,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Cultist footlocker",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 10,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 10,
+          "name": "Chaotic brimstone"
+        },
+        {
+          "quantity": 12,
+          "name": "Demonhide"
+        }
+      ]
+    },
+    {
+      "id": "lesser-demon-mask",
+      "name": "Lesser demon mask",
+      "damagedName": "Lesser demon mask (damaged)",
+      "level": 29,
+      "restoreXp": 735.9,
+      "chronotes": 282,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Cultist footlocker",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 6,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 8,
+          "name": "Chaotic brimstone"
+        },
+        {
+          "quantity": 12,
+          "name": "Demonhide"
+        },
+        {
+          "quantity": 6,
+          "name": "Cadmium red"
+        }
+      ]
+    },
+    {
+      "id": "greater-demon-mask",
+      "name": "Greater demon mask",
+      "damagedName": "Greater demon mask (damaged)",
+      "level": 29,
+      "restoreXp": 735.9,
+      "chronotes": 282,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Cultist footlocker",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 6,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 6,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 8,
+          "name": "Chaotic brimstone"
+        },
+        {
+          "quantity": 12,
+          "name": "Demonhide"
+        }
+      ]
+    },
+    {
+      "id": "teleportation-crystal",
+      "name": "Teleportation crystal",
+      "damagedName": "Teleportation crystal (damaged)",
+      "level": 30,
+      "restoreXp": 233.3,
+      "chronotes": 200,
+      "alignment": "miscellaneous",
+      "sources": [
+        "Crystallised rubble",
+        "None"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "order-of-dis-robes",
+      "name": "Order of Dis robes",
+      "damagedName": "Order of Dis robes (damaged)",
+      "level": 36,
+      "restoreXp": 861.5,
+      "chronotes": 352,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Sacrificial altar",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 10,
+          "name": "Cadmium red"
+        },
+        {
+          "quantity": 14,
+          "name": "Eye of Dagon"
+        }
+      ]
+    },
+    {
+      "id": "ritual-dagger",
+      "name": "Ritual dagger",
+      "damagedName": "Ritual dagger (damaged)",
+      "level": 36,
+      "restoreXp": 861.5,
+      "chronotes": 352,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Sacrificial altar",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 24,
+          "name": "Hellfire metal"
+        },
+        {
+          "quantity": 1,
+          "name": "Ruby"
+        }
+      ]
+    },
+    {
+      "id": "frying-pan",
+      "name": "'Frying pan'",
+      "damagedName": "'Frying pan' (damaged)",
+      "level": 42,
+      "restoreXp": 1073.3,
+      "chronotes": 392,
+      "alignment": "Saradominist",
+      "sources": [
+        "Prodromoi remains",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 24,
+          "name": "White marble"
+        }
+      ]
+    },
+    {
+      "id": "hallowed-lantern",
+      "name": "Hallowed lantern",
+      "damagedName": "Hallowed lantern (damaged)",
+      "level": 42,
+      "restoreXp": 1073.3,
+      "chronotes": 392,
+      "alignment": "Saradominist",
+      "sources": [
+        "Prodromoi remains",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 24,
+          "name": "Keramos"
+        },
+        {
+          "quantity": 1,
+          "name": "White candle"
+        }
+      ]
+    },
+    {
+      "id": "branding-iron",
+      "name": "Branding iron",
+      "damagedName": "Branding iron (damaged)",
+      "level": 45,
+      "restoreXp": 1283.3,
+      "chronotes": 412,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Dis dungeon debris",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 14,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 12,
+          "name": "Eye of Dagon"
+        },
+        {
+          "quantity": 20,
+          "name": "Hellfire metal"
+        }
+      ]
+    },
+    {
+      "id": "manacles",
+      "name": "Manacles",
+      "damagedName": "Manacles (damaged)",
+      "level": 45,
+      "restoreXp": 1283.3,
+      "chronotes": 412,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Dis dungeon debris",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 14,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 18,
+          "name": "Chaotic brimstone"
+        },
+        {
+          "quantity": 14,
+          "name": "Eye of Dagon"
+        }
+      ]
+    },
+    {
+      "id": "ancient-timepiece",
+      "name": "Ancient timepiece",
+      "damagedName": "Ancient timepiece (damaged)",
+      "level": 47,
+      "restoreXp": 1423.3,
+      "chronotes": 416,
+      "alignment": "Zarosian",
+      "sources": [
+        "Praesidio remains",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 12,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 16,
+          "name": "Imperial steel"
+        },
+        {
+          "quantity": 18,
+          "name": "Ancient vis"
+        }
+      ]
+    },
+    {
+      "id": "legatus-pendant",
+      "name": "Legatus pendant",
+      "damagedName": "Legatus pendant (damaged)",
+      "level": 47,
+      "restoreXp": 1423.3,
+      "chronotes": 416,
+      "alignment": "Zarosian",
+      "sources": [
+        "Praesidio remains",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 18,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 12,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 1,
+          "name": "Dragonstone"
+        }
+      ]
+    },
+    {
+      "id": "ceremonial-unicorn-ornament",
+      "name": "Ceremonial unicorn ornament",
+      "damagedName": "Ceremonial unicorn ornament (damaged)",
+      "level": 48,
+      "restoreXp": 1493.3,
+      "chronotes": 418,
+      "alignment": "Saradominist",
+      "sources": [
+        "Monoceros remains",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 26,
+          "name": "Keramos"
+        },
+        {
+          "quantity": 20,
+          "name": "Cobalt blue"
+        }
+      ]
+    },
+    {
+      "id": "ceremonial-unicorn-saddle",
+      "name": "Ceremonial unicorn saddle",
+      "damagedName": "Ceremonial unicorn saddle (damaged)",
+      "level": 48,
+      "restoreXp": 1493.3,
+      "chronotes": 418,
+      "alignment": "Saradominist",
+      "sources": [
+        "Monoceros remains",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 24,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 22,
+          "name": "Cobalt blue"
+        }
+      ]
+    },
+    {
+      "id": "dragonkin-device",
+      "name": "Dragonkin device",
+      "damagedName": "Dragonkin device (damaged)",
+      "level": 50,
+      "restoreXp": 600,
+      "chronotes": 450,
+      "alignment": "None",
+      "sources": [
+        "Dragonkin remains (Desperate Measures)",
+        "none"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "dragonkin-tablet",
+      "name": "Dragonkin tablet",
+      "damagedName": "Dragonkin tablet (damaged)",
+      "level": 50,
+      "restoreXp": 600,
+      "chronotes": 450,
+      "alignment": "none",
+      "sources": [
+        "Orthen rubble (Desperate Measures)",
+        "none"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "everlight-harp",
+      "name": "Everlight harp",
+      "damagedName": "Everlight harp (damaged)",
+      "level": 51,
+      "restoreXp": 1703.3,
+      "chronotes": 466,
+      "alignment": "Saradominist",
+      "sources": [
+        "Amphitheatre debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Everlight silvthril"
+        },
+        {
+          "quantity": 22,
+          "name": "White oak"
+        }
+      ]
+    },
+    {
+      "id": "everlight-trumpet",
+      "name": "Everlight trumpet",
+      "damagedName": "Everlight trumpet (damaged)",
+      "level": 51,
+      "restoreXp": 1703.3,
+      "chronotes": 466,
+      "alignment": "Saradominist",
+      "sources": [
+        "Amphitheatre debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 28,
+          "name": "Everlight silvthril"
+        },
+        {
+          "quantity": 24,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "everlight-violin",
+      "name": "Everlight violin",
+      "damagedName": "Everlight violin (damaged)",
+      "level": 51,
+      "restoreXp": 1703.3,
+      "chronotes": 466,
+      "alignment": "Saradominist",
+      "sources": [
+        "Amphitheatre debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Star of Saradomin"
+        },
+        {
+          "quantity": 20,
+          "name": "White oak"
+        },
+        {
+          "quantity": 16,
+          "name": "Samite silk"
+        }
+      ]
+    },
+    {
+      "id": "lunar-calendar",
+      "name": "Lunar calendar",
+      "damagedName": "Lunar calendar (damaged)",
+      "level": 52,
+      "restoreXp": 1773.3,
+      "chronotes": 468,
+      "alignment": "Guthixian",
+      "sources": [
+        "Lunar wheel debris",
+        "Moonrise"
+      ],
+      "materials": [
+        {
+          "quantity": 28,
+          "name": "Banded limestone"
+        },
+        {
+          "quantity": 24,
+          "name": "Triskelion"
+        }
+      ]
+    },
+    {
+      "id": "wolf-statuette",
+      "name": "Wolf statuette",
+      "damagedName": "Wolf statuette (damaged)",
+      "level": 52,
+      "restoreXp": 1773.3,
+      "chronotes": 468,
+      "alignment": "Guthixian",
+      "sources": [
+        "Lunar wheel debris",
+        "Moonrise"
+      ],
+      "materials": [
+        {
+          "quantity": 26,
+          "name": "Banded limestone"
+        },
+        {
+          "quantity": 26,
+          "name": "Ivory"
+        }
+      ]
+    },
+    {
+      "id": "ivory-sickle",
+      "name": "Ivory sickle",
+      "damagedName": "Ivory sickle (damaged)",
+      "level": 52,
+      "restoreXp": 1773.3,
+      "chronotes": 468,
+      "alignment": "Guthixian",
+      "sources": [
+        "Lunar wheel debris",
+        "Moonrise Dig Site"
+      ],
+      "materials": [
+        {
+          "quantity": 28,
+          "name": "Ivory"
+        },
+        {
+          "quantity": 24,
+          "name": "Triskelion"
+        }
+      ]
+    },
+    {
+      "id": "folded-arm-figurine-female",
+      "name": "Folded-arm figurine (female)",
+      "damagedName": "Folded-arm figurine (female)(damaged)",
+      "level": 56,
+      "restoreXp": 2053.3,
+      "chronotes": 490,
+      "alignment": "Saradominist",
+      "sources": [
+        "Ceramics studio debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "White marble"
+        },
+        {
+          "quantity": 24,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "folded-arm-figurine-male",
+      "name": "Folded-arm figurine (male)",
+      "damagedName": "Folded-arm figurine (male)(damaged)",
+      "level": 56,
+      "restoreXp": 2053.3,
+      "chronotes": 490,
+      "alignment": "Saradominist",
+      "sources": [
+        "Ceramics studio debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "White marble"
+        },
+        {
+          "quantity": 24,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "incite-fear-spell-scroll",
+      "name": "'Incite Fear' spell scroll",
+      "damagedName": "'Incite Fear' spell scroll (damaged)",
+      "level": 58,
+      "restoreXp": 2193.3,
+      "chronotes": 508,
+      "alignment": "Zarosian",
+      "sources": [
+        "Carcerem debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "Vellum"
+        },
+        {
+          "quantity": 18,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 18,
+          "name": "Blood of Orcus"
+        }
+      ]
+    },
+    {
+      "id": "pontifex-signet-ring",
+      "name": "Pontifex signet ring",
+      "damagedName": "Pontifex signet ring (damaged)",
+      "level": 58,
+      "restoreXp": 2193.3,
+      "chronotes": 508,
+      "alignment": "Zarosian",
+      "sources": [
+        "Carcerem debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 18,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 22,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 1,
+          "name": "Dragonstone"
+        }
+      ]
+    },
+    {
+      "id": "nakkirian-seal",
+      "name": "Nakkirian seal",
+      "damagedName": "Nakkirian seal (damaged)",
+      "level": 59,
+      "restoreXp": 2263.3,
+      "chronotes": 552,
+      "alignment": "Guthixian",
+      "sources": [
+        "Arbour rubble",
+        "Moonrise"
+      ],
+      "materials": [
+        {
+          "quantity": 34,
+          "name": "Ivory"
+        },
+        {
+          "quantity": 28,
+          "name": "White oak"
+        },
+        {
+          "quantity": 1,
+          "name": "Soft clay"
+        }
+      ]
+    },
+    {
+      "id": "royal-game-of-ba",
+      "name": "Royal Game of Ba",
+      "damagedName": "Royal Game of Ba (damaged)",
+      "level": 59,
+      "restoreXp": 2263.3,
+      "chronotes": 552,
+      "alignment": "Guthixian",
+      "sources": [
+        "Arbour rubble",
+        "Moonrise"
+      ],
+      "materials": [
+        {
+          "quantity": 32,
+          "name": "White oak"
+        },
+        {
+          "quantity": 30,
+          "name": "Triskelion"
+        }
+      ]
+    },
+    {
+      "id": "apex-cap",
+      "name": "Apex cap",
+      "damagedName": "Apex cap (damaged)",
+      "level": 60,
+      "restoreXp": 2333.3,
+      "chronotes": 540,
+      "alignment": "Zarosian",
+      "sources": [
+        "Ministry remains",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 28,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 12,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 20,
+          "name": "Ancient vis"
+        }
+      ]
+    },
+    {
+      "id": "curse-tablet",
+      "name": "Curse tablet",
+      "damagedName": "Curse tablet (damaged)",
+      "level": 60,
+      "restoreXp": 2333.3,
+      "chronotes": 540,
+      "alignment": "Zarosian",
+      "sources": [
+        "Ministry remains",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Imperial steel"
+        },
+        {
+          "quantity": 12,
+          "name": "Zarosian insignia"
+        },
+        {
+          "quantity": 20,
+          "name": "Soapstone"
+        },
+        {
+          "quantity": 12,
+          "name": "Blood of Orcus"
+        }
+      ]
+    },
+    {
+      "id": "funerary-urn-of-shadow",
+      "name": "Funerary urn of shadow",
+      "damagedName": "Funerary urn of shadow (damaged)",
+      "level": 60,
+      "restoreXp": 2333.3,
+      "chronotes": 540,
+      "alignment": "Zarosian",
+      "sources": [
+        "Ministry remains",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 26,
+          "name": "Soapstone"
+        },
+        {
+          "quantity": 14,
+          "name": "Tyrian purple"
+        },
+        {
+          "quantity": 20,
+          "name": "Ancient vis"
+        }
+      ]
+    },
+    {
+      "id": "dominion-discus",
+      "name": "Dominion discus",
+      "damagedName": "Dominion discus (damaged)",
+      "level": 61,
+      "restoreXp": 2566.7,
+      "chronotes": 556,
+      "alignment": "Saradominist",
+      "sources": [
+        "Stadio debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 34,
+          "name": "Keramos"
+        },
+        {
+          "quantity": 28,
+          "name": "Star of Saradomin"
+        }
+      ]
+    },
+    {
+      "id": "dominion-javelin",
+      "name": "Dominion javelin",
+      "damagedName": "Dominion javelin (damaged)",
+      "level": 61,
+      "restoreXp": 2566.7,
+      "chronotes": 556,
+      "alignment": "Saradominist",
+      "sources": [
+        "Stadio debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 32,
+          "name": "Keramos"
+        },
+        {
+          "quantity": 30,
+          "name": "Third Age iron"
+        }
+      ]
+    },
+    {
+      "id": "dominion-pelte-shield",
+      "name": "Dominion pelte shield",
+      "damagedName": "Dominion pelte shield (damaged)",
+      "level": 61,
+      "restoreXp": 2566.7,
+      "chronotes": 556,
+      "alignment": "Saradominist",
+      "sources": [
+        "Stadio debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 34,
+          "name": "Star of Saradomin"
+        },
+        {
+          "quantity": 28,
+          "name": "Samite silk"
+        }
+      ]
+    },
+    {
+      "id": "infula-robes",
+      "name": "Infula robes",
+      "damagedName": "Infula robes (damaged)",
+      "level": 62,
+      "restoreXp": 2800,
+      "chronotes": 558,
+      "alignment": "Zarosian",
+      "sources": [
+        "Cathedral debris",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 26,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 12,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 12,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 12,
+          "name": "Tyrian purple"
+        }
+      ]
+    },
+    {
+      "id": "funerary-urn-of-smoke",
+      "name": "Funerary urn of smoke",
+      "damagedName": "Funerary urn of smoke (damaged)",
+      "level": 62,
+      "restoreXp": 2800,
+      "chronotes": 558,
+      "alignment": "Zarosian",
+      "sources": [
+        "Cathedral debris",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 28,
+          "name": "Soapstone"
+        },
+        {
+          "quantity": 14,
+          "name": "Tyrian purple"
+        },
+        {
+          "quantity": 20,
+          "name": "Ancient vis"
+        }
+      ]
+    },
+    {
+      "id": "hand-of-the-ancients",
+      "name": "Hand of the Ancients",
+      "damagedName": "Hand of the Ancients (damaged)",
+      "level": 62,
+      "restoreXp": 2800,
+      "chronotes": 558,
+      "alignment": "Zarosian",
+      "sources": [
+        "Cathedral debris",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 12,
+          "name": "Blood of Orcus"
+        },
+        {
+          "quantity": 18,
+          "name": "White oak"
+        },
+        {
+          "quantity": 14,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 18,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "decorative-amphora",
+      "name": "Decorative amphora",
+      "damagedName": "Decorative amphora (damaged)",
+      "level": 63,
+      "restoreXp": 3033.3,
+      "chronotes": 560,
+      "alignment": "Zarosian",
+      "sources": [
+        "Marketplace debris",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Tyrian purple"
+        },
+        {
+          "quantity": 18,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 28,
+          "name": "Soapstone"
+        }
+      ]
+    },
+    {
+      "id": "funerary-urn-of-ice",
+      "name": "Funerary urn of ice",
+      "damagedName": "Funerary urn of ice (damaged)",
+      "level": 63,
+      "restoreXp": 3033.3,
+      "chronotes": 560,
+      "alignment": "Zarosian",
+      "sources": [
+        "Marketplace debris",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 28,
+          "name": "Soapstone"
+        },
+        {
+          "quantity": 14,
+          "name": "Tyrian purple"
+        },
+        {
+          "quantity": 20,
+          "name": "Ancient vis"
+        }
+      ]
+    },
+    {
+      "id": "loarnab-rod",
+      "name": "Loarnab rod",
+      "damagedName": "Loarnab rod (damaged)",
+      "level": 63,
+      "restoreXp": 3033.3,
+      "chronotes": 560,
+      "alignment": "Zarosian",
+      "sources": [
+        "Marketplace debris",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 28,
+          "name": "White oak"
+        },
+        {
+          "quantity": 16,
+          "name": "Blood of Orcus"
+        },
+        {
+          "quantity": 18,
+          "name": "Imperial steel"
+        }
+      ]
+    },
+    {
+      "id": "inquisitor-s-ceremonial-armour",
+      "name": "Inquisitor's ceremonial armour",
+      "damagedName": "Inquisitor's ceremonial armour (damaged)",
+      "level": 64,
+      "restoreXp": 3266.7,
+      "chronotes": 562,
+      "alignment": "Zarosian",
+      "sources": [
+        "Inquisitor remains",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 14,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 30,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 18,
+          "name": "Tyrian purple"
+        }
+      ]
+    },
+    {
+      "id": "inquisitor-s-ceremonial-mask",
+      "name": "Inquisitor's ceremonial mask",
+      "damagedName": "Inquisitor's ceremonial mask (damaged)",
+      "level": 64,
+      "restoreXp": 3266.7,
+      "chronotes": 562,
+      "alignment": "Zarosian",
+      "sources": [
+        "Inquisitor remains",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 14,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 12,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 14,
+          "name": "Blood of Orcus"
+        },
+        {
+          "quantity": 22,
+          "name": "Samite silk"
+        }
+      ]
+    },
+    {
+      "id": "inquisitor-s-seal",
+      "name": "Inquisitor's seal",
+      "damagedName": "Inquisitor's seal (damaged)",
+      "level": 64,
+      "restoreXp": 3266.7,
+      "chronotes": 562,
+      "alignment": "Zarosian",
+      "sources": [
+        "Inquisitor remains",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 14,
+          "name": "Tyrian purple"
+        },
+        {
+          "quantity": 20,
+          "name": "Zarosian insignia"
+        },
+        {
+          "quantity": 14,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 14,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "the-lake-of-fire-painting",
+      "name": "'The Lake of Fire' painting",
+      "damagedName": "'The Lake of Fire' painting (damaged)",
+      "level": 65,
+      "restoreXp": 3500,
+      "chronotes": 578,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Infernal art",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 10,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 10,
+          "name": "White oak"
+        },
+        {
+          "quantity": 10,
+          "name": "Vellum"
+        },
+        {
+          "quantity": 34,
+          "name": "Cadmium red"
+        }
+      ]
+    },
+    {
+      "id": "lust-metal-sculpture",
+      "name": "'Lust' metal sculpture",
+      "damagedName": "'Lust' metal sculpture (damaged)",
+      "level": 65,
+      "restoreXp": 3500,
+      "chronotes": 578,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Infernal art",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 24,
+          "name": "Eye of Dagon"
+        },
+        {
+          "quantity": 24,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 1,
+          "name": "Ruby"
+        }
+      ]
+    },
+    {
+      "id": "backstrap-loom",
+      "name": "Backstrap loom",
+      "damagedName": "Backstrap loom (damaged)",
+      "level": 66,
+      "restoreXp": 3733.3,
+      "chronotes": 580,
+      "alignment": "Guthixian",
+      "sources": [
+        "Weaver's hut debris",
+        "Moonrise"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "White oak"
+        },
+        {
+          "quantity": 18,
+          "name": "Burnt umber"
+        },
+        {
+          "quantity": 16,
+          "name": "Cashmere"
+        }
+      ]
+    },
+    {
+      "id": "animal-doll",
+      "name": "Animal doll",
+      "damagedName": "Animal doll (damaged)",
+      "level": 66,
+      "restoreXp": 3733.3,
+      "chronotes": 580,
+      "alignment": "Guthixian",
+      "sources": [
+        "Weaver's hut debris",
+        "Moonrise"
+      ],
+      "materials": [
+        {
+          "quantity": 24,
+          "name": "Cashmere"
+        },
+        {
+          "quantity": 24,
+          "name": "White oak"
+        },
+        {
+          "quantity": 16,
+          "name": "Ivory"
+        }
+      ]
+    },
+    {
+      "id": "initiate-s-kaunake",
+      "name": "Initiate's kaunake",
+      "damagedName": "Initiate's kaunake (damaged)",
+      "level": 66,
+      "restoreXp": 3733.3,
+      "chronotes": 580,
+      "alignment": "Guthixian",
+      "sources": [
+        "Weaver's hut debris",
+        "Moonrise"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Cashmere"
+        },
+        {
+          "quantity": 20,
+          "name": "Burnt umber"
+        },
+        {
+          "quantity": 14,
+          "name": "Leather scraps"
+        }
+      ]
+    },
+    {
+      "id": "gladiator-helmet",
+      "name": "Gladiator helmet",
+      "damagedName": "Gladiator helmet (damaged)",
+      "level": 66,
+      "restoreXp": 3773.3,
+      "chronotes": 580,
+      "alignment": "Zarosian",
+      "sources": [
+        "Gladiator remains",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Imperial steel"
+        },
+        {
+          "quantity": 16,
+          "name": "Blood of Orcus"
+        },
+        {
+          "quantity": 18,
+          "name": "Leather scraps"
+        }
+      ]
+    },
+    {
+      "id": "gladiator-sword",
+      "name": "Gladiator sword",
+      "damagedName": "Gladiator sword (damaged)",
+      "level": 66,
+      "restoreXp": 3773.3,
+      "chronotes": 580,
+      "alignment": "Zarosian",
+      "sources": [
+        "Gladiator remains",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Imperial steel"
+        },
+        {
+          "quantity": 18,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 16,
+          "name": "Zarosian insignia"
+        }
+      ]
+    },
+    {
+      "id": "funerary-urn-of-blood",
+      "name": "Funerary urn of blood",
+      "damagedName": "Funerary urn of blood (damaged)",
+      "level": 66,
+      "restoreXp": 3773.3,
+      "chronotes": 580,
+      "alignment": "Zarosian",
+      "sources": [
+        "Gladiator remains",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Soapstone"
+        },
+        {
+          "quantity": 14,
+          "name": "Tyrian purple"
+        },
+        {
+          "quantity": 20,
+          "name": "Blood of Orcus"
+        }
+      ]
+    },
+    {
+      "id": "funerary-urn-of-miasma",
+      "name": "Funerary urn of miasma",
+      "damagedName": "Funerary urn of miasma (damaged)",
+      "level": 67,
+      "restoreXp": 3966.7,
+      "chronotes": 582,
+      "alignment": "Zarosian",
+      "sources": [
+        "Citizen remains",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Soapstone"
+        },
+        {
+          "quantity": 14,
+          "name": "Tyrian purple"
+        },
+        {
+          "quantity": 20,
+          "name": "Ancient vis"
+        }
+      ]
+    },
+    {
+      "id": "model-chariot",
+      "name": "Model chariot",
+      "damagedName": "Model chariot (damaged)",
+      "level": 67,
+      "restoreXp": 3966.7,
+      "chronotes": 582,
+      "alignment": "Zarosian",
+      "sources": [
+        "Citizen remains",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 12,
+          "name": "Vellum"
+        },
+        {
+          "quantity": 18,
+          "name": "Imperial steel"
+        },
+        {
+          "quantity": 20,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 14,
+          "name": "Zarosian insignia"
+        }
+      ]
+    },
+    {
+      "id": "the-serpent-s-fall-carving",
+      "name": "'The Serpent's Fall' carving",
+      "damagedName": "'The Serpent's Fall' carving (damaged)",
+      "level": 67,
+      "restoreXp": 3966.7,
+      "chronotes": 582,
+      "alignment": "Zarosian",
+      "sources": [
+        "Citizen remains",
+        "Senntisten"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Vellum"
+        },
+        {
+          "quantity": 24,
+          "name": "Tyrian purple"
+        },
+        {
+          "quantity": 12,
+          "name": "Blood of Orcus"
+        },
+        {
+          "quantity": 12,
+          "name": "White oak"
+        }
+      ]
+    },
+    {
+      "id": "chaos-star",
+      "name": "Chaos star",
+      "damagedName": "Chaos star (damaged)",
+      "level": 68,
+      "restoreXp": 4200,
+      "chronotes": 584,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Shakroth remains",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 28,
+          "name": "Chaotic brimstone"
+        },
+        {
+          "quantity": 36,
+          "name": "Hellfire metal"
+        }
+      ]
+    },
+    {
+      "id": "spiked-dog-collar",
+      "name": "Spiked dog collar",
+      "damagedName": "Spiked dog collar (damaged)",
+      "level": 68,
+      "restoreXp": 4200,
+      "chronotes": 584,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Shakroth remains",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 24,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 24,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 16,
+          "name": "Chaotic brimstone"
+        }
+      ]
+    },
+    {
+      "id": "bronze-dominion-medal",
+      "name": "Bronze Dominion medal",
+      "damagedName": "Bronze Dominion medal (damaged)",
+      "level": 69,
+      "restoreXp": 4433.3,
+      "chronotes": 572,
+      "alignment": "Saradominist",
+      "sources": [
+        "Dominion Games podium",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Everlight silvthril"
+        },
+        {
+          "quantity": 26,
+          "name": "Star of Saradomin"
+        },
+        {
+          "quantity": 1,
+          "name": "Bronze bar"
+        }
+      ]
+    },
+    {
+      "id": "silver-dominion-medal",
+      "name": "Silver Dominion medal",
+      "damagedName": "Silver Dominion medal (damaged)",
+      "level": 69,
+      "restoreXp": 4433.3,
+      "chronotes": 572,
+      "alignment": "Saradominist",
+      "sources": [
+        "Dominion Games podium",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Everlight silvthril"
+        },
+        {
+          "quantity": 26,
+          "name": "Star of Saradomin"
+        },
+        {
+          "quantity": 1,
+          "name": "Silver bar"
+        }
+      ]
+    },
+    {
+      "id": "dominion-torch",
+      "name": "Dominion torch",
+      "damagedName": "Dominion torch (damaged)",
+      "level": 69,
+      "restoreXp": 4433.3,
+      "chronotes": 572,
+      "alignment": "Saradominist",
+      "sources": [
+        "Dominion Games podium",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 12,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 12,
+          "name": "Orthenglass"
+        },
+        {
+          "quantity": 20,
+          "name": "Everlight silvthril"
+        },
+        {
+          "quantity": 18,
+          "name": "Star of Saradomin"
+        }
+      ]
+    },
+    {
+      "id": "ikovian-gerege",
+      "name": "Ikovian gerege",
+      "damagedName": "Ikovian gerege (damaged)",
+      "level": 70,
+      "restoreXp": 4666.7,
+      "chronotes": 602,
+      "alignment": "Armadylean",
+      "sources": [
+        "Ikovian memorial",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 30,
+          "name": "Wings of War"
+        }
+      ]
+    },
+    {
+      "id": "toy-glider",
+      "name": "Toy glider",
+      "damagedName": "Toy glider (damaged)",
+      "level": 70,
+      "restoreXp": 4666.7,
+      "chronotes": 602,
+      "alignment": "Armadylean",
+      "sources": [
+        "Ikovian memorial",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Stormguard steel"
+        },
+        {
+          "quantity": 30,
+          "name": "White oak"
+        }
+      ]
+    },
+    {
+      "id": "toy-war-golem",
+      "name": "Toy war golem",
+      "damagedName": "Toy war golem (damaged)",
+      "level": 70,
+      "restoreXp": 4666.7,
+      "chronotes": 602,
+      "alignment": "Armadylean",
+      "sources": [
+        "Ikovian memorial",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 30,
+          "name": "White oak"
+        },
+        {
+          "quantity": 1,
+          "name": "Clockwork"
+        }
+      ]
+    },
+    {
+      "id": "ceremonial-dragonkin-device",
+      "name": "Ceremonial dragonkin device",
+      "damagedName": "Ceremonial dragonkin device (damaged)",
+      "level": 70,
+      "restoreXp": 4666.7,
+      "chronotes": 602,
+      "alignment": "Miscellaneous",
+      "sources": [
+        "Dragonkin remains",
+        "None"
+      ],
+      "materials": [
+        {
+          "quantity": 66,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "decorative-vase",
+      "name": "Decorative vase",
+      "damagedName": "Decorative vase (damaged)",
+      "level": 72,
+      "restoreXp": 5133.3,
+      "chronotes": 606,
+      "alignment": "Saradominist",
+      "sources": [
+        "Oikos studio debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "White marble"
+        },
+        {
+          "quantity": 30,
+          "name": "Cobalt blue"
+        }
+      ]
+    },
+    {
+      "id": "kantharos-cup",
+      "name": "Kantharos cup",
+      "damagedName": "Kantharos cup (damaged)",
+      "level": 72,
+      "restoreXp": 5133.3,
+      "chronotes": 606,
+      "alignment": "Saradominist",
+      "sources": [
+        "Oikos studio debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Everlight silvthril"
+        },
+        {
+          "quantity": 36,
+          "name": "Orthenglass"
+        },
+        {
+          "quantity": 1,
+          "name": "Sapphire"
+        }
+      ]
+    },
+    {
+      "id": "patera-bowl",
+      "name": "Patera bowl",
+      "damagedName": "Patera bowl (damaged)",
+      "level": 72,
+      "restoreXp": 5133.3,
+      "chronotes": 606,
+      "alignment": "Saradominist",
+      "sources": [
+        "Oikos studio debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Keramos"
+        },
+        {
+          "quantity": 30,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 1,
+          "name": "Sapphire"
+        }
+      ]
+    },
+    {
+      "id": "castle-gatestone",
+      "name": "Castle gatestone",
+      "damagedName": "Castle gatestone (damaged)",
+      "level": 73,
+      "restoreXp": 5366.7,
+      "chronotes": 622,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Castle hall rubble",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Orgone"
+        },
+        {
+          "quantity": 32,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "engraved-ring-of-kinship",
+      "name": "Engraved ring of kinship",
+      "damagedName": "Engraved ring of kinship (damaged)",
+      "level": 73,
+      "restoreXp": 5366.7,
+      "chronotes": 622,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Castle hall rubble",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 28,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 40,
+          "name": "Dragon metal"
+        }
+      ]
+    },
+    {
+      "id": "ceremonial-mace",
+      "name": "Ceremonial mace",
+      "damagedName": "Ceremonial mace (damaged)",
+      "level": 74,
+      "restoreXp": 5600,
+      "chronotes": 624,
+      "alignment": "Zarosian",
+      "sources": [
+        "Kharid-et chapel debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "Imperial steel"
+        },
+        {
+          "quantity": 20,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 28,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "pontifex-maximus-figurine",
+      "name": "Pontifex Maximus figurine",
+      "damagedName": "Pontifex Maximus figurine (damaged)",
+      "level": 74,
+      "restoreXp": 5600,
+      "chronotes": 624,
+      "alignment": "Zarosian",
+      "sources": [
+        "Kharid-et chapel debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 24,
+          "name": "Zarosian insignia"
+        },
+        {
+          "quantity": 16,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 28,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 1,
+          "name": "Dragonstone"
+        }
+      ]
+    },
+    {
+      "id": "consensus-ad-idem-painting",
+      "name": "'Consensus ad Idem' painting",
+      "damagedName": "'Consensus ad Idem' painting (damaged)",
+      "level": 74,
+      "restoreXp": 5600,
+      "chronotes": 638,
+      "alignment": "Zarosian",
+      "sources": [
+        "Kharid-et chapel debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 10,
+          "name": "White oak"
+        },
+        {
+          "quantity": 10,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 50,
+          "name": "Tyrian purple"
+        }
+      ]
+    },
+    {
+      "id": "offering-bowl",
+      "name": "Offering bowl",
+      "damagedName": "Offering bowl (damaged)",
+      "level": 75,
+      "restoreXp": 5830,
+      "chronotes": 584,
+      "alignment": "Guthixian",
+      "sources": [
+        "Shrine debris",
+        "Moonrise Dig Site"
+      ],
+      "materials": [
+        {
+          "quantity": 22,
+          "name": "Banded limestone"
+        },
+        {
+          "quantity": 20,
+          "name": "Triskelion"
+        },
+        {
+          "quantity": 20,
+          "name": "Burnt umber"
+        }
+      ]
+    },
+    {
+      "id": "incense-burner",
+      "name": "Incense burner",
+      "damagedName": "Incense burner (damaged)",
+      "level": 75,
+      "restoreXp": 5830,
+      "chronotes": 584,
+      "alignment": "Guthixian",
+      "sources": [
+        "Shrine debris",
+        "Moonrise Dig Site"
+      ],
+      "materials": [
+        {
+          "quantity": 24,
+          "name": "Banded limestone"
+        },
+        {
+          "quantity": 18,
+          "name": "White oak"
+        },
+        {
+          "quantity": 20,
+          "name": "Cashmere"
+        }
+      ]
+    },
+    {
+      "id": "wingsuit-v1",
+      "name": "Wingsuit v1",
+      "damagedName": "Wingsuit v1 (damaged)",
+      "level": 76,
+      "restoreXp": 10000,
+      "chronotes": 0,
+      "alignment": "miscellaneous",
+      "sources": [
+        "none",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 40,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 20,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 9,
+          "name": "Stormguard steel"
+        },
+        {
+          "quantity": 1,
+          "name": "Armadylean yellow"
+        }
+      ]
+    },
+    {
+      "id": "avian-song-egg-player",
+      "name": "Avian song-egg player",
+      "damagedName": "Avian song-egg player (damaged)",
+      "level": 76,
+      "restoreXp": 6066.7,
+      "chronotes": 628,
+      "alignment": "Armadylean",
+      "sources": [
+        "Keshik ger",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Stormguard steel"
+        },
+        {
+          "quantity": 32,
+          "name": "Armadylean yellow"
+        },
+        {
+          "quantity": 1,
+          "name": "Diamond"
+        }
+      ]
+    },
+    {
+      "id": "keshik-drum",
+      "name": "Keshik drum",
+      "damagedName": "Keshik drum (damaged)",
+      "level": 76,
+      "restoreXp": 6066.7,
+      "chronotes": 628,
+      "alignment": "Armadylean",
+      "sources": [
+        "Keshik ger",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Wings of War"
+        },
+        {
+          "quantity": 16,
+          "name": "Animal furs"
+        },
+        {
+          "quantity": 20,
+          "name": "White oak"
+        },
+        {
+          "quantity": 16,
+          "name": "Leather scraps"
+        }
+      ]
+    },
+    {
+      "id": "morin-khuur",
+      "name": "Morin khuur",
+      "damagedName": "Morin khuur (damaged)",
+      "level": 76,
+      "restoreXp": 6066.7,
+      "chronotes": 628,
+      "alignment": "Armadylean",
+      "sources": [
+        "Keshik ger",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Armadylean yellow"
+        },
+        {
+          "quantity": 32,
+          "name": "White oak"
+        }
+      ]
+    },
+    {
+      "id": "ekeleshuun-blinder-mask",
+      "name": "Ekeleshuun blinder mask",
+      "damagedName": "Ekeleshuun blinder mask (damaged)",
+      "level": 76,
+      "restoreXp": 6066.7,
+      "chronotes": 628,
+      "alignment": "Bandosian",
+      "sources": [
+        "Gladiatorial goblin remains",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 24,
+          "name": "Vulcanised rubber"
+        },
+        {
+          "quantity": 20,
+          "name": "Malachite green"
+        },
+        {
+          "quantity": 24,
+          "name": "Vellum"
+        }
+      ]
+    },
+    {
+      "id": "narogoshuun-hob-da-gob-ball",
+      "name": "Narogoshuun 'Hob-da-Gob' ball",
+      "damagedName": "Narogoshuun 'Hob-da-Gob' ball (damaged)",
+      "level": 76,
+      "restoreXp": 6066.7,
+      "chronotes": 628,
+      "alignment": "Bandosian",
+      "sources": [
+        "Gladiatorial goblin remains",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Vulcanised rubber"
+        },
+        {
+          "quantity": 32,
+          "name": "Mark of the Kyzaj"
+        }
+      ]
+    },
+    {
+      "id": "rekeshuun-war-tether",
+      "name": "Rekeshuun war tether",
+      "damagedName": "Rekeshuun war tether (damaged)",
+      "level": 76,
+      "restoreXp": 6066.7,
+      "chronotes": 628,
+      "alignment": "Bandosian",
+      "sources": [
+        "Gladiatorial goblin remains",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "Warforged bronze"
+        },
+        {
+          "quantity": 22,
+          "name": "Vulcanised rubber"
+        },
+        {
+          "quantity": 26,
+          "name": "Leather scraps"
+        }
+      ]
+    },
+    {
+      "id": "exploratory-totem",
+      "name": "Exploratory totem",
+      "damagedName": "Exploratory totem (damaged)",
+      "level": 77,
+      "restoreXp": 6300,
+      "chronotes": 644,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Tunnelling equipment repository",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 34,
+          "name": "Dragon metal"
+        },
+        {
+          "quantity": 36,
+          "name": "Compass rose"
+        }
+      ]
+    },
+    {
+      "id": "excavator-portal-mine",
+      "name": "Excavator portal mine",
+      "damagedName": "Excavator portal mine (damaged)",
+      "level": 77,
+      "restoreXp": 6300,
+      "chronotes": 644,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Tunnelling equipment repository",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Orgone"
+        },
+        {
+          "quantity": 34,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "storage-totem",
+      "name": "Storage totem",
+      "damagedName": "Storage totem (damaged)",
+      "level": 78,
+      "restoreXp": 6533.3,
+      "chronotes": 646,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Botanical reserve",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Dragon metal"
+        },
+        {
+          "quantity": 34,
+          "name": "Compass rose"
+        }
+      ]
+    },
+    {
+      "id": "plant-seed-satchel",
+      "name": "Plant seed satchel",
+      "damagedName": "Plant seed satchel (damaged)",
+      "level": 78,
+      "restoreXp": 6533.3,
+      "chronotes": 646,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Botanical reserve",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 28,
+          "name": "Felt"
+        },
+        {
+          "quantity": 28,
+          "name": "Carbon black"
+        },
+        {
+          "quantity": 14,
+          "name": "Compass rose"
+        }
+      ]
+    },
+    {
+      "id": "snuff-box",
+      "name": "Snuff box",
+      "damagedName": "Snuff box (damaged)",
+      "level": 78,
+      "restoreXp": 6533.3,
+      "chronotes": 646,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Botanical reserve",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "Soapstone"
+        },
+        {
+          "quantity": 30,
+          "name": "Carbon black"
+        },
+        {
+          "quantity": 20,
+          "name": "Felt"
+        }
+      ]
+    },
+    {
+      "id": "aviansie-dreamcoat",
+      "name": "Aviansie dreamcoat",
+      "damagedName": "Aviansie dreamcoat (damaged)",
+      "level": 81,
+      "restoreXp": 7388.9,
+      "chronotes": 666,
+      "alignment": "Armadylean",
+      "sources": [
+        "Tailory debris",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "Armadylean yellow"
+        },
+        {
+          "quantity": 30,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 22,
+          "name": "Animal furs"
+        }
+      ]
+    },
+    {
+      "id": "ceremonial-plume",
+      "name": "Ceremonial plume",
+      "damagedName": "Ceremonial plume (damaged)",
+      "level": 81,
+      "restoreXp": 7388.9,
+      "chronotes": 666,
+      "alignment": "Armadylean",
+      "sources": [
+        "Tailory debris",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 38,
+          "name": "Armadylean yellow"
+        },
+        {
+          "quantity": 34,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 1,
+          "name": "Phoenix feather"
+        }
+      ]
+    },
+    {
+      "id": "peacocking-parasol",
+      "name": "Peacocking parasol",
+      "damagedName": "Peacocking parasol (damaged)",
+      "level": 81,
+      "restoreXp": 7388.9,
+      "chronotes": 666,
+      "alignment": "Armadylean",
+      "sources": [
+        "Tailory debris",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 22,
+          "name": "Armadylean yellow"
+        },
+        {
+          "quantity": 30,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 20,
+          "name": "White oak"
+        }
+      ]
+    },
+    {
+      "id": "ogre-kyzaj-axe",
+      "name": "Ogre Kyzaj axe",
+      "damagedName": "Ogre Kyzaj axe (damaged)",
+      "level": 81,
+      "restoreXp": 7388.9,
+      "chronotes": 666,
+      "alignment": "Bandosian",
+      "sources": [
+        "Crucible stands debris",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 28,
+          "name": "Warforged bronze"
+        },
+        {
+          "quantity": 20,
+          "name": "Mark of the Kyzaj"
+        },
+        {
+          "quantity": 24,
+          "name": "Fossilised bone"
+        }
+      ]
+    },
+    {
+      "id": "ork-cleaver-sword",
+      "name": "Ork cleaver sword",
+      "damagedName": "Ork cleaver sword (damaged)",
+      "level": 81,
+      "restoreXp": 7388.9,
+      "chronotes": 666,
+      "alignment": "Bandosian",
+      "sources": [
+        "Crucible stands debris",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Warforged bronze"
+        },
+        {
+          "quantity": 36,
+          "name": "Fossilised bone"
+        }
+      ]
+    },
+    {
+      "id": "larupia-trophy",
+      "name": "Larupia trophy",
+      "damagedName": "Larupia trophy (damaged)",
+      "level": 81,
+      "restoreXp": 7388.9,
+      "chronotes": 666,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Animal trophies",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 18,
+          "name": "Cadmium red"
+        },
+        {
+          "quantity": 28,
+          "name": "Animal furs"
+        },
+        {
+          "quantity": 26,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "lion-trophy",
+      "name": "Lion trophy",
+      "damagedName": "Lion trophy (damaged)",
+      "level": 81,
+      "restoreXp": 7388.9,
+      "chronotes": 666,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Animal trophies",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 18,
+          "name": "Cadmium red"
+        },
+        {
+          "quantity": 28,
+          "name": "Animal furs"
+        },
+        {
+          "quantity": 26,
+          "name": "White oak"
+        }
+      ]
+    },
+    {
+      "id": "she-wolf-trophy",
+      "name": "She-wolf trophy",
+      "damagedName": "She-wolf trophy (damaged)",
+      "level": 81,
+      "restoreXp": 7388.9,
+      "chronotes": 666,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Animal trophies",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 26,
+          "name": "Chaotic brimstone"
+        },
+        {
+          "quantity": 18,
+          "name": "Cadmium red"
+        },
+        {
+          "quantity": 28,
+          "name": "Animal furs"
+        }
+      ]
+    },
+    {
+      "id": "pontifex-censer",
+      "name": "Pontifex censer",
+      "damagedName": "Pontifex censer (damaged)",
+      "level": 81,
+      "restoreXp": 7388.9,
+      "chronotes": 666,
+      "alignment": "Zarosian",
+      "sources": [
+        "Pontifex remains",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 20,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 32,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 1,
+          "name": "Dragonstone"
+        }
+      ]
+    },
+    {
+      "id": "pontifex-crozier",
+      "name": "Pontifex crozier",
+      "damagedName": "Pontifex crozier (damaged)",
+      "level": 81,
+      "restoreXp": 7388.9,
+      "chronotes": 666,
+      "alignment": "Zarosian",
+      "sources": [
+        "Pontifex remains",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "Imperial steel"
+        },
+        {
+          "quantity": 20,
+          "name": "Zarosian insignia"
+        },
+        {
+          "quantity": 32,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "pontifex-mitre",
+      "name": "Pontifex mitre",
+      "damagedName": "Pontifex mitre (damaged)",
+      "level": 81,
+      "restoreXp": 7388.9,
+      "chronotes": 666,
+      "alignment": "Zarosian",
+      "sources": [
+        "Pontifex remains",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 32,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 20,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 20,
+          "name": "Zarosian insignia"
+        }
+      ]
+    },
+    {
+      "id": "bloodwine",
+      "name": "Bloodwine",
+      "damagedName": "Bloodwine (damaged)",
+      "level": 82,
+      "restoreXp": 7777.8,
+      "chronotes": 668,
+      "alignment": "Guthixian",
+      "sources": [
+        "Cauldron debris",
+        "Moonrise"
+      ],
+      "materials": [
+        {
+          "quantity": 32,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 20,
+          "name": "Triskelion"
+        },
+        {
+          "quantity": 20,
+          "name": "Cashmere"
+        },
+        {
+          "quantity": 1,
+          "name": "Grapes"
+        }
+      ]
+    },
+    {
+      "id": "reagent-jar",
+      "name": "Reagent jar",
+      "damagedName": "Reagent jar (damaged)",
+      "level": 82,
+      "restoreXp": 7777.8,
+      "chronotes": 668,
+      "alignment": "Guthixian",
+      "sources": [
+        "Cauldron debris",
+        "Moonrise"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 22,
+          "name": "Banded limestone"
+        },
+        {
+          "quantity": 30,
+          "name": "Burnt umber"
+        }
+      ]
+    },
+    {
+      "id": "ninbaradari-mural",
+      "name": "Ninbaradari mural",
+      "damagedName": "Ninbaradari mural (damaged)",
+      "level": 82,
+      "restoreXp": 7777.8,
+      "chronotes": 668,
+      "alignment": "Guthixian",
+      "sources": [
+        "Cauldron debris",
+        "Moonrise"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Burnt umber"
+        },
+        {
+          "quantity": 22,
+          "name": "Banded limestone"
+        },
+        {
+          "quantity": 20,
+          "name": "Triskelion"
+        }
+      ]
+    },
+    {
+      "id": "thorobshuun-battle-standard",
+      "name": "Thorobshuun battle standard",
+      "damagedName": "Thorobshuun battle standard (damaged)",
+      "level": 83,
+      "restoreXp": 8166.7,
+      "chronotes": 684,
+      "alignment": "Bandosian",
+      "sources": [
+        "Goblin dorm debris",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Mark of the Kyzaj"
+        },
+        {
+          "quantity": 22,
+          "name": "Malachite green"
+        },
+        {
+          "quantity": 16,
+          "name": "White oak"
+        },
+        {
+          "quantity": 20,
+          "name": "Samite silk"
+        }
+      ]
+    },
+    {
+      "id": "yurkolgokh-stink-grenade",
+      "name": "Yurkolgokh stink grenade",
+      "damagedName": "Yurkolgokh stink grenade (damaged)",
+      "level": 83,
+      "restoreXp": 8166.7,
+      "chronotes": 684,
+      "alignment": "Bandosian",
+      "sources": [
+        "Goblin dorm debris",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 38,
+          "name": "Yu'biusk clay"
+        },
+        {
+          "quantity": 36,
+          "name": "Vulcanised rubber"
+        },
+        {
+          "quantity": 1,
+          "name": "Weapon poison (3)"
+        }
+      ]
+    },
+    {
+      "id": "dominarian-device",
+      "name": "Dominarian device",
+      "damagedName": "Dominarian device (damaged)",
+      "level": 84,
+      "restoreXp": 8555.6,
+      "chronotes": 686,
+      "alignment": "Saradominist",
+      "sources": [
+        "Oikos fishing hut remnants",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Everlight silvthril"
+        },
+        {
+          "quantity": 22,
+          "name": "Keramos"
+        },
+        {
+          "quantity": 22,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 1,
+          "name": "Clockwork"
+        }
+      ]
+    },
+    {
+      "id": "fishing-trident",
+      "name": "Fishing trident",
+      "damagedName": "Fishing trident (damaged)",
+      "level": 84,
+      "restoreXp": 8555.6,
+      "chronotes": 686,
+      "alignment": "Saradominist",
+      "sources": [
+        "Oikos fishing hut remnants",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 22,
+          "name": "Star of Saradomin"
+        },
+        {
+          "quantity": 30,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 22,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "hawkeye-lens-multi-vision-scope",
+      "name": "Hawkeye lens multi-vision scope",
+      "damagedName": "Hawkeye lens multi-vision scope (damaged)",
+      "level": 85,
+      "restoreXp": 8944.4,
+      "chronotes": 688,
+      "alignment": "Armadylean",
+      "sources": [
+        "Weapons research debris",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 40,
+          "name": "Stormguard steel"
+        },
+        {
+          "quantity": 34,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "talon-3-razor-wing",
+      "name": "Talon-3 razor wing",
+      "damagedName": "Talon-3 razor wing (damaged)",
+      "level": 85,
+      "restoreXp": 8944.4,
+      "chronotes": 688,
+      "alignment": "Armadylean",
+      "sources": [
+        "Weapons research debris",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 40,
+          "name": "Aetherium alloy"
+        },
+        {
+          "quantity": 34,
+          "name": "Wings of War"
+        },
+        {
+          "quantity": 1,
+          "name": "Rope"
+        }
+      ]
+    },
+    {
+      "id": "exsanguinate-spell-scroll",
+      "name": "'Exsanguinate' spell scroll",
+      "damagedName": "'Exsanguinate' spell scroll (damaged)",
+      "level": 86,
+      "restoreXp": 9333.3,
+      "chronotes": 704,
+      "alignment": "Zarosian",
+      "sources": [
+        "Orcus altar",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 40,
+          "name": "Vellum"
+        },
+        {
+          "quantity": 36,
+          "name": "Blood of Orcus"
+        }
+      ]
+    },
+    {
+      "id": "necromantic-focus",
+      "name": "Necromantic focus",
+      "damagedName": "Necromantic focus (damaged)",
+      "level": 86,
+      "restoreXp": 9333.3,
+      "chronotes": 704,
+      "alignment": "Zarosian",
+      "sources": [
+        "Orcus altar",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "Imperial steel"
+        },
+        {
+          "quantity": 26,
+          "name": "Blood of Orcus"
+        },
+        {
+          "quantity": 30,
+          "name": "Ancient vis"
+        }
+      ]
+    },
+    {
+      "id": "spent-summoning-charm",
+      "name": "Spent summoning charm",
+      "damagedName": "Spent summoning charm (damaged)",
+      "level": 87,
+      "restoreXp": 9722.2,
+      "chronotes": 706,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Communal space",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 46,
+          "name": "Orgone"
+        },
+        {
+          "quantity": 30,
+          "name": "Felt"
+        }
+      ]
+    },
+    {
+      "id": "friendship-bracelet",
+      "name": "'Friendship bracelet'",
+      "damagedName": "'Friendship bracelet' (damaged)",
+      "level": 87,
+      "restoreXp": 9722.2,
+      "chronotes": 706,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Communal space",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Soapstone"
+        },
+        {
+          "quantity": 46,
+          "name": "Felt"
+        }
+      ]
+    },
+    {
+      "id": "homely-totem",
+      "name": "Homely totem",
+      "damagedName": "Homely totem (damaged)",
+      "level": 87,
+      "restoreXp": 9722.2,
+      "chronotes": 706,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Communal space",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Soapstone"
+        },
+        {
+          "quantity": 40,
+          "name": "Felt"
+        }
+      ]
+    },
+    {
+      "id": "bloodletting-dagger",
+      "name": "Bloodletting dagger",
+      "damagedName": "Bloodletting dagger (damaged)",
+      "level": 88,
+      "restoreXp": 10111.1,
+      "chronotes": 722,
+      "alignment": "Guthixian",
+      "sources": [
+        "Blood altar (excavation hotspot)",
+        "Moonrise"
+      ],
+      "materials": [
+        {
+          "quantity": 28,
+          "name": "Ivory"
+        },
+        {
+          "quantity": 24,
+          "name": "Cashmere"
+        },
+        {
+          "quantity": 26,
+          "name": "Soapstone"
+        }
+      ]
+    },
+    {
+      "id": "fang-of-kayazu",
+      "name": "Fang of Kayazu",
+      "damagedName": "Fang of Kayazu (damaged)",
+      "level": 88,
+      "restoreXp": 10111.1,
+      "chronotes": 722,
+      "alignment": "Guthixian",
+      "sources": [
+        "Blood altar (excavation hotspot)",
+        "Moonrise Dig Site"
+      ],
+      "materials": [
+        {
+          "quantity": 38,
+          "name": "Ivory"
+        },
+        {
+          "quantity": 20,
+          "name": "Burnt umber"
+        },
+        {
+          "quantity": 20,
+          "name": "Soapstone"
+        }
+      ]
+    },
+    {
+      "id": "high-priest-crozier",
+      "name": "High priest crozier",
+      "damagedName": "High priest crozier (damaged)",
+      "level": 89,
+      "restoreXp": 10500,
+      "chronotes": 724,
+      "alignment": "Bandosian",
+      "sources": [
+        "Big High War God shrine",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 26,
+          "name": "Mark of the Kyzaj"
+        },
+        {
+          "quantity": 24,
+          "name": "Malachite green"
+        },
+        {
+          "quantity": 28,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "high-priest-mitre",
+      "name": "High priest mitre",
+      "damagedName": "High priest mitre (damaged)",
+      "level": 89,
+      "restoreXp": 10500,
+      "chronotes": 724,
+      "alignment": "Bandosian",
+      "sources": [
+        "Big High War God shrine",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 26,
+          "name": "Mark of the Kyzaj"
+        },
+        {
+          "quantity": 24,
+          "name": "Malachite green"
+        },
+        {
+          "quantity": 28,
+          "name": "Samite silk"
+        }
+      ]
+    },
+    {
+      "id": "high-priest-orb",
+      "name": "High priest orb",
+      "damagedName": "High priest orb (damaged)",
+      "level": 89,
+      "restoreXp": 10500,
+      "chronotes": 724,
+      "alignment": "Bandosian",
+      "sources": [
+        "Big High War God shrine",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 26,
+          "name": "Mark of the Kyzaj"
+        },
+        {
+          "quantity": 24,
+          "name": "Malachite green"
+        },
+        {
+          "quantity": 28,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "torment-metal-sculpture",
+      "name": "'Torment' metal sculpture",
+      "damagedName": "'Torment' metal sculpture (damaged)",
+      "level": 89,
+      "restoreXp": 10500,
+      "chronotes": 724,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Dis overspill",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "Eye of Dagon"
+        },
+        {
+          "quantity": 20,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 38,
+          "name": "Hellfire metal"
+        }
+      ]
+    },
+    {
+      "id": "pandemonium-tapestry",
+      "name": "'Pandemonium' tapestry",
+      "damagedName": "'Pandemonium' tapestry (damaged)",
+      "level": 89,
+      "restoreXp": 10500,
+      "chronotes": 724,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Dis overspill",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 12,
+          "name": "White oak"
+        },
+        {
+          "quantity": 12,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 12,
+          "name": "Vellum"
+        },
+        {
+          "quantity": 42,
+          "name": "Cadmium red"
+        }
+      ]
+    },
+    {
+      "id": "ceremonial-dragonkin-tablet",
+      "name": "Ceremonial dragonkin tablet",
+      "damagedName": "Ceremonial dragonkin tablet (damaged)",
+      "level": 90,
+      "restoreXp": 10888.9,
+      "chronotes": 733,
+      "alignment": "miscellaneous",
+      "sources": [
+        "Orthen rubble",
+        "none"
+      ],
+      "materials": [
+        {
+          "quantity": 79,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "pasaha",
+      "name": "Pasaha",
+      "damagedName": "Pasaha (damaged)",
+      "level": 90,
+      "restoreXp": 10888.9,
+      "chronotes": 726,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Varanusaur remains",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 40,
+          "name": "Felt"
+        },
+        {
+          "quantity": 38,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "ritual-bell",
+      "name": "Ritual bell",
+      "damagedName": "Ritual bell (damaged)",
+      "level": 90,
+      "restoreXp": 10888.9,
+      "chronotes": 726,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Varanusaur remains",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 40,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 38,
+          "name": "Compass rose"
+        }
+      ]
+    },
+    {
+      "id": "prototype-gravimeter",
+      "name": "Prototype gravimeter",
+      "damagedName": "Prototype gravimeter (damaged)",
+      "level": 91,
+      "restoreXp": 11277.8,
+      "chronotes": 742,
+      "alignment": "Armadylean",
+      "sources": [
+        "Gravitron research debris",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 34,
+          "name": "Quintessence"
+        },
+        {
+          "quantity": 20,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 26,
+          "name": "Third Age iron"
+        }
+      ]
+    },
+    {
+      "id": "songbird-recorder",
+      "name": "Songbird recorder",
+      "damagedName": "Songbird recorder (damaged)",
+      "level": 91,
+      "restoreXp": 11277.8,
+      "chronotes": 742,
+      "alignment": "Armadylean",
+      "sources": [
+        "Gravitron research debris",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 44,
+          "name": "Stormguard steel"
+        },
+        {
+          "quantity": 36,
+          "name": "Orthenglass"
+        },
+        {
+          "quantity": 1,
+          "name": "Diamond"
+        }
+      ]
+    },
+    {
+      "id": "amphora",
+      "name": "Amphora",
+      "damagedName": "Amphora (damaged)",
+      "level": 92,
+      "restoreXp": 11666.7,
+      "chronotes": 744,
+      "alignment": "Saradominist",
+      "sources": [
+        "Acropolis debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 34,
+          "name": "Everlight silvthril"
+        },
+        {
+          "quantity": 46,
+          "name": "Keramos"
+        }
+      ]
+    },
+    {
+      "id": "rod-of-asclepius",
+      "name": "Rod of Asclepius",
+      "damagedName": "Rod of Asclepius (damaged)",
+      "level": 92,
+      "restoreXp": 11666.7,
+      "chronotes": 744,
+      "alignment": "Saradominist",
+      "sources": [
+        "Acropolis debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "White marble"
+        },
+        {
+          "quantity": 24,
+          "name": "Star of Saradomin"
+        },
+        {
+          "quantity": 26,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "zarosian-ewer",
+      "name": "Zarosian ewer",
+      "damagedName": "Zarosian ewer (damaged)",
+      "level": 93,
+      "restoreXp": 12500,
+      "chronotes": 760,
+      "alignment": "Zarosian",
+      "sources": [
+        "Armarium debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 52,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 30,
+          "name": "Zarosian insignia"
+        }
+      ]
+    },
+    {
+      "id": "zarosian-stein",
+      "name": "Zarosian stein",
+      "damagedName": "Zarosian stein (damaged)",
+      "level": 93,
+      "restoreXp": 12500,
+      "chronotes": 760,
+      "alignment": "Zarosian",
+      "sources": [
+        "Armarium debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 36,
+          "name": "Imperial steel"
+        },
+        {
+          "quantity": 30,
+          "name": "Zarosian insignia"
+        }
+      ]
+    },
+    {
+      "id": "beastkeeper-helm",
+      "name": "Beastkeeper helm",
+      "damagedName": "Beastkeeper helm (damaged)",
+      "level": 94,
+      "restoreXp": 13333.3,
+      "chronotes": 776,
+      "alignment": "Bandosian",
+      "sources": [
+        "Yu'biusk animal pen",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 16,
+          "name": "Warforged bronze"
+        },
+        {
+          "quantity": 24,
+          "name": "Vulcanised rubber"
+        },
+        {
+          "quantity": 20,
+          "name": "Animal furs"
+        },
+        {
+          "quantity": 24,
+          "name": "Fossilised bone"
+        }
+      ]
+    },
+    {
+      "id": "idithuun-horn-ring",
+      "name": "Idithuun horn ring",
+      "damagedName": "Idithuun horn ring (damaged)",
+      "level": 94,
+      "restoreXp": 13333.3,
+      "chronotes": 776,
+      "alignment": "Bandosian",
+      "sources": [
+        "Yu'biusk animal pen",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 40,
+          "name": "Yu'biusk clay"
+        },
+        {
+          "quantity": 44,
+          "name": "Vulcanised rubber"
+        }
+      ]
+    },
+    {
+      "id": "nosorog-sculpture",
+      "name": "'Nosorog!' sculpture",
+      "damagedName": "'Nosorog!' sculpture (damaged)",
+      "level": 94,
+      "restoreXp": 13333.3,
+      "chronotes": 776,
+      "alignment": "Bandosian",
+      "sources": [
+        "Yu'biusk animal pen",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Yu'biusk clay"
+        },
+        {
+          "quantity": 24,
+          "name": "Malachite green"
+        },
+        {
+          "quantity": 30,
+          "name": "Warforged bronze"
+        }
+      ]
+    },
+    {
+      "id": "dayguard-shield",
+      "name": "Dayguard shield",
+      "damagedName": "Dayguard shield (damaged)",
+      "level": 95,
+      "restoreXp": 14166.7,
+      "chronotes": 778,
+      "alignment": "Armadylean",
+      "sources": [
+        "Keshik tower debris",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Stormguard steel"
+        },
+        {
+          "quantity": 28,
+          "name": "Wings of War"
+        },
+        {
+          "quantity": 20,
+          "name": "White oak"
+        }
+      ]
+    },
+    {
+      "id": "stormguard-gerege",
+      "name": "Stormguard gerege",
+      "damagedName": "Stormguard gerege (damaged)",
+      "level": 95,
+      "restoreXp": 14166.7,
+      "chronotes": 778,
+      "alignment": "Armadylean",
+      "sources": [
+        "Keshik tower debris",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Stormguard steel"
+        },
+        {
+          "quantity": 28,
+          "name": "Wings of War"
+        },
+        {
+          "quantity": 20,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "kilaya",
+      "name": "Kilaya",
+      "damagedName": "Kilaya (damaged)",
+      "level": 96,
+      "restoreXp": 15000,
+      "chronotes": 794,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Dragonkin reliquary",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 46,
+          "name": "Dragon metal"
+        },
+        {
+          "quantity": 40,
+          "name": "Compass rose"
+        }
+      ]
+    },
+    {
+      "id": "vazara",
+      "name": "Vazara",
+      "damagedName": "Vazara (damaged)",
+      "level": 96,
+      "restoreXp": 15000,
+      "chronotes": 794,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Dragonkin reliquary",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Dragon metal"
+        },
+        {
+          "quantity": 28,
+          "name": "Compass rose"
+        },
+        {
+          "quantity": 28,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "ourg-megahitter",
+      "name": "Ourg megahitter",
+      "damagedName": "Ourg megahitter (damaged)",
+      "level": 97,
+      "restoreXp": 15833.3,
+      "chronotes": 810,
+      "alignment": "Bandosian",
+      "sources": [
+        "Goblin trainee remains",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "White oak"
+        },
+        {
+          "quantity": 20,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 26,
+          "name": "Orthenglass"
+        },
+        {
+          "quantity": 22,
+          "name": "Malachite green"
+        }
+      ]
+    },
+    {
+      "id": "ourg-tower-goblin-cower-shield",
+      "name": "Ourg tower/goblin cower shield",
+      "damagedName": "Ourg tower/goblin cower shield (damaged)",
+      "level": 97,
+      "restoreXp": 15833.3,
+      "chronotes": 810,
+      "alignment": "Bandosian",
+      "sources": [
+        "Goblin trainee remains",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "Mark of the Kyzaj"
+        },
+        {
+          "quantity": 26,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 22,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 20,
+          "name": "White oak"
+        }
+      ]
+    },
+    {
+      "id": "garagorshuun-anchor",
+      "name": "Garagorshuun anchor",
+      "damagedName": "Garagorshuun anchor (damaged)",
+      "level": 97,
+      "restoreXp": 15833.3,
+      "chronotes": 810,
+      "alignment": "Bandosian",
+      "sources": [
+        "Goblin trainee remains",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 32,
+          "name": "Warforged bronze"
+        },
+        {
+          "quantity": 26,
+          "name": "Mark of the Kyzaj"
+        },
+        {
+          "quantity": 30,
+          "name": "Third Age iron"
+        }
+      ]
+    },
+    {
+      "id": "golem-heart",
+      "name": "Golem heart",
+      "damagedName": "Golem heart (damaged)",
+      "level": 98,
+      "restoreXp": 16666.7,
+      "chronotes": 826,
+      "alignment": "Armadylean",
+      "sources": [
+        "Destroyed golem",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 34,
+          "name": "Aetherium alloy"
+        },
+        {
+          "quantity": 24,
+          "name": "Quintessence"
+        },
+        {
+          "quantity": 16,
+          "name": "Orthenglass"
+        },
+        {
+          "quantity": 16,
+          "name": "Soapstone"
+        }
+      ]
+    },
+    {
+      "id": "golem-instruction",
+      "name": "Golem instruction",
+      "damagedName": "Golem instruction (damaged)",
+      "level": 98,
+      "restoreXp": 16666.7,
+      "chronotes": 826,
+      "alignment": "Armadylean",
+      "sources": [
+        "Destroyed golem",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 46,
+          "name": "Quintessence"
+        },
+        {
+          "quantity": 44,
+          "name": "Vellum"
+        },
+        {
+          "quantity": 1,
+          "name": "Black mushroom ink"
+        }
+      ]
+    },
+    {
+      "id": "hellfire-haladie",
+      "name": "Hellfire haladie",
+      "damagedName": "Hellfire haladie (damaged)",
+      "level": 98,
+      "restoreXp": 16666.7,
+      "chronotes": 826,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Byzroth remains",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 44,
+          "name": "Hellfire metal"
+        },
+        {
+          "quantity": 26,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 20,
+          "name": "Leather scraps"
+        }
+      ]
+    },
+    {
+      "id": "hellfire-katar",
+      "name": "Hellfire katar",
+      "damagedName": "Hellfire katar (damaged)",
+      "level": 98,
+      "restoreXp": 16666.7,
+      "chronotes": 826,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Byzroth remains",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Hellfire metal"
+        },
+        {
+          "quantity": 40,
+          "name": "Leather scraps"
+        }
+      ]
+    },
+    {
+      "id": "hellfire-zaghnal",
+      "name": "Hellfire zaghnal",
+      "damagedName": "Hellfire zaghnal (damaged)",
+      "level": 98,
+      "restoreXp": 16666.7,
+      "chronotes": 826,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Byzroth remains",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 38,
+          "name": "Hellfire metal"
+        },
+        {
+          "quantity": 26,
+          "name": "White oak"
+        },
+        {
+          "quantity": 26,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "death-mask",
+      "name": "Death mask",
+      "damagedName": "Death mask (damaged)",
+      "level": 99,
+      "restoreXp": 17500,
+      "chronotes": 828,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Dragonkin coffin",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 56,
+          "name": "Orgone"
+        },
+        {
+          "quantity": 34,
+          "name": "Soapstone"
+        }
+      ]
+    },
+    {
+      "id": "dragonkin-calendar",
+      "name": "Dragonkin calendar",
+      "damagedName": "Dragonkin calendar (damaged)",
+      "level": 99,
+      "restoreXp": 17500,
+      "chronotes": 828,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Dragonkin coffin",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 34,
+          "name": "Orgone"
+        },
+        {
+          "quantity": 28,
+          "name": "Carbon black"
+        },
+        {
+          "quantity": 28,
+          "name": "Compass rose"
+        }
+      ]
+    },
+    {
+      "id": "dragonkin-staff",
+      "name": "Dragonkin staff",
+      "damagedName": "Dragonkin staff (damaged)",
+      "level": 99,
+      "restoreXp": 17500,
+      "chronotes": 828,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Dragonkin coffin",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 56,
+          "name": "Orgone"
+        },
+        {
+          "quantity": 34,
+          "name": "Compass rose"
+        }
+      ]
+    },
+    {
+      "id": "dorgeshuun-spear",
+      "name": "Dorgeshuun spear",
+      "damagedName": "Dorgeshuun spear (damaged)",
+      "level": 100,
+      "restoreXp": 18666.7,
+      "chronotes": 844,
+      "alignment": "Bandosian",
+      "sources": [
+        "Kyzaj champion's boudoir",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Warforged bronze"
+        },
+        {
+          "quantity": 42,
+          "name": "White oak"
+        }
+      ]
+    },
+    {
+      "id": "forged-in-war-sculpture",
+      "name": "'Forged in War' sculpture",
+      "damagedName": "'Forged in War' sculpture (damaged)",
+      "level": 100,
+      "restoreXp": 18666.7,
+      "chronotes": 844,
+      "alignment": "Bandosian",
+      "sources": [
+        "Kyzaj champion's boudoir",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Warforged bronze"
+        },
+        {
+          "quantity": 42,
+          "name": "Yu'biusk clay"
+        },
+        {
+          "quantity": 1,
+          "name": "Emerald"
+        }
+      ]
+    },
+    {
+      "id": "kopis-dagger",
+      "name": "Kopis dagger",
+      "damagedName": "Kopis dagger (damaged)",
+      "level": 100,
+      "restoreXp": 18666.7,
+      "chronotes": 844,
+      "alignment": "Saradominist",
+      "sources": [
+        "Icyene weapon rack",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Everlight silvthril"
+        },
+        {
+          "quantity": 42,
+          "name": "Leather scraps"
+        }
+      ]
+    },
+    {
+      "id": "xiphos-short-sword",
+      "name": "Xiphos short sword",
+      "damagedName": "Xiphos short sword (damaged)",
+      "level": 100,
+      "restoreXp": 18666.7,
+      "chronotes": 844,
+      "alignment": "Saradominist",
+      "sources": [
+        "Icyene weapon rack",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 46,
+          "name": "Everlight silvthril"
+        },
+        {
+          "quantity": 46,
+          "name": "Leather scraps"
+        }
+      ]
+    },
+    {
+      "id": "smoke-cloud-spell-scroll",
+      "name": "'Smoke Cloud' spell scroll",
+      "damagedName": "'Smoke Cloud' spell scroll (damaged)",
+      "level": 100,
+      "restoreXp": 18666.7,
+      "chronotes": 844,
+      "alignment": "Zarosian",
+      "sources": [
+        "Culinarum debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 40,
+          "name": "Vellum"
+        },
+        {
+          "quantity": 20,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 32,
+          "name": "Blood of Orcus"
+        }
+      ]
+    },
+    {
+      "id": "vigorem-vial",
+      "name": "Vigorem vial",
+      "damagedName": "Vigorem vial (damaged)",
+      "level": 100,
+      "restoreXp": 18666.7,
+      "chronotes": 844,
+      "alignment": "Zarosian",
+      "sources": [
+        "Culinarum debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 54,
+          "name": "Imperial steel"
+        },
+        {
+          "quantity": 38,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 1,
+          "name": "Molten glass"
+        }
+      ]
+    },
+    {
+      "id": "dragon-scalpel",
+      "name": "Dragon scalpel",
+      "damagedName": "Dragon scalpel (damaged)",
+      "level": 101,
+      "restoreXp": 19833.3,
+      "chronotes": 860,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Autopsy table",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 52,
+          "name": "Dragon metal"
+        },
+        {
+          "quantity": 42,
+          "name": "Felt"
+        }
+      ]
+    },
+    {
+      "id": "protective-goggles",
+      "name": "Protective goggles",
+      "damagedName": "Protective goggles (damaged)",
+      "level": 101,
+      "restoreXp": 19833.3,
+      "chronotes": 860,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Autopsy table",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 42,
+          "name": "Felt"
+        },
+        {
+          "quantity": 52,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "dragon-burner",
+      "name": "Dragon burner",
+      "damagedName": "Dragon burner (damaged)",
+      "level": 102,
+      "restoreXp": 21000,
+      "chronotes": 862,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Experiment workbench",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 52,
+          "name": "Dragon metal"
+        },
+        {
+          "quantity": 42,
+          "name": "Orgone"
+        }
+      ]
+    },
+    {
+      "id": "orthenglass-flask",
+      "name": "Orthenglass flask",
+      "damagedName": "Orthenglass flask (damaged)",
+      "level": 102,
+      "restoreXp": 21000,
+      "chronotes": 862,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Experiment workbench",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 34,
+          "name": "Dragon metal"
+        },
+        {
+          "quantity": 60,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "blackfire-lance",
+      "name": "Blackfire lance",
+      "damagedName": "Blackfire lance (damaged)",
+      "level": 103,
+      "restoreXp": 22166.7,
+      "chronotes": 878,
+      "alignment": "Armadylean",
+      "sources": [
+        "Keshik weapon rack",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Aetherium alloy"
+        },
+        {
+          "quantity": 46,
+          "name": "Quintessence"
+        }
+      ]
+    },
+    {
+      "id": "nightguard-shield",
+      "name": "Nightguard shield",
+      "damagedName": "Nightguard shield (damaged)",
+      "level": 103,
+      "restoreXp": 22166.7,
+      "chronotes": 878,
+      "alignment": "Armadylean",
+      "sources": [
+        "Keshik weapon rack",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Stormguard steel"
+        },
+        {
+          "quantity": 36,
+          "name": "Wings of War"
+        },
+        {
+          "quantity": 30,
+          "name": "White oak"
+        }
+      ]
+    },
+    {
+      "id": "projection-attuner",
+      "name": "Projection attuner",
+      "damagedName": "Projection attuner (damaged)",
+      "level": 103,
+      "restoreXp": 22166.7,
+      "chronotes": 878,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Projection space",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 28,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 28,
+          "name": "Orthenglass"
+        },
+        {
+          "quantity": 40,
+          "name": "Dragon metal"
+        }
+      ]
+    },
+    {
+      "id": "golden-projection-needle",
+      "name": "Golden projection 'needle'",
+      "damagedName": "Golden projection 'needle' (damaged)",
+      "level": 103,
+      "restoreXp": 22166.7,
+      "chronotes": 878,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Projection space",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 60,
+          "name": "Dragon metal"
+        }
+      ]
+    },
+    {
+      "id": "huzamogaarb-chaos-crown",
+      "name": "Huzamogaarb chaos crown",
+      "damagedName": "Huzamogaarb chaos crown (damaged)",
+      "level": 104,
+      "restoreXp": 23333.3,
+      "chronotes": 894,
+      "alignment": "Bandosian",
+      "sources": [
+        "Warforge scrap pile",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 44,
+          "name": "Warforged bronze"
+        },
+        {
+          "quantity": 34,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 20,
+          "name": "Eye of Dagon"
+        }
+      ]
+    },
+    {
+      "id": "saragorgak-star-crown",
+      "name": "Saragorgak star crown",
+      "damagedName": "Saragorgak star crown (damaged)",
+      "level": 104,
+      "restoreXp": 23333.3,
+      "chronotes": 894,
+      "alignment": "Bandosian",
+      "sources": [
+        "Warforge scrap pile",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 44,
+          "name": "Warforged bronze"
+        },
+        {
+          "quantity": 34,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 20,
+          "name": "Star of Saradomin"
+        }
+      ]
+    },
+    {
+      "id": "possession-metal-sculpture",
+      "name": "'Possession' metal sculpture",
+      "damagedName": "'Possession' metal sculpture (damaged)",
+      "level": 104,
+      "restoreXp": 23333.3,
+      "chronotes": 894,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Hellfire forge",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 24,
+          "name": "Eye of Dagon"
+        },
+        {
+          "quantity": 30,
+          "name": "Chaotic brimstone"
+        },
+        {
+          "quantity": 44,
+          "name": "Third Age iron"
+        }
+      ]
+    },
+    {
+      "id": "trishula",
+      "name": "Trishula",
+      "damagedName": "Trishula (damaged)",
+      "level": 104,
+      "restoreXp": 23333.3,
+      "chronotes": 894,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Hellfire forge",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 48,
+          "name": "Hellfire metal"
+        },
+        {
+          "quantity": 30,
+          "name": "Eye of Dagon"
+        },
+        {
+          "quantity": 20,
+          "name": "Third Age iron"
+        }
+      ]
+    },
+    {
+      "id": "tsutsaroth-piercing",
+      "name": "Tsutsaroth piercing",
+      "damagedName": "Tsutsaroth piercing (damaged)",
+      "level": 104,
+      "restoreXp": 23333.3,
+      "chronotes": 894,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Hellfire forge",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 44,
+          "name": "Hellfire metal"
+        },
+        {
+          "quantity": 30,
+          "name": "Chaotic brimstone"
+        },
+        {
+          "quantity": 24,
+          "name": "Cadmium red"
+        }
+      ]
+    },
+    {
+      "id": "hallowed-be-the-everlight-painting",
+      "name": "'Hallowed Be the Everlight' painting",
+      "damagedName": "'Hallowed Be the Everlight' painting (damaged)",
+      "level": 105,
+      "restoreXp": 24500,
+      "chronotes": 910,
+      "alignment": "Saradominist",
+      "sources": [
+        "Stockpiled art",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 52,
+          "name": "Cobalt blue"
+        },
+        {
+          "quantity": 16,
+          "name": "White oak"
+        },
+        {
+          "quantity": 16,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 16,
+          "name": "Vellum"
+        }
+      ]
+    },
+    {
+      "id": "the-lord-of-light-painting",
+      "name": "'The Lord of Light' painting",
+      "damagedName": "'The Lord of Light' painting (damaged)",
+      "level": 105,
+      "restoreXp": 24500,
+      "chronotes": 910,
+      "alignment": "Saradominist",
+      "sources": [
+        "Stockpiled art",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 52,
+          "name": "Cobalt blue"
+        },
+        {
+          "quantity": 16,
+          "name": "White oak"
+        },
+        {
+          "quantity": 16,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 16,
+          "name": "Vellum"
+        }
+      ]
+    },
+    {
+      "id": "the-pride-of-padosan-painting",
+      "name": "'The Pride of Padosan' painting",
+      "damagedName": "'The Pride of Padosan' painting (damaged)",
+      "level": 105,
+      "restoreXp": 24500,
+      "chronotes": 910,
+      "alignment": "Saradominist",
+      "sources": [
+        "Stockpiled art",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 52,
+          "name": "Cobalt blue"
+        },
+        {
+          "quantity": 16,
+          "name": "White oak"
+        },
+        {
+          "quantity": 16,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 16,
+          "name": "Vellum"
+        }
+      ]
+    },
+    {
+      "id": "meditation-pipe",
+      "name": "Meditation pipe",
+      "damagedName": "Meditation pipe (damaged)",
+      "level": 106,
+      "restoreXp": 25666.7,
+      "chronotes": 912,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Aughra remains",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 60,
+          "name": "Orgone"
+        },
+        {
+          "quantity": 40,
+          "name": "Dragon metal"
+        }
+      ]
+    },
+    {
+      "id": "personal-totem",
+      "name": "Personal totem",
+      "damagedName": "Personal totem (damaged)",
+      "level": 106,
+      "restoreXp": 25666.7,
+      "chronotes": 912,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Aughra remains",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 48,
+          "name": "Orgone"
+        },
+        {
+          "quantity": 26,
+          "name": "Carbon black"
+        },
+        {
+          "quantity": 26,
+          "name": "Compass rose"
+        }
+      ]
+    },
+    {
+      "id": "singing-bowl",
+      "name": "Singing bowl",
+      "damagedName": "Singing bowl (damaged)",
+      "level": 106,
+      "restoreXp": 25666.7,
+      "chronotes": 912,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Aughra remains",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 60,
+          "name": "Orgone"
+        },
+        {
+          "quantity": 40,
+          "name": "Dragon metal"
+        }
+      ]
+    },
+    {
+      "id": "ancient-magic-tablet",
+      "name": "Ancient magic tablet",
+      "damagedName": "Ancient magic tablet (damaged)",
+      "level": 107,
+      "restoreXp": 27000,
+      "chronotes": 942,
+      "alignment": "Zarosian",
+      "sources": [
+        "Ancient magick munitions",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 40,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 64,
+          "name": "Blood of Orcus"
+        }
+      ]
+    },
+    {
+      "id": "animate-dead-spell-scroll",
+      "name": "'Animate Dead' spell scroll",
+      "damagedName": "'Animate Dead' spell scroll (damaged)",
+      "level": 107,
+      "restoreXp": 27000,
+      "chronotes": 942,
+      "alignment": "Zarosian",
+      "sources": [
+        "Ancient magick munitions",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 40,
+          "name": "Vellum"
+        },
+        {
+          "quantity": 24,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 40,
+          "name": "Blood of Orcus"
+        }
+      ]
+    },
+    {
+      "id": "portable-phylactery",
+      "name": "Portable phylactery",
+      "damagedName": "Portable phylactery (damaged)",
+      "level": 107,
+      "restoreXp": 27000,
+      "chronotes": 942,
+      "alignment": "Zarosian",
+      "sources": [
+        "Ancient magick munitions",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 48,
+          "name": "Imperial steel"
+        },
+        {
+          "quantity": 36,
+          "name": "Blood of Orcus"
+        },
+        {
+          "quantity": 20,
+          "name": "Ancient vis"
+        }
+      ]
+    },
+    {
+      "id": "comfort-gatestone",
+      "name": "Comfort gatestone",
+      "damagedName": "Comfort gatestone (damaged)",
+      "level": 107,
+      "restoreXp": 27000,
+      "chronotes": 942,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Security booth",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 40,
+          "name": "Orthenglass"
+        },
+        {
+          "quantity": 34,
+          "name": "Orgone"
+        },
+        {
+          "quantity": 30,
+          "name": "Compass rose"
+        }
+      ]
+    },
+    {
+      "id": "halak-s-cube",
+      "name": "Halak's cube",
+      "damagedName": "Halak's cube (damaged)",
+      "level": 107,
+      "restoreXp": 27000,
+      "chronotes": 942,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Security booth",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Compass rose"
+        },
+        {
+          "quantity": 40,
+          "name": "Carbon black"
+        },
+        {
+          "quantity": 28,
+          "name": "Orgone"
+        }
+      ]
+    },
+    {
+      "id": "lingam-stone",
+      "name": "Lingam stone",
+      "damagedName": "Lingam stone (damaged)",
+      "level": 108,
+      "restoreXp": 28333.3,
+      "chronotes": 958,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Moksha device",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 44,
+          "name": "Orgone"
+        },
+        {
+          "quantity": 30,
+          "name": "Carbon black"
+        },
+        {
+          "quantity": 32,
+          "name": "Compass rose"
+        }
+      ]
+    },
+    {
+      "id": "master-control",
+      "name": "Master control",
+      "damagedName": "Master control (damaged)",
+      "level": 108,
+      "restoreXp": 28333.3,
+      "chronotes": 958,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Moksha device",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Orgone"
+        },
+        {
+          "quantity": 32,
+          "name": "Carbon black"
+        },
+        {
+          "quantity": 44,
+          "name": "Compass rose"
+        }
+      ]
+    },
+    {
+      "id": "the-enlightened-soul-scroll",
+      "name": "'The Enlightened Soul' scroll",
+      "damagedName": "'The Enlightened Soul' scroll (damaged)",
+      "level": 109,
+      "restoreXp": 29666.7,
+      "chronotes": 988,
+      "alignment": "Saradominist",
+      "sources": [
+        "Bibliotheke debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Star of Saradomin"
+        },
+        {
+          "quantity": 60,
+          "name": "Vellum"
+        }
+      ]
+    },
+    {
+      "id": "the-eudoxian-elements-tablet",
+      "name": "'The Eudoxian Elements' tablet",
+      "damagedName": "'The Eudoxian Elements' tablet (damaged)",
+      "level": 109,
+      "restoreXp": 29666.7,
+      "chronotes": 988,
+      "alignment": "Saradominist",
+      "sources": [
+        "Bibliotheke debris",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 60,
+          "name": "White marble"
+        },
+        {
+          "quantity": 50,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "drogokishuun-hook-sword",
+      "name": "Drogokishuun hook sword",
+      "damagedName": "Drogokishuun hook sword (damaged)",
+      "level": 110,
+      "restoreXp": 31000,
+      "chronotes": 1004,
+      "alignment": "Bandosian",
+      "sources": [
+        "Warforge weapon rack",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 44,
+          "name": "Warforged bronze"
+        },
+        {
+          "quantity": 36,
+          "name": "Malachite green"
+        },
+        {
+          "quantity": 32,
+          "name": "Fossilised bone"
+        }
+      ]
+    },
+    {
+      "id": "hobgoblin-mansticker",
+      "name": "Hobgoblin mansticker",
+      "damagedName": "Hobgoblin mansticker (damaged)",
+      "level": 110,
+      "restoreXp": 31000,
+      "chronotes": 1004,
+      "alignment": "Bandosian",
+      "sources": [
+        "Warforge weapon rack",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 66,
+          "name": "Warforged bronze"
+        },
+        {
+          "quantity": 46,
+          "name": "Fossilised bone"
+        }
+      ]
+    },
+    {
+      "id": "chaos-elemental-trophy",
+      "name": "Chaos Elemental trophy",
+      "damagedName": "Chaos Elemental trophy (damaged)",
+      "level": 110,
+      "restoreXp": 31000,
+      "chronotes": 1004,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Chthonian trophies",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 52,
+          "name": "Chaotic brimstone"
+        },
+        {
+          "quantity": 30,
+          "name": "White oak"
+        },
+        {
+          "quantity": 30,
+          "name": "Hellfire metal"
+        }
+      ]
+    },
+    {
+      "id": "virius-trophy",
+      "name": "Virius trophy",
+      "damagedName": "Virius trophy (damaged)",
+      "level": 110,
+      "restoreXp": 31000,
+      "chronotes": 1004,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Chthonian trophies",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 44,
+          "name": "Demonhide"
+        },
+        {
+          "quantity": 34,
+          "name": "White oak"
+        },
+        {
+          "quantity": 34,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "flat-cap",
+      "name": "Flat cap",
+      "damagedName": "Flat cap (damaged)",
+      "level": 111,
+      "restoreXp": 32333.3,
+      "chronotes": 1020,
+      "alignment": "Armadylean",
+      "sources": [
+        "Flight research debris",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 60,
+          "name": "Armadylean yellow"
+        },
+        {
+          "quantity": 54,
+          "name": "Samite silk"
+        }
+      ]
+    },
+    {
+      "id": "night-owl-flight-goggles",
+      "name": "Night owl flight goggles",
+      "damagedName": "Night owl flight goggles (damaged)",
+      "level": 111,
+      "restoreXp": 32333.3,
+      "chronotes": 1020,
+      "alignment": "Armadylean",
+      "sources": [
+        "Flight research debris",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 44,
+          "name": "Armadylean yellow"
+        },
+        {
+          "quantity": 40,
+          "name": "Leather scraps"
+        },
+        {
+          "quantity": 30,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "prototype-godbow",
+      "name": "Prototype godbow",
+      "damagedName": "Prototype godbow (damaged)",
+      "level": 112,
+      "restoreXp": 33666.7,
+      "chronotes": 1050,
+      "alignment": "Armadylean",
+      "sources": [
+        "Aetherium forge",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Aetherium alloy"
+        },
+        {
+          "quantity": 34,
+          "name": "Quintessence"
+        },
+        {
+          "quantity": 34,
+          "name": "Wings of War"
+        }
+      ]
+    },
+    {
+      "id": "prototype-godstaff",
+      "name": "Prototype godstaff",
+      "damagedName": "Prototype godstaff (damaged)",
+      "level": 112,
+      "restoreXp": 33666.7,
+      "chronotes": 1050,
+      "alignment": "Armadylean",
+      "sources": [
+        "Aetherium forge",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Aetherium alloy"
+        },
+        {
+          "quantity": 34,
+          "name": "Quintessence"
+        },
+        {
+          "quantity": 34,
+          "name": "Wings of War"
+        }
+      ]
+    },
+    {
+      "id": "prototype-godsword",
+      "name": "Prototype godsword",
+      "damagedName": "Prototype godsword (damaged)",
+      "level": 112,
+      "restoreXp": 33666.7,
+      "chronotes": 1050,
+      "alignment": "Armadylean",
+      "sources": [
+        "Aetherium forge",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Aetherium alloy"
+        },
+        {
+          "quantity": 34,
+          "name": "Wings of War"
+        },
+        {
+          "quantity": 34,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "xolo-hard-hat",
+      "name": "Xolo hard hat",
+      "damagedName": "Xolo hard hat (damaged)",
+      "level": 113,
+      "restoreXp": 35000,
+      "chronotes": 1066,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Xolo mine",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 54,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 66,
+          "name": "Dragon metal"
+        }
+      ]
+    },
+    {
+      "id": "xolo-pickaxe",
+      "name": "Xolo pickaxe",
+      "damagedName": "Xolo pickaxe (damaged)",
+      "level": 113,
+      "restoreXp": 35000,
+      "chronotes": 1066,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Xolo mine",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 50,
+          "name": "Dragon metal"
+        },
+        {
+          "quantity": 34,
+          "name": "Orgone"
+        }
+      ]
+    },
+    {
+      "id": "portable-portal-generator",
+      "name": "Portable portal generator",
+      "damagedName": "Portable portal generator (damaged)",
+      "level": 113,
+      "restoreXp": 35000,
+      "chronotes": 1066,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Traveller's station",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Dragon metal"
+        },
+        {
+          "quantity": 36,
+          "name": "Orthenglass"
+        },
+        {
+          "quantity": 34,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "warped-trinket",
+      "name": "Warped trinket",
+      "damagedName": "Warped trinket (damaged)",
+      "level": 113,
+      "restoreXp": 35000,
+      "chronotes": 1066,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Traveller's station",
+        "Daemonheim"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Dragon metal"
+        },
+        {
+          "quantity": 30,
+          "name": "Orthenglass"
+        },
+        {
+          "quantity": 30,
+          "name": "Soapstone"
+        },
+        {
+          "quantity": 30,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "praetorian-hood",
+      "name": "Praetorian hood",
+      "damagedName": "Praetorian hood (damaged)",
+      "level": 114,
+      "restoreXp": 36666.7,
+      "chronotes": 1096,
+      "alignment": "Zarosian",
+      "sources": [
+        "Praetorian remains",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 48,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 40,
+          "name": "Zarosian insignia"
+        },
+        {
+          "quantity": 30,
+          "name": "Death rune"
+        }
+      ]
+    },
+    {
+      "id": "praetorian-robes",
+      "name": "Praetorian robes",
+      "damagedName": "Praetorian robes (damaged)",
+      "level": 114,
+      "restoreXp": 36666.7,
+      "chronotes": 1096,
+      "alignment": "Zarosian",
+      "sources": [
+        "Praetorian remains",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 30,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 54,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 40,
+          "name": "Zarosian insignia"
+        },
+        {
+          "quantity": 50,
+          "name": "Death rune"
+        }
+      ]
+    },
+    {
+      "id": "praetorian-staff",
+      "name": "Praetorian staff",
+      "damagedName": "Praetorian staff (damaged)",
+      "level": 114,
+      "restoreXp": 36666.7,
+      "chronotes": 1096,
+      "alignment": "Zarosian",
+      "sources": [
+        "Praetorian remains",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 36,
+          "name": "Imperial steel"
+        },
+        {
+          "quantity": 58,
+          "name": "Ancient vis"
+        },
+        {
+          "quantity": 30,
+          "name": "Zarosian insignia"
+        },
+        {
+          "quantity": 100,
+          "name": "Death rune"
+        }
+      ]
+    },
+    {
+      "id": "kal-i-kra-chieftain-crown",
+      "name": "Kal-i-kra chieftain crown",
+      "damagedName": "Kal-i-kra chieftain crown (damaged)",
+      "level": 115,
+      "restoreXp": 38333.3,
+      "chronotes": 1112,
+      "alignment": "Bandosian",
+      "sources": [
+        "Bandos's sanctum debris",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 66,
+          "name": "Yu'biusk clay"
+        },
+        {
+          "quantity": 60,
+          "name": "Animal furs"
+        }
+      ]
+    },
+    {
+      "id": "kal-i-kra-mace",
+      "name": "Kal-i-kra mace",
+      "damagedName": "Kal-i-kra mace (damaged)",
+      "level": 115,
+      "restoreXp": 38333.3,
+      "chronotes": 1112,
+      "alignment": "Bandosian",
+      "sources": [
+        "Bandos's sanctum debris",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 42,
+          "name": "Vulcanised rubber"
+        },
+        {
+          "quantity": 44,
+          "name": "Third Age iron"
+        },
+        {
+          "quantity": 40,
+          "name": "Fossilised bone"
+        }
+      ]
+    },
+    {
+      "id": "kal-i-kra-warhorn",
+      "name": "Kal-i-kra warhorn",
+      "damagedName": "Kal-i-kra warhorn (damaged)",
+      "level": 115,
+      "restoreXp": 38333.3,
+      "chronotes": 1112,
+      "alignment": "Bandosian",
+      "sources": [
+        "Bandos's sanctum debris",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 44,
+          "name": "Vulcanised rubber"
+        },
+        {
+          "quantity": 42,
+          "name": "Fossilised bone"
+        },
+        {
+          "quantity": 40,
+          "name": "Animal furs"
+        }
+      ]
+    },
+    {
+      "id": "tsutsaroth-helm",
+      "name": "Tsutsaroth helm",
+      "damagedName": "Tsutsaroth helm (damaged)",
+      "level": 116,
+      "restoreXp": 40000,
+      "chronotes": 1142,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Tsutsaroth remains",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Hellfire metal"
+        },
+        {
+          "quantity": 40,
+          "name": "Eye of Dagon"
+        },
+        {
+          "quantity": 40,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "tsutsaroth-pauldron",
+      "name": "Tsutsaroth pauldron",
+      "damagedName": "Tsutsaroth pauldron (damaged)",
+      "level": 116,
+      "restoreXp": 40000,
+      "chronotes": 1142,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Tsutsaroth remains",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 40,
+          "name": "Hellfire metal"
+        },
+        {
+          "quantity": 50,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 40,
+          "name": "Eye of Dagon"
+        }
+      ]
+    },
+    {
+      "id": "tsutsaroth-urumi",
+      "name": "Tsutsaroth urumi",
+      "damagedName": "Tsutsaroth urumi (damaged)",
+      "level": 116,
+      "restoreXp": 40000,
+      "chronotes": 1142,
+      "alignment": "Zamorakian",
+      "sources": [
+        "Tsutsaroth remains",
+        "Infernal Source"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Hellfire metal"
+        },
+        {
+          "quantity": 40,
+          "name": "Eye of Dagon"
+        },
+        {
+          "quantity": 40,
+          "name": "Third Age iron"
+        }
+      ]
+    },
+    {
+      "id": "doru-spear",
+      "name": "Doru spear",
+      "damagedName": "Doru spear (damaged)",
+      "level": 117,
+      "restoreXp": 41666.7,
+      "chronotes": 1158,
+      "alignment": "Saradominist",
+      "sources": [
+        "Optimatoi remains",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 70,
+          "name": "Everlight silvthril"
+        },
+        {
+          "quantity": 62,
+          "name": "White oak"
+        }
+      ]
+    },
+    {
+      "id": "kontos-lance",
+      "name": "Kontos lance",
+      "damagedName": "Kontos lance (damaged)",
+      "level": 117,
+      "restoreXp": 41666.7,
+      "chronotes": 1158,
+      "alignment": "Saradominist",
+      "sources": [
+        "Optimatoi remains",
+        "Everlight"
+      ],
+      "materials": [
+        {
+          "quantity": 70,
+          "name": "Everlight silvthril"
+        },
+        {
+          "quantity": 62,
+          "name": "Samite silk"
+        }
+      ]
+    },
+    {
+      "id": "chuluu-stone",
+      "name": "Chuluu stone",
+      "damagedName": "Chuluu stone (damaged)",
+      "level": 118,
+      "restoreXp": 43333.3,
+      "chronotes": 1174,
+      "alignment": "Armadylean",
+      "sources": [
+        "Howl's workshop debris",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 40,
+          "name": "Aetherium alloy"
+        },
+        {
+          "quantity": 30,
+          "name": "Quintessence"
+        },
+        {
+          "quantity": 40,
+          "name": "Soapstone"
+        },
+        {
+          "quantity": 24,
+          "name": "Goldrune"
+        }
+      ]
+    },
+    {
+      "id": "quintessence-counter",
+      "name": "Quintessence counter",
+      "damagedName": "Quintessence counter (damaged)",
+      "level": 118,
+      "restoreXp": 43333.3,
+      "chronotes": 1174,
+      "alignment": "Armadylean",
+      "sources": [
+        "Howl's workshop debris",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 54,
+          "name": "Quintessence"
+        },
+        {
+          "quantity": 40,
+          "name": "Stormguard steel"
+        },
+        {
+          "quantity": 40,
+          "name": "White oak"
+        }
+      ]
+    },
+    {
+      "id": "spherical-astrolabe",
+      "name": "Spherical astrolabe",
+      "damagedName": "Spherical astrolabe (damaged)",
+      "level": 118,
+      "restoreXp": 43333.3,
+      "chronotes": 1174,
+      "alignment": "Armadylean",
+      "sources": [
+        "Howl's workshop debris",
+        "Stormguard Citadel"
+      ],
+      "materials": [
+        {
+          "quantity": 46,
+          "name": "Aetherium alloy"
+        },
+        {
+          "quantity": 40,
+          "name": "Armadylean yellow"
+        },
+        {
+          "quantity": 48,
+          "name": "Orthenglass"
+        }
+      ]
+    },
+    {
+      "id": "ancient-globe",
+      "name": "Ancient globe",
+      "damagedName": "Ancient globe (damaged)",
+      "level": 118,
+      "restoreXp": 43333.3,
+      "chronotes": 1174,
+      "alignment": "Zarosian",
+      "sources": [
+        "War table debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "White oak"
+        },
+        {
+          "quantity": 54,
+          "name": "Tyrian purple"
+        },
+        {
+          "quantity": 60,
+          "name": "Ancient vis"
+        }
+      ]
+    },
+    {
+      "id": "battle-plans",
+      "name": "Battle plans",
+      "damagedName": "Battle plans (damaged)",
+      "level": 118,
+      "restoreXp": 43333.3,
+      "chronotes": 1174,
+      "alignment": "Zarosian",
+      "sources": [
+        "War table debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 40,
+          "name": "Vellum"
+        },
+        {
+          "quantity": 60,
+          "name": "Tyrian purple"
+        },
+        {
+          "quantity": 34,
+          "name": "Ancient vis"
+        }
+      ]
+    },
+    {
+      "id": "prima-legio-painting",
+      "name": "'Prima Legio' painting",
+      "damagedName": "'Prima Legio' painting (damaged)",
+      "level": 118,
+      "restoreXp": 43333.3,
+      "chronotes": 1174,
+      "alignment": "Zarosian",
+      "sources": [
+        "War table debris",
+        "Kharid-et"
+      ],
+      "materials": [
+        {
+          "quantity": 20,
+          "name": "White oak"
+        },
+        {
+          "quantity": 20,
+          "name": "Samite silk"
+        },
+        {
+          "quantity": 74,
+          "name": "Tyrian purple"
+        },
+        {
+          "quantity": 20,
+          "name": "Zarosian insignia"
+        }
+      ]
+    },
+    {
+      "id": "da-boss-man-sculpture",
+      "name": "'Da Boss Man' sculpture",
+      "damagedName": "'Da Boss Man' sculpture (damaged)",
+      "level": 119,
+      "restoreXp": 45000,
+      "chronotes": 1204,
+      "alignment": "Bandosian",
+      "sources": [
+        "Makeshift pie oven",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 50,
+          "name": "Yu'biusk clay"
+        },
+        {
+          "quantity": 44,
+          "name": "Malachite green"
+        },
+        {
+          "quantity": 44,
+          "name": "Soapstone"
+        }
+      ]
+    },
+    {
+      "id": "horogothgar-cooking-pot",
+      "name": "Horogothgar cooking pot",
+      "damagedName": "Horogothgar cooking pot (damaged)",
+      "level": 119,
+      "restoreXp": 45000,
+      "chronotes": 1204,
+      "alignment": "Bandosian",
+      "sources": [
+        "Makeshift pie oven",
+        "Warforge"
+      ],
+      "materials": [
+        {
+          "quantity": 60,
+          "name": "Yu'biusk clay"
+        },
+        {
+          "quantity": 38,
+          "name": "Malachite green"
+        },
+        {
+          "quantity": 40,
+          "name": "Soapstone"
+        }
+      ]
+    },
+    {
+      "id": "xolo-shield",
+      "name": "Xolo shield",
+      "damagedName": "Xolo shield (damaged)",
+      "level": 119,
+      "restoreXp": 45000,
+      "chronotes": 1204,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Xolo remains",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 52,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 44,
+          "name": "Orgone"
+        },
+        {
+          "quantity": 42,
+          "name": "Felt"
+        }
+      ]
+    },
+    {
+      "id": "xolo-spear",
+      "name": "Xolo spear",
+      "damagedName": "Xolo spear (damaged)",
+      "level": 119,
+      "restoreXp": 45000,
+      "chronotes": 1204,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Xolo remains",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 74,
+          "name": "Dragon metal"
+        },
+        {
+          "quantity": 64,
+          "name": "Orgone"
+        }
+      ]
+    },
+    {
+      "id": "gold-dish",
+      "name": "Gold dish",
+      "damagedName": "Gold dish (damaged)",
+      "level": 120,
+      "restoreXp": 46666.7,
+      "chronotes": 1220,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Saurthen debris",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 86,
+          "name": "Goldrune"
+        },
+        {
+          "quantity": 54,
+          "name": "Dragon metal"
+        }
+      ]
+    },
+    {
+      "id": "raksha-idol",
+      "name": "'Raksha' idol",
+      "damagedName": "'Raksha' idol (damaged)",
+      "level": 120,
+      "restoreXp": 46666.7,
+      "chronotes": 1220,
+      "alignment": "Dragonkin",
+      "sources": [
+        "Saurthen debris",
+        "Orthen"
+      ],
+      "materials": [
+        {
+          "quantity": 56,
+          "name": "Orgone"
+        },
+        {
+          "quantity": 44,
+          "name": "Dragon metal"
+        },
+        {
+          "quantity": 40,
+          "name": "Goldrune"
+        }
+      ]
+    }
+  ],
+  "collections": [
+    {
+      "id": "anarchic-abstraction-art-critic-jacques",
+      "name": "Anarchic Abstraction",
+      "collector": "Art Critic Jacques",
+      "level": 89,
+      "alignment": "Zamorakian",
+      "artefacts": [
+        "'Disorder' painting",
+        "'The Lake of Fire' painting",
+        "'Pandemonium' tapestry"
+      ],
+      "artefactChronotes": 1574,
+      "bonusChronotes": 1574,
+      "restoreXp": 14646,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "radiant-renaissance-art-critic-jacques",
+      "name": "Radiant Renaissance",
+      "collector": "Art Critic Jacques",
+      "level": 105,
+      "alignment": "Saradominist",
+      "artefacts": [
+        "'Hallowed Be the Everlight' painting",
+        "'The Lord of Light' painting",
+        "'The Pride of Padosan' painting"
+      ],
+      "artefactChronotes": 2730,
+      "bonusChronotes": 2730,
+      "restoreXp": 73500,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "imperial-impressionism-art-critic-jacques",
+      "name": "Imperial Impressionism",
+      "collector": "Art Critic Jacques",
+      "level": 118,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "'Solem in Umbra' painting",
+        "'Consensus ad Idem' painting",
+        "'Prima Legio' painting"
+      ],
+      "artefactChronotes": 2086,
+      "bonusChronotes": 2086,
+      "restoreXp": 49597,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "guthixian-i-artiefax",
+      "name": "Guthixian I",
+      "collector": "Artiefax",
+      "level": 66,
+      "alignment": "Guthixian",
+      "artefacts": [
+        "Lunar calendar",
+        "Wolf statuette",
+        "Ivory sickle",
+        "Nakkirian seal",
+        "Royal Game of Ba",
+        "Backstrap loom",
+        "Animal doll",
+        "Initiate's kaunake"
+      ],
+      "artefactChronotes": 4248,
+      "bonusChronotes": 4248,
+      "restoreXp": 21046,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "guthixian-ii-artiefax",
+      "name": "Guthixian II",
+      "collector": "Artiefax",
+      "level": 88,
+      "alignment": "Guthixian",
+      "artefacts": [
+        "Incense burner",
+        "Offering bowl",
+        "Bloodwine",
+        "Reagent jar",
+        "Ninbaradari mural",
+        "Bloodletting dagger",
+        "Fang of Kayazu"
+      ],
+      "artefactChronotes": 4616,
+      "bonusChronotes": 4628,
+      "restoreXp": 55216,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "blingy-fings-chief-tess",
+      "name": "Blingy Fings",
+      "collector": "Chief Tess",
+      "level": 69,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Ancient timepiece",
+        "Legatus pendant",
+        "Pontifex signet ring",
+        "Bronze Dominion medal",
+        "Silver Dominion medal"
+      ],
+      "artefactChronotes": 2484,
+      "bonusChronotes": 2484,
+      "restoreXp": 13907,
+      "recurringReward": {
+        "quantity": 20,
+        "name": "robust glass"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "smoky-fings-chief-tess",
+      "name": "Smoky Fings",
+      "collector": "Chief Tess",
+      "level": 81,
+      "alignment": "Zamorakian",
+      "artefacts": [
+        "Hookah pipe",
+        "Opulent wine goblet",
+        "Everlight trumpet",
+        "Dominion torch",
+        "Pontifex censer"
+      ],
+      "artefactChronotes": 2204,
+      "bonusChronotes": 2204,
+      "restoreXp": 14674,
+      "recurringReward": {
+        "quantity": 40,
+        "name": "robust glass"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "hitty-fings-chief-tess",
+      "name": "Hitty Fings",
+      "collector": "Chief Tess",
+      "level": 89,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Ceremonial mace",
+        "Pontifex crozier",
+        "Fishing trident",
+        "High priest crozier",
+        "High priest orb"
+      ],
+      "artefactChronotes": 3424,
+      "bonusChronotes": 5136,
+      "restoreXp": 42545,
+      "recurringReward": {
+        "quantity": 40,
+        "name": "robust glass"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "showy-fings-chief-tess",
+      "name": "Showy Fings",
+      "collector": "Chief Tess",
+      "level": 92,
+      "alignment": "Zamorakian",
+      "artefacts": [
+        "Crest of Dagon",
+        "Legatus Maximus figurine",
+        "'Lust' metal sculpture",
+        "Pontifex Maximus figurine",
+        "Ceremonial plume",
+        "Rod of Asclepius"
+      ],
+      "artefactChronotes": 3158,
+      "bonusChronotes": 3158,
+      "restoreXp": 29466,
+      "recurringReward": {
+        "quantity": 40,
+        "name": "robust glass"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "finery-of-the-inquisition-eblis",
+      "name": "Finery of the Inquisition",
+      "collector": "Eblis",
+      "level": 64,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Inquisitor's ceremonial armour",
+        "Inquisitor's ceremonial mask",
+        "Inquisitor's seal"
+      ],
+      "artefactChronotes": 1686,
+      "bonusChronotes": 1686,
+      "restoreXp": 9800,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "religious-iconography-eblis",
+      "name": "Religious Iconography",
+      "collector": "Eblis",
+      "level": 67,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Apex cap",
+        "Infula robes",
+        "Loarnab rod",
+        "'The Serpent's Fall' carving"
+      ],
+      "artefactChronotes": 2240,
+      "bonusChronotes": 2240,
+      "restoreXp": 12133,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "urns-of-the-empire-eblis",
+      "name": "Urns of the Empire",
+      "collector": "Eblis",
+      "level": 67,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Funerary urn of shadow",
+        "Funerary urn of smoke",
+        "Funerary urn of ice",
+        "Funerary urn of blood",
+        "Funerary urn of miasma"
+      ],
+      "artefactChronotes": 2820,
+      "bonusChronotes": 2820,
+      "restoreXp": 15907,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "entertaining-the-masses-eblis",
+      "name": "Entertaining the Masses",
+      "collector": "Eblis",
+      "level": 67,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Decorative amphora",
+        "Gladiator helmet",
+        "Gladiator sword",
+        "Model chariot"
+      ],
+      "artefactChronotes": 2302,
+      "bonusChronotes": 2302,
+      "restoreXp": 14547,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "imperial-sorcery-eblis",
+      "name": "Imperial Sorcery",
+      "collector": "Eblis",
+      "level": 107,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "'Incite Fear' spell scroll",
+        "Curse tablet",
+        "Hand of the Ancients",
+        "'Exsanguinate' spell scroll",
+        "Necromantic focus",
+        "'Smoke Cloud' spell scroll",
+        "Ancient magic tablet",
+        "'Animate Dead' spell scroll"
+      ],
+      "artefactChronotes": 5742,
+      "bonusChronotes": 5742,
+      "restoreXp": 98660,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "red-rum-relics-i-general-bentnoze",
+      "name": "Red Rum Relics I",
+      "collector": "General Bentnoze",
+      "level": 94,
+      "alignment": "Bandosian",
+      "artefacts": [
+        "Ork cleaver sword",
+        "Ogre Kyzaj axe",
+        "Beastkeeper helm",
+        "'Nosorog!' sculpture"
+      ],
+      "artefactChronotes": 2884,
+      "bonusChronotes": 2884,
+      "restoreXp": 41444,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "red-rum-relics-ii-general-bentnoze",
+      "name": "Red Rum Relics II",
+      "collector": "General Bentnoze",
+      "level": 110,
+      "alignment": "Bandosian",
+      "artefacts": [
+        "Ourg megahitter",
+        "Ourg tower/goblin cower shield",
+        "'Forged in War' sculpture",
+        "Hobgoblin mansticker"
+      ],
+      "artefactChronotes": 3468,
+      "bonusChronotes": 3468,
+      "restoreXp": 81333,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "red-rum-relics-iii-general-bentnoze",
+      "name": "Red Rum Relics III",
+      "collector": "General Bentnoze",
+      "level": 119,
+      "alignment": "Bandosian",
+      "artefacts": [
+        "Kal-i-kra chieftain crown",
+        "Kal-i-kra mace",
+        "Kal-i-kra warhorn",
+        "'Da Boss Man' sculpture"
+      ],
+      "artefactChronotes": 4540,
+      "bonusChronotes": 4540,
+      "restoreXp": 160000,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "green-gobbo-goodies-i-general-wartface",
+      "name": "Green Gobbo Goodies I",
+      "collector": "General Wartface",
+      "level": 83,
+      "alignment": "Bandosian",
+      "artefacts": [
+        "Ekeleshuun blinder mask",
+        "Narogoshuun 'Hob-da-Gob' ball",
+        "Rekeshuun war tether",
+        "Thorobshuun battle standard",
+        "Yurkolgokh stink grenade"
+      ],
+      "artefactChronotes": 3252,
+      "bonusChronotes": 3252,
+      "restoreXp": 34534,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "green-gobbo-goodies-ii-general-wartface",
+      "name": "Green Gobbo Goodies II",
+      "collector": "General Wartface",
+      "level": 97,
+      "alignment": "Bandosian",
+      "artefacts": [
+        "High priest crozier",
+        "High priest mitre",
+        "High priest orb",
+        "Idithuun horn ring",
+        "Garagorshuun anchor"
+      ],
+      "artefactChronotes": 3758,
+      "bonusChronotes": 3758,
+      "restoreXp": 60667,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "green-gobbo-goodies-iii-general-wartface",
+      "name": "Green Gobbo Goodies III",
+      "collector": "General Wartface",
+      "level": 119,
+      "alignment": "Bandosian",
+      "artefacts": [
+        "Dorgeshuun spear",
+        "Huzamogaarb chaos crown",
+        "Saragorgak star crown",
+        "Drogokishuun hook sword",
+        "Horogothgar cooking pot",
+        "'Da Boss Man' sculpture"
+      ],
+      "artefactChronotes": 6044,
+      "bonusChronotes": 6044,
+      "restoreXp": 186333,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "desperate-for-artefacts-giles",
+      "name": "Desperate for Artefacts",
+      "collector": "Giles",
+      "level": 90,
+      "alignment": "Miscellaneous",
+      "artefacts": [
+        "Ceremonial dragonkin device",
+        "Ceremonial dragonkin tablet"
+      ],
+      "artefactChronotes": 1335,
+      "bonusChronotes": 1335,
+      "restoreXp": 15556,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "No"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "zamorakian-i-isaura",
+      "name": "Zamorakian I",
+      "collector": "Isaura",
+      "level": 36,
+      "alignment": "Zamorakian",
+      "artefacts": [
+        "Hookah pipe",
+        "Opulent wine goblet",
+        "Crest of Dagon",
+        "'Disorder' painting",
+        "Imp mask",
+        "Lesser demon mask",
+        "Greater demon mask",
+        "Order of Dis robes",
+        "Ritual dagger"
+      ],
+      "artefactChronotes": 2594,
+      "bonusChronotes": 2594,
+      "restoreXp": 6372,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "zamorakian-ii-isaura",
+      "name": "Zamorakian II",
+      "collector": "Isaura",
+      "level": 81,
+      "alignment": "Zamorakian",
+      "artefacts": [
+        "Branding iron",
+        "Manacles",
+        "'The Lake of Fire' painting",
+        "'Lust' metal sculpture",
+        "Chaos star",
+        "Spiked dog collar",
+        "Larupia trophy",
+        "Lion trophy",
+        "She-wolf trophy"
+      ],
+      "artefactChronotes": 5146,
+      "bonusChronotes": 5146,
+      "restoreXp": 40133,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "zamorakian-iii-isaura",
+      "name": "Zamorakian III",
+      "collector": "Isaura",
+      "level": 104,
+      "alignment": "Zamorakian",
+      "artefacts": [
+        "'Torment' metal sculpture",
+        "'Pandemonium' tapestry",
+        "Hellfire haladie",
+        "Hellfire katar",
+        "Hellfire zaghnal",
+        "'Possession' metal sculpture",
+        "Trishula",
+        "Tsutsaroth piercing"
+      ],
+      "artefactChronotes": 6608,
+      "bonusChronotes": 6608,
+      "restoreXp": 141000,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "zamorakian-iv-isaura",
+      "name": "Zamorakian IV",
+      "collector": "Isaura",
+      "level": 116,
+      "alignment": "Zamorakian",
+      "artefacts": [
+        "Chaos Elemental trophy",
+        "Virius trophy",
+        "Tsutsaroth helm",
+        "Tsutsaroth pauldron",
+        "Tsutsaroth urumi"
+      ],
+      "artefactChronotes": 5434,
+      "bonusChronotes": 5434,
+      "restoreXp": 182000,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "armadylean-i-lowse",
+      "name": "Armadylean I",
+      "collector": "Lowse",
+      "level": 81,
+      "alignment": "Armadylean",
+      "artefacts": [
+        "Ikovian gerege",
+        "Toy glider",
+        "Toy war golem",
+        "Avian song-egg player",
+        "Keshik drum",
+        "Morin khuur",
+        "Aviansie dreamcoat",
+        "Ceremonial plume",
+        "Peacocking parasol"
+      ],
+      "artefactChronotes": 5688,
+      "bonusChronotes": 5688,
+      "restoreXp": 54367,
+      "recurringReward": {
+        "quantity": 50,
+        "name": "torn blueprint fragments (Howl's workshop)"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "armadylean-ii-lowse",
+      "name": "Armadylean II",
+      "collector": "Lowse",
+      "level": 98,
+      "alignment": "Armadylean",
+      "artefacts": [
+        "Hawkeye lens multi-vision scope",
+        "Talon-3 razor wing",
+        "Prototype gravimeter",
+        "Songbird recorder",
+        "Dayguard shield",
+        "Stormguard gerege",
+        "Golem heart",
+        "Golem instruction"
+      ],
+      "artefactChronotes": 6068,
+      "bonusChronotes": 6068,
+      "restoreXp": 102111,
+      "recurringReward": {
+        "quantity": 75,
+        "name": "torn blueprint fragments (Howl's workshop)"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "armadylean-iii-lowse",
+      "name": "Armadylean III",
+      "collector": "Lowse",
+      "level": 118,
+      "alignment": "Armadylean",
+      "artefacts": [
+        "Blackfire lance",
+        "Nightguard shield",
+        "Flat cap",
+        "Night owl flight goggles",
+        "Prototype godbow",
+        "Prototype godstaff",
+        "Prototype godsword",
+        "Chuluu stone",
+        "Quintessence counter",
+        "Spherical astrolabe"
+      ],
+      "artefactChronotes": 10468,
+      "bonusChronotes": 10468,
+      "restoreXp": 340000,
+      "recurringReward": {
+        "quantity": 150,
+        "name": "torn blueprint fragments (Howl's workshop)"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "dragonkin-i-sharrigan",
+      "name": "Dragonkin I",
+      "collector": "Sharrigan",
+      "level": 99,
+      "alignment": "Dragonkin",
+      "artefacts": [
+        "Pasaha",
+        "Ritual bell",
+        "Kilaya",
+        "Vazara",
+        "Death mask",
+        "Dragonkin calendar",
+        "Dragonkin staff"
+      ],
+      "artefactChronotes": 5524,
+      "bonusChronotes": 5524,
+      "restoreXp": 104278,
+      "recurringReward": {
+        "quantity": 6,
+        "name": "Anachronia resource packs"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "dragonkin-ii-sharrigan",
+      "name": "Dragonkin II",
+      "collector": "Sharrigan",
+      "level": 102,
+      "alignment": "Dragonkin",
+      "artefacts": [
+        "Dragon scalpel",
+        "Protective goggles",
+        "Dragon burner",
+        "Orthenglass flask"
+      ],
+      "artefactChronotes": 3444,
+      "bonusChronotes": 3444,
+      "restoreXp": 81667,
+      "recurringReward": {
+        "quantity": 75,
+        "name": "rex skeleton fragments"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "dragonkin-iii-sharrigan",
+      "name": "Dragonkin III",
+      "collector": "Sharrigan",
+      "level": 108,
+      "alignment": "Dragonkin",
+      "artefacts": [
+        "Meditation pipe",
+        "Personal totem",
+        "Singing bowl",
+        "Lingam stone",
+        "Master control"
+      ],
+      "artefactChronotes": 4652,
+      "bonusChronotes": 4652,
+      "restoreXp": 133667,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "dragonkin-iv-sharrigan",
+      "name": "Dragonkin IV",
+      "collector": "Sharrigan",
+      "level": 120,
+      "alignment": "Dragonkin",
+      "artefacts": [
+        "Xolo hard hat",
+        "Xolo pickaxe",
+        "Xolo shield",
+        "Xolo spear",
+        "Gold dish",
+        "'Raksha' idol"
+      ],
+      "artefactChronotes": 6980,
+      "bonusChronotes": 6980,
+      "restoreXp": 253333,
+      "recurringReward": {
+        "quantity": 150,
+        "name": "rex skeleton fragments"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "dragonkin-v-sharrigan",
+      "name": "Dragonkin V",
+      "collector": "Sharrigan",
+      "level": 77,
+      "alignment": "Dragonkin",
+      "artefacts": [
+        "Castle gatestone",
+        "Engraved ring of kinship",
+        "Exploratory totem",
+        "Excavator portal mine"
+      ],
+      "artefactChronotes": 2532,
+      "bonusChronotes": 2532,
+      "restoreXp": 23333,
+      "recurringReward": {
+        "quantity": 2,
+        "name": "large dungeoneering token boxes"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "dragonkin-vi-sharrigan",
+      "name": "Dragonkin VI",
+      "collector": "Sharrigan",
+      "level": 87,
+      "alignment": "Dragonkin",
+      "artefacts": [
+        "Storage totem",
+        "Plant seed satchel",
+        "Snuff box",
+        "Spent summoning charm",
+        "'Friendship bracelet'",
+        "Homely totem"
+      ],
+      "artefactChronotes": 4056,
+      "bonusChronotes": 4056,
+      "restoreXp": 48767,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "dragonkin-vii-sharrigan",
+      "name": "Dragonkin VII",
+      "collector": "Sharrigan",
+      "level": 113,
+      "alignment": "Dragonkin",
+      "artefacts": [
+        "Projection attuner",
+        "Golden projection 'needle'",
+        "Comfort gatestone",
+        "Halak's cube",
+        "Portable portal generator",
+        "Warped trinket"
+      ],
+      "artefactChronotes": 5772,
+      "bonusChronotes": 5772,
+      "restoreXp": 168333,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "saradominist-i-sir-atcha",
+      "name": "Saradominist I",
+      "collector": "Sir Atcha",
+      "level": 56,
+      "alignment": "Saradominist",
+      "artefacts": [
+        "'Frying pan'",
+        "Hallowed lantern",
+        "Ceremonial unicorn ornament",
+        "Ceremonial unicorn saddle",
+        "Everlight harp",
+        "Everlight trumpet",
+        "Everlight violin",
+        "Folded-arm figurine (female)",
+        "Folded-arm figurine (male)"
+      ],
+      "artefactChronotes": 3998,
+      "bonusChronotes": 3998,
+      "restoreXp": 14350,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "saradominist-ii-sir-atcha",
+      "name": "Saradominist II",
+      "collector": "Sir Atcha",
+      "level": 72,
+      "alignment": "Saradominist",
+      "artefacts": [
+        "Dominion discus",
+        "Dominion javelin",
+        "Dominion pelte shield",
+        "Bronze Dominion medal",
+        "Silver Dominion medal",
+        "Dominion torch",
+        "Decorative vase",
+        "Kantharos cup",
+        "Patera bowl"
+      ],
+      "artefactChronotes": 5202,
+      "bonusChronotes": 5202,
+      "restoreXp": 36400,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "saradominist-iii-sir-atcha",
+      "name": "Saradominist III",
+      "collector": "Sir Atcha",
+      "level": 100,
+      "alignment": "Saradominist",
+      "artefacts": [
+        "Dominarian device",
+        "Fishing trident",
+        "Amphora",
+        "Rod of Asclepius",
+        "Kopis dagger",
+        "Xiphos short sword"
+      ],
+      "artefactChronotes": 4548,
+      "bonusChronotes": 4548,
+      "restoreXp": 77778,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "saradominist-iv-sir-atcha",
+      "name": "Saradominist IV",
+      "collector": "Sir Atcha",
+      "level": 117,
+      "alignment": "Saradominist",
+      "artefacts": [
+        "'Hallowed Be the Everlight' painting",
+        "'The Lord of Light' painting",
+        "'The Pride of Padosan' painting",
+        "'The Enlightened Soul' scroll",
+        "'The Eudoxian Elements' tablet",
+        "Doru spear",
+        "Kontos lance"
+      ],
+      "artefactChronotes": 7022,
+      "bonusChronotes": 7022,
+      "restoreXp": 216167,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "Tetracompass piece"
+      },
+      "tetracompassPieces": 1,
+      "oneTimeReward": null
+    },
+    {
+      "id": "zarosian-i-soran-emissary-of-zaros",
+      "name": "Zarosian I",
+      "collector": "Soran, Emissary of Zaros",
+      "level": 25,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Venator dagger",
+        "Venator light crossbow",
+        "Primis Elementis standard",
+        "Legionary gladius",
+        "Legionary square shield",
+        "Zaros effigy",
+        "Zarosian training dummy",
+        "Legatus Maximus figurine",
+        "'Solem in Umbra' painting"
+      ],
+      "artefactChronotes": 2108,
+      "bonusChronotes": 2108,
+      "restoreXp": 4272,
+      "recurringReward": {
+        "quantity": 20,
+        "name": "pylon batteries"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "zarosian-ii-soran-emissary-of-zaros",
+      "name": "Zarosian II",
+      "collector": "Soran, Emissary of Zaros",
+      "level": 81,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Ancient timepiece",
+        "Legatus pendant",
+        "'Incite Fear' spell scroll",
+        "Pontifex signet ring",
+        "Ceremonial mace",
+        "Pontifex Maximus figurine",
+        "'Consensus ad Idem' painting",
+        "Pontifex censer",
+        "Pontifex crozier",
+        "Pontifex mitre"
+      ],
+      "artefactChronotes": 5732,
+      "bonusChronotes": 5732,
+      "restoreXp": 46200,
+      "recurringReward": {
+        "quantity": 50,
+        "name": "Kharid-et pylon batteries"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "zarosian-iii-soran-emissary-of-zaros",
+      "name": "Zarosian III",
+      "collector": "Soran, Emissary of Zaros",
+      "level": 107,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "'Exsanguinate' spell scroll",
+        "Necromantic focus",
+        "Zarosian ewer",
+        "Zarosian stein",
+        "'Smoke Cloud' spell scroll",
+        "Vigorem vial",
+        "Ancient magic tablet",
+        "'Animate Dead' spell scroll",
+        "Portable phylactery"
+      ],
+      "artefactChronotes": 7442,
+      "bonusChronotes": 7442,
+      "restoreXp": 162000,
+      "recurringReward": {
+        "quantity": 100,
+        "name": "Kharid-et pylon batteries"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "zarosian-iv-soran-emissary-of-zaros",
+      "name": "Zarosian IV",
+      "collector": "Soran, Emissary of Zaros",
+      "level": 118,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Praetorian hood",
+        "Praetorian robes",
+        "Praetorian staff",
+        "Ancient globe",
+        "Battle plans",
+        "'Prima Legio' painting"
+      ],
+      "artefactChronotes": 6810,
+      "bonusChronotes": 6810,
+      "restoreXp": 240000,
+      "recurringReward": {
+        "quantity": 100,
+        "name": "Kharid-et pylon batteries"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-armadylean-i-velucia",
+      "name": "Museum - Armadylean I",
+      "collector": "Velucia",
+      "level": 81,
+      "alignment": "Armadylean",
+      "artefacts": [
+        "Ikovian gerege",
+        "Toy glider",
+        "Toy war golem",
+        "Avian song-egg player",
+        "Keshik drum",
+        "Morin khuur",
+        "Aviansie dreamcoat",
+        "Ceremonial plume",
+        "Peacocking parasol"
+      ],
+      "artefactChronotes": 5688,
+      "bonusChronotes": 7110,
+      "restoreXp": 54367,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-armadylean-ii-velucia",
+      "name": "Museum - Armadylean II",
+      "collector": "Velucia",
+      "level": 98,
+      "alignment": "Armadylean",
+      "artefacts": [
+        "Hawkeye lens multi-vision scope",
+        "Talon-3 razor wing",
+        "Prototype gravimeter",
+        "Songbird recorder",
+        "Dayguard shield",
+        "Stormguard gerege",
+        "Golem heart",
+        "Golem instruction"
+      ],
+      "artefactChronotes": 6068,
+      "bonusChronotes": 7585,
+      "restoreXp": 102111,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-armadylean-iii-velucia",
+      "name": "Museum - Armadylean III",
+      "collector": "Velucia",
+      "level": 118,
+      "alignment": "Armadylean",
+      "artefacts": [
+        "Blackfire lance",
+        "Nightguard shield",
+        "Flat cap",
+        "Night owl flight goggles",
+        "Prototype godbow",
+        "Prototype godstaff",
+        "Prototype godsword",
+        "Chuluu stone",
+        "Quintessence counter",
+        "Spherical astrolabe"
+      ],
+      "artefactChronotes": 10468,
+      "bonusChronotes": 13085,
+      "restoreXp": 340000,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-bandosian-i-velucia",
+      "name": "Museum - Bandosian I",
+      "collector": "Velucia",
+      "level": 89,
+      "alignment": "Bandosian",
+      "artefacts": [
+        "Ekeleshuun blinder mask",
+        "Narogoshuun 'Hob-da-Gob' ball",
+        "Rekeshuun war tether",
+        "Ogre Kyzaj axe",
+        "Ork cleaver sword",
+        "Thorobshuun battle standard",
+        "Yurkolgokh stink grenade",
+        "High priest crozier",
+        "High priest mitre",
+        "High priest orb"
+      ],
+      "artefactChronotes": 6756,
+      "bonusChronotes": 8445,
+      "restoreXp": 80811,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-bandosian-ii-velucia",
+      "name": "Museum - Bandosian II",
+      "collector": "Velucia",
+      "level": 100,
+      "alignment": "Bandosian",
+      "artefacts": [
+        "Beastkeeper helm",
+        "Idithuun horn ring",
+        "'Nosorog!' sculpture",
+        "Ourg megahitter",
+        "Ourg tower/goblin cower shield",
+        "Garagorshuun anchor",
+        "Dorgeshuun spear",
+        "'Forged in War' sculpture"
+      ],
+      "artefactChronotes": 6446,
+      "bonusChronotes": 8057,
+      "restoreXp": 124833,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-bandosian-iii-velucia",
+      "name": "Museum - Bandosian III",
+      "collector": "Velucia",
+      "level": 119,
+      "alignment": "Bandosian",
+      "artefacts": [
+        "Huzamogaarb chaos crown",
+        "Saragorgak star crown",
+        "Drogokishuun hook sword",
+        "Hobgoblin mansticker",
+        "Kal-i-kra chieftain crown",
+        "Kal-i-kra mace",
+        "Kal-i-kra warhorn",
+        "'Da Boss Man' sculpture",
+        "Horogothgar cooking pot"
+      ],
+      "artefactChronotes": 9540,
+      "bonusChronotes": 11925,
+      "restoreXp": 313667,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-dragonkin-i-velucia",
+      "name": "Museum - Dragonkin I",
+      "collector": "Velucia",
+      "level": 99,
+      "alignment": "Dragonkin",
+      "artefacts": [
+        "Pasaha",
+        "Ritual bell",
+        "Kilaya",
+        "Vazara",
+        "Death mask",
+        "Dragonkin calendar",
+        "Dragonkin staff"
+      ],
+      "artefactChronotes": 5524,
+      "bonusChronotes": 6905,
+      "restoreXp": 104278,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-dragonkin-ii-velucia",
+      "name": "Museum - Dragonkin II",
+      "collector": "Velucia",
+      "level": 102,
+      "alignment": "Dragonkin",
+      "artefacts": [
+        "Dragon scalpel",
+        "Protective goggles",
+        "Dragon burner",
+        "Orthenglass flask"
+      ],
+      "artefactChronotes": 3444,
+      "bonusChronotes": 4305,
+      "restoreXp": 81667,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-dragonkin-iii-velucia",
+      "name": "Museum - Dragonkin III",
+      "collector": "Velucia",
+      "level": 108,
+      "alignment": "Dragonkin",
+      "artefacts": [
+        "Meditation pipe",
+        "Personal totem",
+        "Singing bowl",
+        "Lingam stone",
+        "Master control"
+      ],
+      "artefactChronotes": 4652,
+      "bonusChronotes": 5815,
+      "restoreXp": 133667,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-dragonkin-iv-velucia",
+      "name": "Museum - Dragonkin IV",
+      "collector": "Velucia",
+      "level": 120,
+      "alignment": "Dragonkin",
+      "artefacts": [
+        "Xolo hard hat",
+        "Xolo pickaxe",
+        "Xolo shield",
+        "Xolo spear",
+        "Gold dish",
+        "'Raksha' idol"
+      ],
+      "artefactChronotes": 6980,
+      "bonusChronotes": 8725,
+      "restoreXp": 253333,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-dragonkin-v-velucia",
+      "name": "Museum - Dragonkin V",
+      "collector": "Velucia",
+      "level": 77,
+      "alignment": "Dragonkin",
+      "artefacts": [
+        "Castle gatestone",
+        "Engraved ring of kinship",
+        "Exploratory totem",
+        "Excavator portal mine"
+      ],
+      "artefactChronotes": 2532,
+      "bonusChronotes": 3165,
+      "restoreXp": 23333,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-dragonkin-vi-velucia",
+      "name": "Museum - Dragonkin VI",
+      "collector": "Velucia",
+      "level": 87,
+      "alignment": "Dragonkin",
+      "artefacts": [
+        "Storage totem",
+        "Plant seed satchel",
+        "Snuff box",
+        "Spent summoning charm",
+        "'Friendship bracelet'",
+        "Homely totem"
+      ],
+      "artefactChronotes": 4056,
+      "bonusChronotes": 5070,
+      "restoreXp": 48767,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-dragonkin-vii-velucia",
+      "name": "Museum - Dragonkin VII",
+      "collector": "Velucia",
+      "level": 113,
+      "alignment": "Dragonkin",
+      "artefacts": [
+        "Projection attuner",
+        "Golden projection 'needle'",
+        "Comfort gatestone",
+        "Halak's cube",
+        "Portable portal generator",
+        "Warped trinket"
+      ],
+      "artefactChronotes": 5772,
+      "bonusChronotes": 7215,
+      "restoreXp": 168333,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-guthixian-i-velucia",
+      "name": "Museum - Guthixian I",
+      "collector": "Velucia",
+      "level": 66,
+      "alignment": "Guthixian",
+      "artefacts": [
+        "Lunar calendar",
+        "Wolf statuette",
+        "Ivory sickle",
+        "Nakkirian seal",
+        "Royal Game of Ba",
+        "Backstrap loom",
+        "Animal doll",
+        "Initiate's kaunake"
+      ],
+      "artefactChronotes": 4248,
+      "bonusChronotes": 5310,
+      "restoreXp": 21046,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-guthixian-ii-velucia",
+      "name": "Museum - Guthixian II",
+      "collector": "Velucia",
+      "level": 88,
+      "alignment": "Guthixian",
+      "artefacts": [
+        "Incense burner",
+        "Offering bowl",
+        "Bloodwine",
+        "Reagent jar",
+        "Ninbaradari mural",
+        "Bloodletting dagger",
+        "Fang of Kayazu"
+      ],
+      "artefactChronotes": 4616,
+      "bonusChronotes": 5785,
+      "restoreXp": 55216,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-saradominist-i-velucia",
+      "name": "Museum - Saradominist I",
+      "collector": "Velucia",
+      "level": 56,
+      "alignment": "Saradominist",
+      "artefacts": [
+        "'Frying pan'",
+        "Hallowed lantern",
+        "Ceremonial unicorn ornament",
+        "Ceremonial unicorn saddle",
+        "Everlight harp",
+        "Everlight trumpet",
+        "Everlight violin",
+        "Folded-arm figurine (female)",
+        "Folded-arm figurine (male)"
+      ],
+      "artefactChronotes": 3998,
+      "bonusChronotes": 4997,
+      "restoreXp": 14350,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-saradominist-ii-velucia",
+      "name": "Museum - Saradominist II",
+      "collector": "Velucia",
+      "level": 72,
+      "alignment": "Saradominist",
+      "artefacts": [
+        "Dominion discus",
+        "Dominion javelin",
+        "Dominion pelte shield",
+        "Bronze Dominion medal",
+        "Silver Dominion medal",
+        "Dominion torch",
+        "Decorative vase",
+        "Kantharos cup",
+        "Patera bowl"
+      ],
+      "artefactChronotes": 5202,
+      "bonusChronotes": 6502,
+      "restoreXp": 36400,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-saradominist-iii-velucia",
+      "name": "Museum - Saradominist III",
+      "collector": "Velucia",
+      "level": 100,
+      "alignment": "Saradominist",
+      "artefacts": [
+        "Dominarian device",
+        "Fishing trident",
+        "Amphora",
+        "Rod of Asclepius",
+        "Kopis dagger",
+        "Xiphos short sword"
+      ],
+      "artefactChronotes": 4548,
+      "bonusChronotes": 5685,
+      "restoreXp": 77778,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-saradominist-iv-velucia",
+      "name": "Museum - Saradominist IV",
+      "collector": "Velucia",
+      "level": 117,
+      "alignment": "Saradominist",
+      "artefacts": [
+        "'Hallowed Be the Everlight' painting",
+        "'The Lord of Light' painting",
+        "'The Pride of Padosan' painting",
+        "'The Enlightened Soul' scroll",
+        "'The Eudoxian Elements' tablet",
+        "Doru spear",
+        "Kontos lance"
+      ],
+      "artefactChronotes": 7022,
+      "bonusChronotes": 8777,
+      "restoreXp": 216167,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-zamorakian-i-velucia",
+      "name": "Museum - Zamorakian I",
+      "collector": "Velucia",
+      "level": 36,
+      "alignment": "Zamorakian",
+      "artefacts": [
+        "Hookah pipe",
+        "Opulent wine goblet",
+        "Crest of Dagon",
+        "'Disorder' painting",
+        "Imp mask",
+        "Lesser demon mask",
+        "Greater demon mask",
+        "Order of Dis robes",
+        "Ritual dagger"
+      ],
+      "artefactChronotes": 2594,
+      "bonusChronotes": 3242,
+      "restoreXp": 6372,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-zamorakian-ii-velucia",
+      "name": "Museum - Zamorakian II",
+      "collector": "Velucia",
+      "level": 81,
+      "alignment": "Zamorakian",
+      "artefacts": [
+        "Branding iron",
+        "Manacles",
+        "'The Lake of Fire' painting",
+        "'Lust' metal sculpture",
+        "Chaos star",
+        "Spiked dog collar",
+        "Larupia trophy",
+        "Lion trophy",
+        "She-wolf trophy"
+      ],
+      "artefactChronotes": 5146,
+      "bonusChronotes": 6432,
+      "restoreXp": 40133,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-zamorakian-iii-velucia",
+      "name": "Museum - Zamorakian III",
+      "collector": "Velucia",
+      "level": 104,
+      "alignment": "Zamorakian",
+      "artefacts": [
+        "'Torment' metal sculpture",
+        "'Pandemonium' tapestry",
+        "Hellfire haladie",
+        "Hellfire katar",
+        "Hellfire zaghnal",
+        "'Possession' metal sculpture",
+        "Trishula",
+        "Tsutsaroth piercing"
+      ],
+      "artefactChronotes": 6608,
+      "bonusChronotes": 8260,
+      "restoreXp": 141000,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-zamorakian-iv-velucia",
+      "name": "Museum - Zamorakian IV",
+      "collector": "Velucia",
+      "level": 116,
+      "alignment": "Zamorakian",
+      "artefacts": [
+        "Chaos Elemental trophy",
+        "Virius trophy",
+        "Tsutsaroth helm",
+        "Tsutsaroth pauldron",
+        "Tsutsaroth urumi"
+      ],
+      "artefactChronotes": 5434,
+      "bonusChronotes": 6792,
+      "restoreXp": 182000,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-zarosian-i-velucia",
+      "name": "Museum - Zarosian I",
+      "collector": "Velucia",
+      "level": 25,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Venator dagger",
+        "Venator light crossbow",
+        "Primis Elementis standard",
+        "Legionary gladius",
+        "Legionary square shield",
+        "Zaros effigy",
+        "Zarosian training dummy",
+        "Legatus Maximus figurine",
+        "'Solem in Umbra' painting"
+      ],
+      "artefactChronotes": 2108,
+      "bonusChronotes": 2635,
+      "restoreXp": 4272,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-zarosian-ii-velucia",
+      "name": "Museum - Zarosian II",
+      "collector": "Velucia",
+      "level": 81,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Ancient timepiece",
+        "Legatus pendant",
+        "'Incite Fear' spell scroll",
+        "Pontifex signet ring",
+        "Ceremonial mace",
+        "Pontifex Maximus figurine",
+        "'Consensus ad Idem' painting",
+        "Pontifex censer",
+        "Pontifex crozier",
+        "Pontifex mitre"
+      ],
+      "artefactChronotes": 5732,
+      "bonusChronotes": 7165,
+      "restoreXp": 46200,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-zarosian-iii-velucia",
+      "name": "Museum - Zarosian III",
+      "collector": "Velucia",
+      "level": 107,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "'Exsanguinate' spell scroll",
+        "Necromantic focus",
+        "Zarosian ewer",
+        "Zarosian stein",
+        "'Smoke Cloud' spell scroll",
+        "Vigorem vial",
+        "Ancient magic tablet",
+        "'Animate Dead' spell scroll",
+        "Portable phylactery"
+      ],
+      "artefactChronotes": 7442,
+      "bonusChronotes": 9302,
+      "restoreXp": 162000,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-zarosian-iv-velucia",
+      "name": "Museum - Zarosian IV",
+      "collector": "Velucia",
+      "level": 118,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Praetorian hood",
+        "Praetorian robes",
+        "Praetorian staff",
+        "Ancient globe",
+        "Battle plans",
+        "'Prima Legio' painting"
+      ],
+      "artefactChronotes": 6810,
+      "bonusChronotes": 8512,
+      "restoreXp": 240000,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-zarosian-v-velucia",
+      "name": "Museum - Zarosian V",
+      "collector": "Velucia",
+      "level": 62,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Apex cap",
+        "Curse tablet",
+        "Funerary urn of shadow",
+        "Infula robes",
+        "Funerary urn of smoke",
+        "Hand of the Ancients"
+      ],
+      "artefactChronotes": 3294,
+      "bonusChronotes": 4117,
+      "restoreXp": 15400,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-zarosian-vi-velucia",
+      "name": "Museum - Zarosian VI",
+      "collector": "Velucia",
+      "level": 64,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Decorative amphora",
+        "Funerary urn of ice",
+        "Loarnab rod",
+        "Inquisitor's ceremonial armour",
+        "Inquisitor's ceremonial mask",
+        "Inquisitor's seal"
+      ],
+      "artefactChronotes": 3366,
+      "bonusChronotes": 4207,
+      "restoreXp": 18900,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-zarosian-vii-velucia",
+      "name": "Museum - Zarosian VII",
+      "collector": "Velucia",
+      "level": 67,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Gladiator helmet",
+        "Gladiator sword",
+        "Funerary urn of blood",
+        "Funerary urn of miasma",
+        "Model chariot",
+        "'The Serpent's Fall' carving"
+      ],
+      "artefactChronotes": 3486,
+      "bonusChronotes": 4357,
+      "restoreXp": 23220,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "museum-training-weapons-velucia",
+      "name": "Museum - Training Weapons",
+      "collector": "Velucia",
+      "level": 1,
+      "alignment": "Miscellaneous",
+      "artefacts": [
+        "Centurion's dress sword"
+      ],
+      "artefactChronotes": 0,
+      "bonusChronotes": 1000,
+      "restoreXp": 250,
+      "recurringReward": {
+        "quantity": 1,
+        "name": "No"
+      },
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "wise-am-the-music-man-wise-old-man",
+      "name": "Wise Am the Music Man",
+      "collector": "Wise Old Man",
+      "level": 91,
+      "alignment": "Armadylean",
+      "artefacts": [
+        "Everlight harp",
+        "Everlight trumpet",
+        "Everlight violin",
+        "Avian song-egg player",
+        "Keshik drum",
+        "Morin khuur",
+        "Songbird recorder"
+      ],
+      "artefactChronotes": 4024,
+      "bonusChronotes": 4024,
+      "restoreXp": 34588,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "hat-problem-wise-old-man",
+      "name": "Hat Problem",
+      "collector": "Wise Old Man",
+      "level": 114,
+      "alignment": "Bandosian",
+      "artefacts": [
+        "Imp mask",
+        "Ekeleshuun blinder mask",
+        "High priest mitre",
+        "Beastkeeper helm",
+        "Huzamogaarb chaos crown",
+        "Flat cap",
+        "Praetorian hood"
+      ],
+      "artefactChronotes": 5420,
+      "bonusChronotes": 6775,
+      "restoreXp": 122969,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "hat-hoarder-wise-old-man",
+      "name": "Hat Hoarder",
+      "collector": "Wise Old Man",
+      "level": 116,
+      "alignment": "Zamorakian",
+      "artefacts": [
+        "Lesser demon mask",
+        "Greater demon mask",
+        "Ceremonial unicorn ornament",
+        "Pontifex mitre",
+        "Saragorgak star crown",
+        "Kal-i-kra chieftain crown",
+        "Tsutsaroth helm"
+      ],
+      "artefactChronotes": 4796,
+      "bonusChronotes": 5995,
+      "restoreXp": 112021,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "magic-man-wise-old-man",
+      "name": "Magic Man",
+      "collector": "Wise Old Man",
+      "level": 118,
+      "alignment": "Zarosian",
+      "artefacts": [
+        "Legatus Maximus figurine",
+        "Ritual dagger",
+        "Ancient timepiece",
+        "'Incite Fear' spell scroll",
+        "'Exsanguinate' spell scroll",
+        "High priest mitre",
+        "'Smoke Cloud' spell scroll",
+        "'Animate Dead' spell scroll",
+        "Portable phylactery",
+        "Chuluu stone"
+      ],
+      "artefactChronotes": 6880,
+      "bonusChronotes": 8600,
+      "restoreXp": 140976,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    },
+    {
+      "id": "knowledge-is-power-wise-old-man",
+      "name": "Knowledge is Power",
+      "collector": "Wise Old Man",
+      "level": 119,
+      "alignment": "Armadylean",
+      "artefacts": [
+        "Crest of Dagon",
+        "Ikovian gerege",
+        "Necromantic focus",
+        "Golem instruction",
+        "'The Enlightened Soul' scroll",
+        "'The Eudoxian Elements' tablet",
+        "'Da Boss Man' sculpture"
+      ],
+      "artefactChronotes": 5584,
+      "bonusChronotes": 5584,
+      "restoreXp": 135646,
+      "recurringReward": null,
+      "tetracompassPieces": 0,
+      "oneTimeReward": null
+    }
+  ],
+  "materials": [
+    {
+      "id": "goldrune",
+      "name": "Goldrune",
+      "usedInArtefacts": 47,
+      "totalQuantity": 1340,
+      "common": true
+    },
+    {
+      "id": "white-oak",
+      "name": "White oak",
+      "usedInArtefacts": 39,
+      "totalQuantity": 890,
+      "common": true
+    },
+    {
+      "id": "third-age-iron",
+      "name": "Third Age iron",
+      "usedInArtefacts": 38,
+      "totalQuantity": 856,
+      "common": true
+    },
+    {
+      "id": "ancient-vis",
+      "name": "Ancient vis",
+      "usedInArtefacts": 28,
+      "totalQuantity": 686,
+      "common": true
+    },
+    {
+      "id": "samite-silk",
+      "name": "Samite silk",
+      "usedInArtefacts": 28,
+      "totalQuantity": 702,
+      "common": true
+    },
+    {
+      "id": "orthenglass",
+      "name": "Orthenglass",
+      "usedInArtefacts": 26,
+      "totalQuantity": 927,
+      "common": true
+    },
+    {
+      "id": "leather-scraps",
+      "name": "Leather scraps",
+      "usedInArtefacts": 24,
+      "totalQuantity": 516,
+      "common": true
+    },
+    {
+      "id": "zarosian-insignia",
+      "name": "Zarosian insignia",
+      "usedInArtefacts": 20,
+      "totalQuantity": 386,
+      "common": true
+    },
+    {
+      "id": "dragon-metal",
+      "name": "Dragon metal",
+      "usedInArtefacts": 19,
+      "totalQuantity": 872,
+      "common": true
+    },
+    {
+      "id": "orgone",
+      "name": "Orgone",
+      "usedInArtefacts": 18,
+      "totalQuantity": 808,
+      "common": true
+    },
+    {
+      "id": "soapstone",
+      "name": "Soapstone",
+      "usedInArtefacts": 18,
+      "totalQuantity": 526,
+      "common": true
+    },
+    {
+      "id": "vellum",
+      "name": "Vellum",
+      "usedInArtefacts": 16,
+      "totalQuantity": 412,
+      "common": true
+    },
+    {
+      "id": "imperial-steel",
+      "name": "Imperial steel",
+      "usedInArtefacts": 15,
+      "totalQuantity": 386,
+      "common": true
+    },
+    {
+      "id": "tyrian-purple",
+      "name": "Tyrian purple",
+      "usedInArtefacts": 15,
+      "totalQuantity": 406,
+      "common": true
+    },
+    {
+      "id": "blood-of-orcus",
+      "name": "Blood of Orcus",
+      "usedInArtefacts": 14,
+      "totalQuantity": 354,
+      "common": true
+    },
+    {
+      "id": "compass-rose",
+      "name": "Compass rose",
+      "usedInArtefacts": 13,
+      "totalQuantity": 420,
+      "common": true
+    },
+    {
+      "id": "hellfire-metal",
+      "name": "Hellfire metal",
+      "usedInArtefacts": 13,
+      "totalQuantity": 512,
+      "common": true
+    },
+    {
+      "id": "everlight-silvthril",
+      "name": "Everlight silvthril",
+      "usedInArtefacts": 12,
+      "totalQuantity": 480,
+      "common": true
+    },
+    {
+      "id": "warforged-bronze",
+      "name": "Warforged bronze",
+      "usedInArtefacts": 12,
+      "totalQuantity": 460,
+      "common": true
+    },
+    {
+      "id": "eye-of-dagon",
+      "name": "Eye of Dagon",
+      "usedInArtefacts": 11,
+      "totalQuantity": 278,
+      "common": true
+    },
+    {
+      "id": "chaotic-brimstone",
+      "name": "Chaotic brimstone",
+      "usedInArtefacts": 10,
+      "totalQuantity": 226,
+      "common": true
+    },
+    {
+      "id": "malachite-green",
+      "name": "Malachite green",
+      "usedInArtefacts": 10,
+      "totalQuantity": 278,
+      "common": true
+    },
+    {
+      "id": "star-of-saradomin",
+      "name": "Star of Saradomin",
+      "usedInArtefacts": 10,
+      "totalQuantity": 264,
+      "common": true
+    },
+    {
+      "id": "armadylean-yellow",
+      "name": "Armadylean yellow",
+      "usedInArtefacts": 9,
+      "totalQuantity": 293,
+      "common": true
+    },
+    {
+      "id": "cadmium-red",
+      "name": "Cadmium red",
+      "usedInArtefacts": 9,
+      "totalQuantity": 184,
+      "common": true
+    },
+    {
+      "id": "felt",
+      "name": "Felt",
+      "usedInArtefacts": 9,
+      "totalQuantity": 330,
+      "common": true
+    },
+    {
+      "id": "stormguard-steel",
+      "name": "Stormguard steel",
+      "usedInArtefacts": 9,
+      "totalQuantity": 307,
+      "common": true
+    },
+    {
+      "id": "wings-of-war",
+      "name": "Wings of War",
+      "usedInArtefacts": 9,
+      "totalQuantity": 274,
+      "common": true
+    },
+    {
+      "id": "aetherium-alloy",
+      "name": "Aetherium alloy",
+      "usedInArtefacts": 8,
+      "totalQuantity": 360,
+      "common": true
+    },
+    {
+      "id": "animal-furs",
+      "name": "Animal furs",
+      "usedInArtefacts": 8,
+      "totalQuantity": 242,
+      "common": true
+    },
+    {
+      "id": "mark-of-the-kyzaj",
+      "name": "Mark of the Kyzaj",
+      "usedInArtefacts": 8,
+      "totalQuantity": 192,
+      "common": true
+    },
+    {
+      "id": "quintessence",
+      "name": "Quintessence",
+      "usedInArtefacts": 8,
+      "totalQuantity": 302,
+      "common": true
+    },
+    {
+      "id": "vulcanised-rubber",
+      "name": "Vulcanised rubber",
+      "usedInArtefacts": 8,
+      "totalQuantity": 272,
+      "common": true
+    },
+    {
+      "id": "carbon-black",
+      "name": "Carbon black",
+      "usedInArtefacts": 7,
+      "totalQuantity": 214,
+      "common": true
+    },
+    {
+      "id": "fossilised-bone",
+      "name": "Fossilised bone",
+      "usedInArtefacts": 7,
+      "totalQuantity": 244,
+      "common": true
+    },
+    {
+      "id": "keramos",
+      "name": "Keramos",
+      "usedInArtefacts": 7,
+      "totalQuantity": 220,
+      "common": true
+    },
+    {
+      "id": "yu-biusk-clay",
+      "name": "Yu'biusk clay",
+      "usedInArtefacts": 7,
+      "totalQuantity": 326,
+      "common": true
+    },
+    {
+      "id": "banded-limestone",
+      "name": "Banded limestone",
+      "usedInArtefacts": 6,
+      "totalQuantity": 144,
+      "common": true
+    },
+    {
+      "id": "burnt-umber",
+      "name": "Burnt umber",
+      "usedInArtefacts": 6,
+      "totalQuantity": 138,
+      "common": true
+    },
+    {
+      "id": "cashmere",
+      "name": "Cashmere",
+      "usedInArtefacts": 6,
+      "totalQuantity": 134,
+      "common": true
+    },
+    {
+      "id": "cobalt-blue",
+      "name": "Cobalt blue",
+      "usedInArtefacts": 6,
+      "totalQuantity": 228,
+      "common": true
+    },
+    {
+      "id": "ivory",
+      "name": "Ivory",
+      "usedInArtefacts": 6,
+      "totalQuantity": 170,
+      "common": true
+    },
+    {
+      "id": "triskelion",
+      "name": "Triskelion",
+      "usedInArtefacts": 6,
+      "totalQuantity": 138,
+      "common": true
+    },
+    {
+      "id": "white-marble",
+      "name": "White marble",
+      "usedInArtefacts": 6,
+      "totalQuantity": 210,
+      "common": true
+    },
+    {
+      "id": "demonhide",
+      "name": "Demonhide",
+      "usedInArtefacts": 4,
+      "totalQuantity": 80,
+      "common": true
+    },
+    {
+      "id": "dragonstone",
+      "name": "Dragonstone",
+      "usedInArtefacts": 4,
+      "totalQuantity": 4,
+      "common": true
+    },
+    {
+      "id": "death-rune",
+      "name": "Death rune",
+      "usedInArtefacts": 3,
+      "totalQuantity": 180,
+      "common": true
+    },
+    {
+      "id": "clockwork",
+      "name": "Clockwork",
+      "usedInArtefacts": 2,
+      "totalQuantity": 2,
+      "common": false
+    },
+    {
+      "id": "diamond",
+      "name": "Diamond",
+      "usedInArtefacts": 2,
+      "totalQuantity": 2,
+      "common": false
+    },
+    {
+      "id": "ruby",
+      "name": "Ruby",
+      "usedInArtefacts": 2,
+      "totalQuantity": 2,
+      "common": false
+    },
+    {
+      "id": "sapphire",
+      "name": "Sapphire",
+      "usedInArtefacts": 2,
+      "totalQuantity": 2,
+      "common": false
+    },
+    {
+      "id": "black-mushroom-ink",
+      "name": "Black mushroom ink",
+      "usedInArtefacts": 1,
+      "totalQuantity": 1,
+      "common": false
+    },
+    {
+      "id": "bronze-bar",
+      "name": "Bronze bar",
+      "usedInArtefacts": 1,
+      "totalQuantity": 1,
+      "common": false
+    },
+    {
+      "id": "emerald",
+      "name": "Emerald",
+      "usedInArtefacts": 1,
+      "totalQuantity": 1,
+      "common": false
+    },
+    {
+      "id": "grapes",
+      "name": "Grapes",
+      "usedInArtefacts": 1,
+      "totalQuantity": 1,
+      "common": false
+    },
+    {
+      "id": "imperial-iron",
+      "name": "Imperial iron",
+      "usedInArtefacts": 1,
+      "totalQuantity": 5,
+      "common": false
+    },
+    {
+      "id": "molten-glass",
+      "name": "Molten glass",
+      "usedInArtefacts": 1,
+      "totalQuantity": 1,
+      "common": false
+    },
+    {
+      "id": "phoenix-feather",
+      "name": "Phoenix feather",
+      "usedInArtefacts": 1,
+      "totalQuantity": 1,
+      "common": false
+    },
+    {
+      "id": "purpleheart-wood",
+      "name": "Purpleheart wood",
+      "usedInArtefacts": 1,
+      "totalQuantity": 5,
+      "common": false
+    },
+    {
+      "id": "rope",
+      "name": "Rope",
+      "usedInArtefacts": 1,
+      "totalQuantity": 1,
+      "common": false
+    },
+    {
+      "id": "silver-bar",
+      "name": "Silver bar",
+      "usedInArtefacts": 1,
+      "totalQuantity": 1,
+      "common": false
+    },
+    {
+      "id": "soft-clay",
+      "name": "Soft clay",
+      "usedInArtefacts": 1,
+      "totalQuantity": 1,
+      "common": false
+    },
+    {
+      "id": "weapon-poison-3",
+      "name": "Weapon poison (3)",
+      "usedInArtefacts": 1,
+      "totalQuantity": 1,
+      "common": false
+    },
+    {
+      "id": "white-candle",
+      "name": "White candle",
+      "usedInArtefacts": 1,
+      "totalQuantity": 1,
+      "common": false
+    }
+  ]
+}

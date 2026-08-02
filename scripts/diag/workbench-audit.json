@@ -1,0 +1,437 @@
+{
+  "capture": "Workbench-Storage_Capture.PNG",
+  "grid": {
+    "ox": 51,
+    "oy": 72,
+    "px": 42.48,
+    "py": 36.17,
+    "nx": 5,
+    "ny": 11
+  },
+  "cells": [
+    {
+      "row": 0,
+      "column": 0,
+      "name": "aviansie-dreamcoat-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 88
+    },
+    {
+      "row": 0,
+      "column": 1,
+      "name": "peacocking-parasol-damaged",
+      "verdict": "redrawn",
+      "precision": 84,
+      "recall": 92
+    },
+    {
+      "row": 0,
+      "column": 2,
+      "name": "ceremonial-plume-damaged",
+      "verdict": "redrawn",
+      "precision": 87,
+      "recall": 81
+    },
+    {
+      "row": 0,
+      "column": 3,
+      "name": "hallowed-lantern-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 90
+    },
+    {
+      "row": 0,
+      "column": 4,
+      "name": "lesser-demon-mask-damaged",
+      "verdict": "redrawn",
+      "precision": 88,
+      "recall": 88
+    },
+    {
+      "row": 1,
+      "column": 0,
+      "name": "opulent-wine-goblet-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 82
+    },
+    {
+      "row": 1,
+      "column": 1,
+      "name": "incite-fear-spell-scroll-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 57
+    },
+    {
+      "row": 1,
+      "column": 2,
+      "name": "dominion-javelin-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 79
+    },
+    {
+      "row": 1,
+      "column": 3,
+      "name": "hallowed-be-the-everlight-painting-damaged",
+      "verdict": "exact",
+      "precision": 99,
+      "recall": 84
+    },
+    {
+      "row": 1,
+      "column": 4,
+      "name": "the-lord-of-light-painting-damaged",
+      "verdict": "exact",
+      "precision": 98,
+      "recall": 87
+    },
+    {
+      "row": 2,
+      "column": 0,
+      "name": "prototype-godstaff-damaged",
+      "verdict": "redrawn",
+      "precision": 79,
+      "recall": 77
+    },
+    {
+      "row": 2,
+      "column": 1,
+      "name": "disorder-painting-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 89
+    },
+    {
+      "row": 2,
+      "column": 2,
+      "name": "prototype-godbow-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 88
+    },
+    {
+      "row": 2,
+      "column": 3,
+      "name": "ikovian-gerege-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 81
+    },
+    {
+      "row": 2,
+      "column": 4,
+      "name": "kantharos-cup-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 90
+    },
+    {
+      "row": 3,
+      "column": 0,
+      "name": "ceremonial-mace-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 85
+    },
+    {
+      "row": 3,
+      "column": 1,
+      "name": "curse-tablet-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 77
+    },
+    {
+      "row": 3,
+      "column": 2,
+      "name": "legatus-pendant-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 77
+    },
+    {
+      "row": 3,
+      "column": 3,
+      "name": "ritual-bell-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 88
+    },
+    {
+      "row": 3,
+      "column": 4,
+      "name": "prototype-godsword-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 93
+    },
+    {
+      "row": 4,
+      "column": 0,
+      "name": "death-mask-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 82
+    },
+    {
+      "row": 4,
+      "column": 1,
+      "name": "dragon-burner-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 88
+    },
+    {
+      "row": 4,
+      "column": 2,
+      "name": "funerary-urn-of-miasma-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 91
+    },
+    {
+      "row": 4,
+      "column": 3,
+      "name": "orthenglass-flask-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 84
+    },
+    {
+      "row": 4,
+      "column": 4,
+      "name": "funerary-urn-of-ice-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 92
+    },
+    {
+      "row": 5,
+      "column": 0,
+      "name": "frying-pan-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 89
+    },
+    {
+      "row": 5,
+      "column": 1,
+      "name": "amphora-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 90
+    },
+    {
+      "row": 5,
+      "column": 2,
+      "name": "the-serpent-s-fall-carving-damaged",
+      "verdict": "exact",
+      "precision": 99,
+      "recall": 80
+    },
+    {
+      "row": 5,
+      "column": 3,
+      "name": "pandemonium-tapestry-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 89
+    },
+    {
+      "row": 5,
+      "column": 4,
+      "name": "she-wolf-trophy-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 75
+    },
+    {
+      "row": 6,
+      "column": 0,
+      "name": "larupia-trophy-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 77
+    },
+    {
+      "row": 6,
+      "column": 1,
+      "name": "high-priest-orb-damaged",
+      "verdict": "redrawn",
+      "precision": 89,
+      "recall": 86
+    },
+    {
+      "row": 6,
+      "column": 2,
+      "name": "high-priest-mitre-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 91
+    },
+    {
+      "row": 6,
+      "column": 3,
+      "name": "ourg-megahitter-damaged",
+      "verdict": "exact",
+      "precision": 99,
+      "recall": 78
+    },
+    {
+      "row": 6,
+      "column": 4,
+      "name": "talon-3-razor-wing-damaged",
+      "verdict": "redrawn",
+      "precision": 95,
+      "recall": 85
+    },
+    {
+      "row": 7,
+      "column": 0,
+      "name": "everlight-harp-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 90
+    },
+    {
+      "row": 7,
+      "column": 1,
+      "name": "everlight-violin-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 93
+    },
+    {
+      "row": 7,
+      "column": 2,
+      "name": "kontos-lance-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 78
+    },
+    {
+      "row": 7,
+      "column": 3,
+      "name": "legatus-maximus-figurine-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 87
+    },
+    {
+      "row": 7,
+      "column": 4,
+      "name": "portable-phylactery-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 87
+    },
+    {
+      "row": 8,
+      "column": 0,
+      "name": "ourg-tower-goblin-cower-shield-damaged",
+      "verdict": "exact",
+      "precision": 99,
+      "recall": 86
+    },
+    {
+      "row": 8,
+      "column": 1,
+      "name": "kal-i-kra-mace-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 82
+    },
+    {
+      "row": 8,
+      "column": 2,
+      "name": "lust-metal-sculpture-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 87
+    },
+    {
+      "row": 8,
+      "column": 3,
+      "name": "beastkeeper-helm-damaged",
+      "verdict": "redrawn",
+      "precision": 91,
+      "recall": 87
+    },
+    {
+      "row": 8,
+      "column": 4,
+      "name": "projection-attuner-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 76
+    },
+    {
+      "row": 9,
+      "column": 0,
+      "name": "possession-metal-sculpture-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 88
+    },
+    {
+      "row": 9,
+      "column": 1,
+      "name": "tsutsaroth-piercing-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 83
+    },
+    {
+      "row": 9,
+      "column": 2,
+      "name": "trishula-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 73
+    },
+    {
+      "row": 9,
+      "column": 3,
+      "name": "torment-metal-sculpture-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 73
+    },
+    {
+      "row": 9,
+      "column": 4,
+      "name": "bronze-dominion-medal-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 64
+    },
+    {
+      "row": 10,
+      "column": 0,
+      "name": "silver-dominion-medal-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 90
+    },
+    {
+      "row": 10,
+      "column": 1,
+      "name": "the-pride-of-padosan-painting-damaged",
+      "verdict": "exact",
+      "precision": 99,
+      "recall": 86
+    },
+    {
+      "row": 10,
+      "column": 2,
+      "name": "chaos-star-damaged",
+      "verdict": "exact",
+      "precision": 100,
+      "recall": 76
+    }
+  ]
+}

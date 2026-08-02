@@ -1,0 +1,13 @@
+{
+  "appName": "Guildmaster’s Companion",
+  "description": "Track damaged and restored artefacts, collection progress, chronotes and tetracompass rewards.",
+  "appUrl": "./index.html",
+  "configUrl": "./appconfig.json",
+  "iconUrl": "./icon.png",
+  "defaultWidth": 470,
+  "defaultHeight": 720,
+  "minWidth": 390,
+  "minHeight": 540,
+  "requestHandlers": [],
+  "activators": []
+}
