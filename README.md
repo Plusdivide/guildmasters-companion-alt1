@@ -75,5 +75,5 @@ Pushing to `main` runs `.github/workflows/deploy.yml` for GitHub Pages.
 
 Once deployed:
 
-- App: `https://plusdivide.github.io/rs3-archaeology-companion/`
-- Open in Alt1: `alt1://addapp/https://plusdivide.github.io/rs3-archaeology-companion/appconfig.json`
+- App: `https://plusdivide.github.io/guildmasters-companion-alt1/`
+- Open in Alt1: `alt1://addapp/https://plusdivide.github.io/guildmasters-companion-alt1/appconfig.json`
