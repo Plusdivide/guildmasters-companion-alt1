@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Guildmaster’s Companion to Alt1</title>
+    <meta
+      http-equiv="refresh"
+      content="0;url=alt1://addapp/https://plusdivide.github.io/guildmasters-companion-alt1/appconfig.json"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #211d1a;
+        --text: #e8dcc0;
+        --gold: #f0d9a0;
+        --muted: #b5a484;
+        --border: #a08850;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        font: 16px/1.45 system-ui, sans-serif;
+        color: var(--text);
+        background: radial-gradient(ellipse at top, #2a2420, var(--bg));
+      }
+      main {
+        width: min(420px, 100%);
+        padding: 28px 24px;
+        text-align: center;
+        background: #1a1614;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 1.35rem;
+        color: var(--gold);
+      }
+      p { margin: 0 0 18px; color: var(--muted); font-size: 0.95rem; }
+      a.add {
+        display: inline-block;
+        padding: 12px 18px;
+        color: #2f2308;
+        background: linear-gradient(180deg, #f0d9a0, #d4b878);
+        border: 1px solid #f0d9a0;
+        border-radius: 4px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      a.add:hover { filter: brightness(1.06); }
+      code {
+        display: block;
+        margin-top: 16px;
+        padding: 10px;
+        overflow-wrap: anywhere;
+        color: var(--muted);
+        background: #0e0c0a;
+        border: 1px solid #4a4030;
+        border-radius: 4px;
+        font-size: 0.72rem;
+      }
+    </style>
+    <script>
+      location.href =
+        "alt1://addapp/https://plusdivide.github.io/guildmasters-companion-alt1/appconfig.json";
+    </script>
+  </head>
+  <body>
+    <main>
+      <h1>Guildmaster’s Companion</h1>
+      <p>Opening Alt1… If nothing happens, click below.</p>
+      <a
+        class="add"
+        href="alt1://addapp/https://plusdivide.github.io/guildmasters-companion-alt1/appconfig.json"
+      >
+        Add to Alt1
+      </a>
+      <code>alt1://addapp/https://plusdivide.github.io/guildmasters-companion-alt1/appconfig.json</code>
+    </main>
+  </body>
+</html>

@@ -5,11 +5,7 @@ materials, collection progress, chronotes, tetracompass pieces, and more.
 
 **Live:** https://plusdivide.github.io/guildmasters-companion-alt1/
 
-**[Add to Alt1](alt1://addapp/https://plusdivide.github.io/guildmasters-companion-alt1/appconfig.json)**
-
-```text
-alt1://addapp/https://plusdivide.github.io/guildmasters-companion-alt1/appconfig.json
-```
+**[Add to Alt1](https://plusdivide.github.io/guildmasters-companion-alt1/add.html)** — opens the installer in Alt1 Toolkit.
 
 Grant **View screen** (scans) and **Get game state** (mouse for teach + chat watching)
 in the app spanner → permissions.
