@@ -332,8 +332,8 @@ const renderScanControls = (): string => {
 
   const extraHint = !canScan && !scanBusy
     ? esc(status.message)
-    : capturing
-      ? "Scroll only if more items are off-screen, then press Finish."
+    : scanBusy
+      ? "If more items are off-screen, nudge the scrollbar with its arrow buttons in small steps — then press Finish when the list looks complete."
       : "";
 
   return `
@@ -1189,7 +1189,7 @@ const runLiveStitchScan = async (): Promise<void> => {
     // Seed with the current view immediately.
     seedFromCapture(stitch);
     scanPasses = 1;
-    setScanLiveStatus(`Capturing… ${stitch.strips} strip(s) — scroll, then Finish`);
+    setScanLiveStatus(`Capturing… ${stitch.strips} strip(s)`);
     render();
 
     const settleBrief = async (): Promise<number | null> => {
@@ -1206,7 +1206,7 @@ const runLiveStitchScan = async (): Promise<void> => {
 
     let lastSig: number | null = stitch.lastSignature;
     while (!scanStopRequested) {
-      setScanLiveStatus(`Capturing… ${stitch.strips} strip(s) — scroll, then Finish`);
+      setScanLiveStatus(`Capturing… ${stitch.strips} strip(s)`);
 
       const settled = await settleBrief();
       if (scanStopRequested) break;
