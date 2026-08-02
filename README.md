@@ -5,7 +5,7 @@ materials, collection progress, chronotes, tetracompass pieces, and more.
 
 **Live:** https://plusdivide.github.io/guildmasters-companion-alt1/
 
-## Open in Alt1
+**[Add to Alt1](alt1://addapp/https://plusdivide.github.io/guildmasters-companion-alt1/appconfig.json)**
 
 ```text
 alt1://addapp/https://plusdivide.github.io/guildmasters-companion-alt1/appconfig.json
