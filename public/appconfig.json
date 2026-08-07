@@ -1,5 +1,5 @@
 {
-  "appName": "Guildmaster’s Companion (dev build)",
+  "appName": "Guildmaster’s Companion",
   "description": "Track damaged and restored artefacts, collection progress, chronotes and tetracompass rewards.",
   "appUrl": "./index.html",
   "configUrl": "./appconfig.json",

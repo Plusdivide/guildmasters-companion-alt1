@@ -231,7 +231,7 @@ const renderHeader = (): string => {
 
   return `
   <header class="app-header">
-    <div class="brand">${img(uiIcon("app-icon"), "brand-icon")}<h1>Guildmaster’s Companion (dev build)</h1></div>
+    <div class="brand">${img(uiIcon("app-icon"), "brand-icon")}<h1>Guildmaster’s Companion</h1></div>
     ${state.setupComplete ? `
       <div class="header-actions">
         <div class="level-pill" title="${formatNumber(state.xp)} Archaeology XP">
@@ -255,7 +255,7 @@ const passLabel = (count: number): string =>
 const renderSetupBrand = (subtitle?: string): string => `
   <div class="setup-brand">
     ${img(uiIcon("app-icon"), "setup-icon")}
-    <h2 class="setup-brand-title">Guildmaster’s Companion (dev build)</h2>
+    <h2 class="setup-brand-title">Guildmaster’s Companion</h2>
     ${subtitle ? `<p class="setup-welcome">${subtitle}</p>` : ""}
   </div>`;
 
