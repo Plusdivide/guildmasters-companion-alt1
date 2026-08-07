@@ -1,78 +1,142 @@
 import * as a1lib from "alt1/base";
 import * as OCR from "alt1/ocr";
+import { createWorker, type Worker } from "tesseract.js";
 import { archaeologyData } from "./data";
 import { matchArtefactText } from "./alt1";
 import type { Artefact } from "./types";
+import dialogOcrStripUrl from "./assets/dialog-ocr.data.png";
+import dialogOcrMeta from "./assets/dialog-ocr.fontmeta.json" with { type: "json" };
 
 type Area = { x: number; y: number; width: number; height: number };
 
 const TEXT_COLOURS: OCR.ColortTriplet[] = [
+  [2, 2, 2],
+  [4, 4, 3],
+  [5, 5, 4],
+  [8, 7, 6],
   [9, 8, 7],
   [9, 8, 6],
   [16, 14, 12],
+  [26, 10, 0],
+  [16, 0, 0],
   [0, 0, 0],
 ];
 
 /**
- * The reward dialogue uses ordinary anti-aliased interface text, not the pixel
- * font used by chat. Alt1 does not ship that font, so build its OCR definition
- * once from the browser's matching Arial glyphs.
+ * Dig-popup body text uses Jagex UI glyphs. We ship a custom Alt1 strip built
+ * from lossless dialog screenshots (see scripts/build-dialog-font-strip.mjs).
+ * Live Alt1 captures are softer than those crops, so tesseract backs the strip
+ * when sprite OCR stalls. Noto Sans remains for ink-mask templates only.
  */
-const makeFont = (size: number): OCR.FontDefinition => {
-  const chars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'():,.-!?/";
-  const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d", { willReadFrequently: true })!;
-  context.font = `${size}px Arial`;
+const DIALOGUE_FONT_FAMILY = '"Noto Sans", Arial, sans-serif';
 
-  const widths = [...chars].map((char) =>
-    Math.max(1, Math.ceil(context.measureText(char).width)),
-  );
-  canvas.width = widths.reduce((sum, width) => sum + width + 2, 0);
-  canvas.height = size + 7;
-
-  const draw = canvas.getContext("2d", { willReadFrequently: true })!;
-  draw.fillStyle = "black";
-  draw.fillRect(0, 0, canvas.width, canvas.height);
-  draw.font = `${size}px Arial`;
-  draw.textBaseline = "alphabetic";
-  draw.fillStyle = "white";
-
-  const baseline = size + 1;
-  let x = 0;
-  for (let index = 0; index < chars.length; index += 1) {
-    const width = widths[index];
-    draw.fillText(chars[index], x, baseline);
-    x += width + 2;
-  }
-
-  // OCR's generator needs the white-on-black raster converted back into alpha.
-  // Mark character widths only after that conversion, otherwise the red marker
-  // itself is interpreted as part of a glyph.
-  const unblended = OCR.unblendBlackBackground(
-    draw.getImageData(0, 0, canvas.width, canvas.height),
-    255,
-    255,
-    255,
-  );
-  x = 0;
-  for (const width of widths) {
-    for (let marker = x; marker < x + width; marker += 1) {
-      const index = ((unblended.height - 1) * unblended.width + marker) * 4;
-      unblended.data[index] = 255;
-      unblended.data[index + 1] = 0;
-      unblended.data[index + 2] = 0;
-      unblended.data[index + 3] = 255;
-    }
-    x += width + 2;
-  }
-  return OCR.generateFont(unblended, chars, ".,'!:;", {}, baseline, 4, 0.3, false);
-};
+const decodePngUrl = (url: string): Promise<ImageData> =>
+  new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
+      const context = canvas.getContext("2d", { willReadFrequently: true });
+      if (!context) {
+        reject(new Error("Could not create canvas for dialog OCR font"));
+        return;
+      }
+      context.drawImage(image, 0, 0);
+      resolve(context.getImageData(0, 0, canvas.width, canvas.height));
+    };
+    image.onerror = () => reject(new Error(`Failed to load dialog OCR font: ${url}`));
+    image.src = url;
+  });
 
 let fonts: OCR.FontDefinition[] | null = null;
-const dialogueFonts = (): OCR.FontDefinition[] => {
-  fonts ??= [makeFont(13), makeFont(12)];
-  return fonts;
+const dialogueFonts = (): OCR.FontDefinition[] => fonts ?? [];
+
+let digTesseractPromise: Promise<Worker> | null = null;
+const getDigTesseract = async (): Promise<Worker> => {
+  if (!digTesseractPromise) {
+    digTesseractPromise = (async () => {
+      const worker = await createWorker("eng");
+      await worker.setParameters({
+        tessedit_char_whitelist:
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 /'-():!,.",
+        tessedit_pageseg_mode: "7" as never,
+      });
+      return worker;
+    })().catch((error) => {
+      digTesseractPromise = null;
+      throw error;
+    });
+  }
+  return digTesseractPromise;
+};
+
+const nearestScale = (src: ImageData, scale: number): ImageData => {
+  const w = src.width * scale;
+  const h = src.height * scale;
+  const data = new Uint8ClampedArray(w * h * 4);
+  for (let y = 0; y < h; y += 1) {
+    for (let x = 0; x < w; x += 1) {
+      const si =
+        (Math.floor(y / scale) * src.width + Math.floor(x / scale)) * 4;
+      const di = (y * w + x) * 4;
+      data[di] = src.data[si];
+      data[di + 1] = src.data[si + 1];
+      data[di + 2] = src.data[si + 2];
+      data[di + 3] = 255;
+    }
+  }
+  return new ImageData(data, w, h);
+};
+
+const imageDataToPngBlob = (img: ImageData): Promise<Blob> =>
+  new Promise((resolve, reject) => {
+    const canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      reject(new Error("no canvas"));
+      return;
+    }
+    ctx.putImageData(img, 0, 0);
+    canvas.toBlob((blob) => {
+      if (!blob) reject(new Error("toBlob failed"));
+      else resolve(blob);
+    }, "image/png");
+  });
+
+const cropPaperTextBand = (
+  screen: ImageData,
+  paper: Area,
+): ImageData | null => {
+  const left = Math.max(0, paper.x + 70);
+  const top = Math.max(0, paper.y + Math.floor(paper.height * 0.18));
+  const width = Math.min(screen.width - left, paper.width - 90);
+  const height = Math.min(
+    screen.height - top,
+    Math.max(22, Math.round(paper.height * 0.55)),
+  );
+  if (width < 80 || height < 14) return null;
+  const data = new Uint8ClampedArray(width * height * 4);
+  for (let y = 0; y < height; y += 1) {
+    const from = ((top + y) * screen.width + left) * 4;
+    data.set(screen.data.subarray(from, from + width * 4), y * width * 4);
+  }
+  return new ImageData(data, width, height);
+};
+
+/** Reject punctuation mush from soft live captures ("Yo '.. . .':!"). */
+const isUsefulOcrReading = (text: string): boolean => {
+  const compact = text.replace(/\s+/g, "");
+  if (compact.length < 8) return false;
+  const letters = (compact.match(/[A-Za-z]/g) ?? []).length;
+  return letters >= 6 && letters / compact.length >= 0.45;
+};
+
+const hintsYouFind = (text: string): boolean => {
+  const compact = text.replace(/\s+/g, "");
+  return /youfind|find:/i.test(compact);
 };
 
 const isPaper = (data: Uint8ClampedArray, index: number): boolean => {
@@ -92,10 +156,9 @@ const isPaper = (data: Uint8ClampedArray, index: number): boolean => {
 };
 
 /**
- * Finds the broad parchment body of the "You find…" dialogue. A reward popup
- * has a long run of parchment on many adjacent rows; normal game scenery does
- * not need to be classified precisely because OCR still has to read an artefact
- * name before anything is added.
+ * Finds the broad parchment body of the "You find…" dialogue anywhere on
+ * screen. Location is not assumed — players move the popup freely — so we
+ * scan the full frame and pick the best wide parchment strip by shape.
  */
 const findPaper = (screen: ImageData): Area | null => {
   const rows: { y: number; left: number; right: number }[] = [];
@@ -130,30 +193,47 @@ const findPaper = (screen: ImageData): Area | null => {
   }
 
   if (!rows.length) return null;
-  let best: typeof rows = [];
+
+  const groups: (typeof rows)[] = [];
   let group: typeof rows = [];
   for (const row of rows) {
     if (!group.length || row.y - group.at(-1)!.y <= step * 2) group.push(row);
     else {
-      if (group.length > best.length) best = group;
+      groups.push(group);
       group = [row];
     }
   }
-  if (group.length > best.length) best = group;
-  if (best.length * step < 45) return null;
+  if (group.length) groups.push(group);
 
-  const sortedLeft = best.map((row) => row.left).sort((a, b) => a - b);
-  const sortedRight = best.map((row) => row.right).sort((a, b) => a - b);
-  const left = sortedLeft[Math.floor(sortedLeft.length / 2)];
-  const right = sortedRight[Math.floor(sortedRight.length / 2)];
-  const area = {
-    x: left,
-    y: best[0].y,
-    width: right - left,
-    height: best.at(-1)!.y - best[0].y + step,
-  };
-  if (area.width < 350 || area.height < 55 || area.height > 130) return null;
-  return area;
+  let bestArea: Area | null = null;
+  let bestScore = -1;
+
+  for (const candidate of groups) {
+    if (candidate.length * step < 45) continue;
+    const sortedLeft = candidate.map((row) => row.left).sort((a, b) => a - b);
+    const sortedRight = candidate.map((row) => row.right).sort((a, b) => a - b);
+    const left = sortedLeft[Math.floor(sortedLeft.length / 2)];
+    const right = sortedRight[Math.floor(sortedRight.length / 2)];
+    const area: Area = {
+      x: left,
+      y: candidate[0].y,
+      width: right - left,
+      height: candidate.at(-1)!.y - candidate[0].y + step,
+    };
+    if (area.width < 320 || area.height < 48 || area.height > 180) continue;
+    const aspect = area.width / area.height;
+    // Find dialogue is a wide strip (~3–6×). Reject square-ish dirt patches.
+    if (aspect < 2.4) continue;
+    // Prefer wider, dialogue-height strips. No screen-position bias.
+    const heightFit = 1 - Math.min(1, Math.abs(area.height - 90) / 90);
+    const score = area.width * aspect * (0.55 + 0.45 * heightFit);
+    if (score > bestScore) {
+      bestScore = score;
+      bestArea = area;
+    }
+  }
+
+  return bestArea;
 };
 
 export interface ArtefactDialogueRead {
@@ -268,7 +348,11 @@ const maskAgreement = (actual: TextMask, template: TextMask): number => {
   return (actualCovered / actualCount + templateCovered / templateCount) / 2;
 };
 
-const TEMPLATE_FONTS = ["13px Arial", "13px Tahoma", "12px Arial"];
+const TEMPLATE_FONTS = [
+  `13px ${DIALOGUE_FONT_FAMILY}`,
+  `12px ${DIALOGUE_FONT_FAMILY}`,
+  "13px Arial", // fallback if Noto failed to load
+];
 
 interface NameTemplate {
   artefact: Artefact;
@@ -280,6 +364,53 @@ interface NameTemplate {
 // draws. The sentences never change, so pay for it once rather than on each
 // poll while a dialogue is on screen.
 let templates: NameTemplate[] | null = null;
+let dialogueFontsWarmed = false;
+let dialogueFontsWarmPromise: Promise<void> | null = null;
+
+/** Load the custom dig-dialog OCR strip (+ Noto for mask templates). */
+export const warmArtefactDialogueFonts = async (): Promise<void> => {
+  if (dialogueFontsWarmed) return;
+  if (dialogueFontsWarmPromise) return dialogueFontsWarmPromise;
+
+  dialogueFontsWarmPromise = (async () => {
+    if (typeof document !== "undefined" && document.fonts?.load) {
+      try {
+        await Promise.all([
+          document.fonts.load(`12px ${DIALOGUE_FONT_FAMILY}`),
+          document.fonts.load(`13px ${DIALOGUE_FONT_FAMILY}`),
+          document.fonts.load(`400 12px "Noto Sans"`),
+          document.fonts.load(`400 13px "Noto Sans"`),
+        ]);
+      } catch {
+        // Templates fall back to Arial if the webfont fails.
+      }
+    }
+
+    const strip = await decodePngUrl(dialogOcrStripUrl);
+    const font = OCR.loadFontImage(
+      strip,
+      dialogOcrMeta as OCR.GenerateFontMeta,
+    );
+    // Dig text has ~1–2px gaps between letters and ~4px word spaces.
+    font.spacewidth = 1;
+    font.maxspaces = 6;
+    fonts = [font];
+    templates = null;
+    dialogueFontsWarmed = true;
+    // Warm tesseract in the background — live captures need it often.
+    void getDigTesseract().catch(() => {
+      /* optional */
+    });
+  })();
+
+  try {
+    await dialogueFontsWarmPromise;
+  } catch (error) {
+    dialogueFontsWarmPromise = null;
+    throw error;
+  }
+};
+
 const nameTemplates = (): NameTemplate[] => {
   if (templates) return templates;
   const canvas = document.createElement("canvas");
@@ -288,23 +419,33 @@ const nameTemplates = (): NameTemplate[] => {
   const context = canvas.getContext("2d", { willReadFrequently: true })!;
 
   templates = archaeologyData.artefacts.map((artefact) => {
-    const text = `You find: ${artefact.damagedName}.`;
+    // Live UI uses a trailing "!" — older references used ".". Keep both masks.
+    const sentences = [
+      `You find: ${artefact.damagedName}!`,
+      `You find: ${artefact.damagedName}.`,
+    ];
     const masks: TextMask[] = [];
-    for (const font of TEMPLATE_FONTS) {
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      context.font = font;
-      context.textBaseline = "alphabetic";
-      context.fillStyle = "black";
-      context.fillText(text, 2, 16);
-      const mask = cropMask(
-        context.getImageData(0, 0, canvas.width, canvas.height).data,
-        canvas.width,
-        canvas.height,
-        false,
-      );
-      if (mask) masks.push(mask);
+    for (const text of sentences) {
+      for (const font of TEMPLATE_FONTS) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.font = font;
+        context.textBaseline = "alphabetic";
+        context.fillStyle = "black";
+        context.fillText(text, 2, 16);
+        const mask = cropMask(
+          context.getImageData(0, 0, canvas.width, canvas.height).data,
+          canvas.width,
+          canvas.height,
+          false,
+        );
+        if (mask) masks.push(mask);
+      }
     }
-    return { artefact, text, masks };
+    return {
+      artefact,
+      text: `You find: ${artefact.damagedName}!`,
+      masks,
+    };
   });
   return templates;
 };
@@ -313,10 +454,14 @@ const knownTextMatches = (
   screen: ImageData,
   paper: Area,
 ): { artefact: Artefact; text: string; score: number }[] => {
-  const left = Math.max(0, paper.x + 12);
-  const top = Math.max(0, paper.y + 10);
-  const width = Math.min(screen.width - left, paper.width - 18);
-  const height = Math.min(screen.height - top, Math.round(paper.height * 0.55));
+  // Compare the black sentence only — skip the circular item icon on the left.
+  const left = Math.max(0, paper.x + 70);
+  const top = Math.max(0, paper.y + Math.floor(paper.height * 0.22));
+  const width = Math.min(screen.width - left, paper.width - 90);
+  const height = Math.min(
+    screen.height - top,
+    Math.max(22, Math.round(paper.height * 0.5)),
+  );
   const pixels = new Uint8ClampedArray(width * height * 4);
   for (let y = 0; y < height; y += 1) {
     const from = ((top + y) * screen.width + left) * 4;
@@ -357,27 +502,64 @@ export const debugArtefactDialogueOcr = (
 } => {
   const paper = findPaper(screen);
   if (!paper) return { paper: null, readings: [], knownMatches: [] };
-  const x = Math.max(0, paper.x + 12);
-  const y = Math.max(0, paper.y + 8);
-  const width = Math.min(screen.width - x, paper.width - 18);
-  const height = Math.max(20, paper.height - 16);
+
+  // Text sits to the right of the circular item icon. Seed on dark ink in the
+  // text band — fixed offsets miss tight crops and shifted popups.
+  // findReadLine's w/h are a *search window* for the first glyph (not line length).
+  const bandLeft = Math.max(0, paper.x + 40);
+  const bandTop = Math.max(0, paper.y + Math.floor(paper.height * 0.2));
+  const bandRight = Math.min(screen.width, paper.x + paper.width - 20);
+  const bandBottom = Math.min(
+    screen.height,
+    paper.y + Math.floor(paper.height * 0.75),
+  );
+  const seeds: { x: number; y: number }[] = [];
+  for (let y = bandTop; y < bandBottom; y += 2) {
+    for (let x = bandLeft; x < Math.min(bandRight, bandLeft + 160); x += 3) {
+      const i = (y * screen.width + x) * 4;
+      const r = screen.data[i];
+      const g = screen.data[i + 1];
+      const b = screen.data[i + 2];
+      if (r <= 40 && g <= 36 && b <= 32) {
+        seeds.push({ x, y });
+        if (seeds.length >= 24) break;
+      }
+    }
+    if (seeds.length >= 24) break;
+  }
+  if (!seeds.length) {
+    seeds.push(
+      { x: paper.x + 72, y: paper.y + Math.floor(paper.height * 0.35) },
+      { x: paper.x + 48, y: paper.y + Math.floor(paper.height * 0.35) },
+    );
+  }
+
   const readings: string[] = [];
+  const seen = new Set<string>();
   for (const font of dialogueFonts()) {
+    const searchW = Math.max(12, font.width + font.spacewidth);
+    const searchH = Math.max(6, Math.min(14, font.height + 2));
     try {
-      const text = OCR.findReadLine(
-        screen,
-        font,
-        TEXT_COLOURS,
-        x,
-        y,
-        width,
-        height,
-      )?.text?.trim();
-      if (text) readings.push(text);
+      for (const seed of seeds) {
+        const text = OCR.findReadLine(
+          screen,
+          font,
+          TEXT_COLOURS,
+          seed.x,
+          seed.y,
+          searchW,
+          searchH,
+        )?.text?.trim();
+        if (!text || !isUsefulOcrReading(text) || seen.has(text)) continue;
+        seen.add(text);
+        readings.push(text);
+        if (hintsYouFind(text)) break;
+      }
     } catch {
       readings.push("<OCR error>");
     }
   }
+  readings.sort((a, b) => b.replace(/\s+/g, "").length - a.replace(/\s+/g, "").length);
   return {
     paper,
     readings,
@@ -392,27 +574,190 @@ export const debugArtefactDialogueOcr = (
 /**
  * Reads the text from a visible archaeology reward dialogue. It never clicks,
  * dismisses, or otherwise interacts with the game.
+ *
+ * `extraReadings` — e.g. tesseract lines already checked for "You find".
+ * Parchment alone is not enough: OCR must look find-shaped before any accept
+ * (including strong template matches), so other parchment UIs (pylon charge,
+ * etc.) cannot count as dig finds.
  */
 export const readArtefactDialogueFromImage = (
   screen: ImageData,
+  extraReadings: string[] = [],
 ): ArtefactDialogueRead | null => {
   const debug = debugArtefactDialogueOcr(screen);
-  const { readings } = debug;
+  const readings = [...extraReadings, ...debug.readings];
   for (const text of readings) {
-    if (!/you\s+find/i.test(text)) continue;
+    if (!hintsYouFind(text)) continue;
     const artefact = matchArtefactText(text, archaeologyData.artefacts);
     if (artefact) return { artefact, text };
   }
+
+  // No find-shaped text → ignore parchment (templates would FP on other UIs).
+  if (!readings.some((text) => hintsYouFind(text))) return null;
+
   const first = debug.knownMatches[0];
   const second = debug.knownMatches[1];
-  if (first && first.score >= 0.52 && (!second || first.score - second.score >= 0.015)) {
-    const artefact = archaeologyData.artefacts.find((item) => item.id === first.id);
-    if (artefact) return { artefact, text: first.text };
+  if (!first) return null;
+
+  const margin = second ? first.score - second.score : 1;
+  // Template accepts still need a clear winner once OCR saw "You find".
+  const confident =
+    (first.score >= 0.85 && margin >= 0.02) ||
+    (first.score >= 0.7 && margin >= 0.03) ||
+    (first.score >= 0.55 && margin >= 0.05);
+
+  let pick = first;
+  // Near-tie: prefer the longer damaged name (crossbow beats dagger, etc.).
+  if (
+    second &&
+    margin < 0.03 &&
+    first.score >= 0.7 &&
+    second.score >= 0.7
+  ) {
+    const a = archaeologyData.artefacts.find((item) => item.id === first.id);
+    const b = archaeologyData.artefacts.find((item) => item.id === second.id);
+    if (a && b && b.damagedName.length > a.damagedName.length + 4) {
+      pick = second;
+    }
+  }
+
+  const nearTie =
+    pick.score >= 0.78 &&
+    margin < 0.03;
+
+  if (
+    !confident &&
+    !nearTie &&
+    !(pick !== first && pick.score >= 0.7 && margin < 0.03)
+  ) {
+    return null;
+  }
+
+  const artefact = archaeologyData.artefacts.find((item) => item.id === pick.id);
+  if (!artefact) return null;
+  return { artefact, text: pick.text };
+};
+
+/**
+ * Tesseract on the parchment text band — robust on soft live Alt1 captures.
+ * Returns the first find-shaped line (and an artefact match when OCR names it).
+ */
+const readDigPopupTesseract = async (
+  screen: ImageData,
+  paper: Area,
+): Promise<{ text: string; artefact: Artefact | null } | null> => {
+  const band = cropPaperTextBand(screen, paper);
+  if (!band) return null;
+  try {
+    const worker = await getDigTesseract();
+    for (const scale of [3, 2, 4]) {
+      const blob = await imageDataToPngBlob(nearestScale(band, scale));
+      const {
+        data: { text },
+      } = await worker.recognize(blob);
+      const raw = String(text ?? "")
+        .replace(/\s+/g, " ")
+        .trim();
+      if (!raw || !hintsYouFind(raw)) continue;
+      return {
+        text: raw,
+        artefact: matchArtefactText(raw, archaeologyData.artefacts),
+      };
+    }
+  } catch {
+    // tesseract unavailable
   }
   return null;
 };
 
-export const readArtefactDialogue = (): ArtefactDialogueRead | null => {
-  const capture = a1lib.captureHoldFullRs();
-  return capture ? readArtefactDialogueFromImage(capture.toData()) : null;
+const captureDialogueScreen = (): ImageData | null => {
+  // Prefer plain capture — captureHoldFullRs fights the chatbox reader when we
+  // alternate mat/artefact ticks, which is the usual failure mode now.
+  try {
+    const w = window.alt1?.rsWidth ?? 0;
+    const h = window.alt1?.rsHeight ?? 0;
+    if (w > 0 && h > 0) {
+      const screen = a1lib.capture(0, 0, w, h);
+      if (screen?.data) return screen;
+    }
+  } catch {
+    // fall through
+  }
+  try {
+    const hold = a1lib.captureHoldFullRs?.();
+    if (hold && typeof hold.toData === "function") {
+      const full = hold.toData();
+      if (full?.data) return full;
+    }
+  } catch {
+    // ignore
+  }
+  return null;
+};
+
+export type ArtefactDialogueProbe = {
+  capture: boolean;
+  paper: Area | null;
+  /** True when OCR saw find-shaped text ("You find" / "find:"). */
+  findShaped: boolean;
+  readings: string[];
+  topMatch: { id: string; text: string; score: number } | null;
+  secondMatch: { id: string; text: string; score: number } | null;
+  hit: ArtefactDialogueRead | null;
+};
+
+/** One-shot diagnostic for why a visible find popup is/isn't accepted. */
+export const probeArtefactDialogue = async (): Promise<ArtefactDialogueProbe> => {
+  const screen = captureDialogueScreen();
+  if (!screen) {
+    return {
+      capture: false,
+      paper: null,
+      findShaped: false,
+      readings: [],
+      topMatch: null,
+      secondMatch: null,
+      hit: null,
+    };
+  }
+  const debug = debugArtefactDialogueOcr(screen);
+  const extraReadings: string[] = [];
+  let hit = readArtefactDialogueFromImage(screen);
+
+  // Soft captures often miss "You find" on the glyph reader — try tesseract
+  // before giving up. Other parchment UIs (pylon charge, etc.) never pass.
+  if (!hit && debug.paper) {
+    const tess = await readDigPopupTesseract(screen, debug.paper);
+    if (tess) {
+      if (!debug.readings.includes(tess.text)) {
+        debug.readings.unshift(tess.text);
+      }
+      extraReadings.push(tess.text);
+      if (tess.artefact) {
+        hit = { artefact: tess.artefact, text: tess.text };
+      } else {
+        // Find-shaped OCR without a name match — allow templates now.
+        hit = readArtefactDialogueFromImage(screen, extraReadings);
+      }
+    }
+  }
+
+  const findShaped =
+    Boolean(hit) || debug.readings.some((text) => hintsYouFind(text));
+
+  return {
+    capture: true,
+    paper: debug.paper,
+    findShaped,
+    readings: debug.readings,
+    // Only surface template near-misses when the text looks like a dig find.
+    topMatch: findShaped ? (debug.knownMatches[0] ?? null) : null,
+    secondMatch: findShaped ? (debug.knownMatches[1] ?? null) : null,
+    hit,
+  };
+};
+
+export const readArtefactDialogue = async (): Promise<ArtefactDialogueRead | null> => {
+  const probe = await probeArtefactDialogue();
+  return probe.hit;
 };

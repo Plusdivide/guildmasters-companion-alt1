@@ -11,18 +11,25 @@ import {
   materialCategory,
   materialFindSites,
   materialIcon,
+  tetraPieceIcon,
+  tetraPieceLabel,
   uiIcon,
 } from "./data";
 import { fetchArchaeologyHiscore } from "./hiscores";
 import {
+  assembleTetraCompass,
   exportState,
   getCount,
   getMaterial,
+  getTetraPiece,
   importState,
   loadState,
+  resetScanWizardProgress,
   saveStateNow,
   setCount,
   setMaterial,
+  setTetraPiece,
+  tetraCompassesReady,
 } from "./store";
 import { getAlt1Status, identifyAlt1App } from "./alt1";
 import { addIgnored, clearIgnored, ignoredCount } from "./ignored";
@@ -41,7 +48,7 @@ import {
   startHoverTeach,
   stopHoverTeach,
 } from "./tooltip-teach";
-import type { ExcavationWatcher } from "./watcher";
+import type { CompanionWatcher } from "./companion-watcher";
 import { excavationSnapshot, noteExcavationValue } from "./excavation-session";
 import {
   artefactRestoreCost,
@@ -53,11 +60,24 @@ import {
   priceForName,
 } from "./prices";
 import type {
-  Artefact, Collection, MaterialInfo, PlayerState, ViewName,
+  Artefact,
+  Collection,
+  MaterialInfo,
+  PlayerState,
+  ScanWizardInterface,
+  TetraPieceId,
+  ViewName,
 } from "./types";
+import { emptyTetraPieces, TETRA_PIECE_IDS } from "./types";
+import {
+  ENABLE_DEV_TOOLS,
+  isDevToolsActive,
+  setDevModeEnabled,
+} from "./dev-tools";
 
 const app = document.querySelector<HTMLDivElement>("#app")!;
 let state: PlayerState = loadState();
+setDevModeEnabled(state.devMode);
 
 // Drop shop / non-dig materials left over from older saves.
 {
@@ -71,6 +91,33 @@ let state: PlayerState = loadState();
   }
   if (pruned) saveStateNow(state);
 }
+
+/** True until the player finishes or skips the first-run storage scan wizard. */
+const needsScanWizard = (): boolean => state.setupComplete && !state.scanWizardComplete;
+
+const WIZARD_STEPS: ScanWizardInterface[] = ["bank", "material-storage", "workbench"];
+
+const WIZARD_LABELS: Record<ScanWizardInterface, string> = {
+  bank: "Bank",
+  "material-storage": "Material Storage",
+  workbench: "Workbench",
+};
+
+const WIZARD_INSTRUCTIONS: Record<ScanWizardInterface, string> = {
+  bank: "Open your bank on a dedicated Archaeology tab (recommended for reliable scans). Keep the title visible, then press Start scanning.",
+  "material-storage": "Open Material Storage, keep its title visible, then press Start scanning. While it runs, click the bottom scrollbar arrow in small steps so every row is captured.",
+  workbench: "Open the Archaeologist’s Workbench storage, keep its title visible, then press Start scanning. While it runs, click the bottom scrollbar arrow in small steps so every row is captured.",
+};
+
+/** Session-only skips so a skipped step can be scanned later via Settings → Run scan again. */
+const wizardSkipped = new Set<ScanWizardInterface>();
+
+const nextWizardStep = (): ScanWizardInterface | null =>
+  WIZARD_STEPS.find((step) => !state.scanWizardDone[step] && !wizardSkipped.has(step)) ?? null;
+
+const wizardStepNumber = (step: ScanWizardInterface): number =>
+  WIZARD_STEPS.indexOf(step) + 1;
+
 let view: ViewName = "dashboard";
 let search = "";
 let materialSearch = "";
@@ -96,11 +143,16 @@ let scanMessage = "";
 let scanLive = false;
 let scanStopRequested = false;
 let scanPasses = 0;
-let watcher: ExcavationWatcher | null = null;
-let watcherStarting = false;
+let companionWatcher: CompanionWatcher | null = null;
+let companionWatcherStarting = false;
+/** Suppress restore-status toasts briefly after an inventory apply toast. */
+let lastRestoreToastAt = 0;
+/** Throttle identical artefact-popup near-miss toasts. */
+let lastPopupMissToast = "";
+let lastPopupMissToastAt = 0;
 let excavationRateTimer: number | undefined;
 let manualSetup = false;
-const collapsed = new Set<string>();
+const collapsed = new Set<string>(["overview:recommended"]);
 // Alt1's CEF host suppresses window.confirm(), so destructive actions ask for a
 // second click on the same button instead.
 let pendingConfirm: { id: string; until: number } | null = null;
@@ -112,7 +164,7 @@ const confirmDestructive = (id: string, prompt: string): boolean => {
     return true;
   }
   pendingConfirm = { id, until: now + 4000 };
-  showToast(`${prompt} Click again to confirm.`, "bad");
+  showToast(`${prompt} Click again to confirm.`, "error");
   return false;
 };
 
@@ -138,7 +190,11 @@ const esc = (value: string): string =>
 const img = (src: string, className: string): string =>
   `<img class="${className}" src="${src}" alt="" loading="lazy" decoding="async">`;
 
-const showToast = (message: string, kind: "good" | "bad" = "good"): void => {
+/** Ink toast: detect=blue, good=green (gains), bad=red (losses), error=orange. */
+const showToast = (
+  message: string,
+  kind: "detect" | "good" | "bad" | "error" = "detect",
+): void => {
   document.querySelector(".toast")?.remove();
   const element = document.createElement("div");
   element.className = `toast ${kind}`;
@@ -175,7 +231,7 @@ const renderHeader = (): string => {
 
   return `
   <header class="app-header">
-    <div class="brand">${img(uiIcon("app-icon"), "brand-icon")}<h1>Guildmaster’s Companion</h1></div>
+    <div class="brand">${img(uiIcon("app-icon"), "brand-icon")}<h1>Guildmaster’s Companion (dev build)</h1></div>
     ${state.setupComplete ? `
       <div class="header-actions">
         <div class="level-pill" title="${formatNumber(state.xp)} Archaeology XP">
@@ -193,12 +249,21 @@ const renderHeader = (): string => {
 
 /* ----------------------------------------------------------------- setup */
 
+const passLabel = (count: number): string =>
+  `${count} pass${count === 1 ? "" : "es"}`;
+
+const renderSetupBrand = (subtitle?: string): string => `
+  <div class="setup-brand">
+    ${img(uiIcon("app-icon"), "setup-icon")}
+    <h2 class="setup-brand-title">Guildmaster’s Companion (dev build)</h2>
+    ${subtitle ? `<p class="setup-welcome">${subtitle}</p>` : ""}
+  </div>`;
+
 const renderSetup = (): string => `
   <main class="setup">
     <section class="setup-card">
-      ${img(uiIcon("journal"), "setup-icon")}
-      <h2>Welcome, archaeologist</h2>
-      <p>Tell the app who you are and it will load your exact Archaeology level and XP, then only show collections you can actually complete.</p>
+      ${renderSetupBrand("Welcome, archaeologist")}
+      <p>Enter your RuneScape name to pull your Archaeology level and XP. Collections are filtered to what you can complete at that level.</p>
       <label class="setup-field">
         <span>RuneScape display name</span>
         <input id="setup-name" autocomplete="off" placeholder="Your character name" value="${esc(state.displayName)}">
@@ -216,19 +281,138 @@ const renderSetup = (): string => `
       <div class="setup-mode">
         <span>How will you track items?</span>
         <div class="mode-row">
-          <button type="button" class="mode-chip ${state.entryMode === "auto" ? "active" : ""}" data-entry-mode="auto">
-            <strong>Auto</strong>
-            <small>Scan fills counts · no +/−</small>
-          </button>
-          <button type="button" class="mode-chip ${state.entryMode === "manual" ? "active" : ""}" data-entry-mode="manual">
-            <strong>Manual</strong>
-            <small>Type with +/− steppers</small>
-          </button>
+          <div class="mode-option">
+            <button type="button" class="mode-chip ${state.entryMode === "auto" ? "active" : ""}" data-entry-mode="auto">
+              Auto
+              <span class="mode-recommended">(Recommended)</span>
+            </button>
+            <p class="mode-desc">Scan your bank and storage to fill in what you own</p>
+          </div>
+          <div class="mode-option">
+            <button type="button" class="mode-chip ${state.entryMode === "manual" ? "active" : ""}" data-entry-mode="manual">Manual</button>
+            <p class="mode-desc">Enter amounts yourself with the + and − controls</p>
+          </div>
         </div>
       </div>
-      <p class="setup-note">Everything is stored on this computer only. You can change this later in Settings.</p>
+      <p class="setup-note">All data is stored locally. Change tracking mode anytime in Settings.</p>
     </section>
   </main>`;
+
+const renderWizardProgress = (active: ScanWizardInterface | "done"): string => `
+  <ol class="wizard-progress" aria-label="Setup progress">
+    ${WIZARD_STEPS.map((step) => {
+      const done = active === "done" || state.scanWizardDone[step];
+      const skipped = active !== "done" && !done && wizardSkipped.has(step);
+      const current = active !== "done" && active === step;
+      const cls = [
+        done ? "done" : "",
+        skipped ? "skipped" : "",
+        !done && !skipped && current ? "current" : "",
+      ].filter(Boolean).join(" ");
+      return `<li class="${cls}">${WIZARD_LABELS[step]}</li>`;
+    }).join("")}
+  </ol>`;
+
+const wizardInventorySummary = (): {
+  artefacts: number;
+  materials: number;
+  materialValue: number;
+} => {
+  let artefacts = 0;
+  for (const artefact of archaeologyData.artefacts) {
+    const count = getCount(state, artefact.id);
+    artefacts += count.damaged + count.restored;
+  }
+  let materials = 0;
+  let materialValue = 0;
+  for (const material of archaeologyMaterials()) {
+    const qty = getMaterial(state, material.id);
+    if (!qty) continue;
+    materials += qty;
+    const price = materialPrice(material.id);
+    if (price !== null) materialValue += price * qty;
+  }
+  return { artefacts, materials, materialValue };
+};
+
+const renderScanWizardDone = (): string => {
+  const scannedAll = WIZARD_STEPS.every((step) => state.scanWizardDone[step]);
+  const summary = wizardInventorySummary();
+  const title = scannedAll ? "All storage scanned" : "You’re ready to dig";
+  const blurb = scannedAll
+    ? "Bank, material storage, and workbench are on your list. Run scan again anytime from Settings if something changes."
+    : "Skipped steps can be scanned later from Settings. Everything you’ve added is saved locally.";
+
+  const priceAtRender = getPriceVersion();
+  void ensureMaterialPrices().then(() => {
+    if (
+      getPriceVersion() !== priceAtRender &&
+      needsScanWizard() &&
+      !nextWizardStep()
+    ) {
+      render();
+    }
+  });
+
+  return `
+    <main class="setup wizard">
+      <section class="wizard-card wizard-scan wizard-done">
+        ${renderSetupBrand()}
+        ${renderWizardProgress("done")}
+        <div class="wizard-done-copy">
+          <h3 class="wizard-done-title">${title}</h3>
+          <p>${blurb}</p>
+        </div>
+        <div class="wizard-done-stats">
+          <article><span>Artefacts</span><strong>${formatNumber(summary.artefacts)}</strong></article>
+          <article><span>Materials</span><strong>${formatNumber(summary.materials)}</strong></article>
+          <article><span>Material value</span><strong>${formatGp(summary.materialValue)}</strong></article>
+        </div>
+        <button id="wizard-finish" class="gold-button wide">Complete setup</button>
+      </section>
+    </main>`;
+};
+
+const renderScanWizard = (): string => {
+  const step = nextWizardStep();
+  if (!step) return renderScanWizardDone();
+
+  const status = getAlt1Status();
+  const canScan = status.pixelPermission && status.linked;
+  const capturing = scanBusy && scanLive && !scanStopRequested;
+  const finishing = scanBusy && (!scanLive || scanStopRequested);
+  const scanDisabled = !canScan || finishing;
+  const scanLabel = capturing || finishing ? "Finish" : "Start scanning";
+  const hasResults = Boolean(lastScan) && !scanBusy;
+  const n = wizardStepNumber(step);
+  const liveNote = scanBusy
+    ? esc(scanMessage)
+    : !canScan
+      ? esc(status.message)
+      : "";
+
+  return `
+    <main class="setup wizard">
+      <section class="wizard-card wizard-scan${hasResults ? " wizard-has-results" : ""}">
+        ${renderSetupBrand(hasResults ? undefined : "I see you’ve been busy — let’s check your inventory.")}
+        <span class="eyebrow wizard-step-label">Step ${n} of ${WIZARD_STEPS.length}</span>
+        ${renderWizardProgress(step)}
+        ${hasResults ? "" : `<p class="wizard-instruction">${WIZARD_INSTRUCTIONS[step]}</p>`}
+        ${liveNote ? `<p class="wizard-live">${liveNote}</p>` : ""}
+        ${hasResults ? "" : `<button class="${capturing ? "secondary-button" : "gold-button"} wide" id="start-scan" ${scanDisabled ? "disabled" : ""}>${scanLabel}</button>`}
+        ${renderScanResults({ hideActions: hasResults && Boolean(lastScan?.hits.length) })}
+        <div class="wizard-footer${hasResults && lastScan?.hits.length ? " wizard-footer-actions" : ""}">
+          ${hasResults && lastScan?.hits.length
+            ? `
+          <button id="add-scan" class="gold-button" title="Add these amounts to your tracked inventory">Add to inventory</button>
+          <button id="discard-scan" class="secondary-button">Discard</button>`
+            : `
+          <button id="wizard-skip-step" class="secondary-button wizard-skip-step" ${scanBusy ? "disabled" : ""}>Skip this step</button>
+          <button id="wizard-skip-all" class="link-button" ${scanBusy ? "disabled" : ""}>Skip all</button>`}
+        </div>
+      </section>
+    </main>`;
+};
 
 /* ------------------------------------------------------------- dashboard */
 
@@ -252,102 +436,52 @@ const favoriteStarButton = (collectionId: string, compact = false): string => {
 const renderRecommendation = (
   progress: ReturnType<typeof getCollectionProgress>,
   options?: { label?: string; reason?: "chronotes" | "tetracompass" | "other" },
-): string => {
-  const { collection } = progress;
-  const chronotes = progress.completeSets ? progress.totalChronotes : collection.artefactChronotes + collection.bonusChronotes;
-  const chronotesLabel = `chronotes${progress.completeSets ? " owned" : " per set"}`;
-  const filled = collection.artefacts.length - progress.missing.length;
-  const recurring =
-    collection.recurringReward && collection.recurringReward.name !== "No"
-      ? collection.recurringReward
-      : null;
-  const reason = options?.reason ?? "chronotes";
+): string => renderCollectionCard(progress.collection, options);
 
-  let primaryValue: string;
-  let primaryLabel: string;
-  let secondary = "";
-  let iconKey = "chronotes";
+const materialByName = new Map(
+  archaeologyData.materials.map((material) => [
+    material.name.toLowerCase(),
+    material,
+  ]),
+);
 
-  if (reason === "tetracompass" && collection.tetracompassPieces > 0) {
-    iconKey = "tetracompass";
-    const pieces = progress.completeSets
-      ? progress.totalTetracompassPieces
-      : collection.tetracompassPieces;
-    primaryValue = formatNumber(pieces);
-    primaryLabel = `tetracompass piece${pieces === 1 ? "" : "s"} / set`;
-    secondary = `<small>${formatNumber(chronotes)} ${chronotesLabel}</small>`;
-  } else if (reason === "other" && recurring) {
-    iconKey = "archaeology";
-    const qty = progress.completeSets
-      ? recurring.quantity * progress.completeSets
-      : recurring.quantity;
-    primaryValue = formatNumber(qty);
-    primaryLabel = `${recurring.name}${progress.completeSets ? " owned" : " / set"}`;
-    secondary = `<small>${formatNumber(chronotes)} ${chronotesLabel}</small>`;
-  } else {
-    primaryValue = formatNumber(chronotes);
-    primaryLabel = chronotesLabel;
-    if (collection.tetracompassPieces > 0) {
-      secondary = `<small>+${collection.tetracompassPieces} tetracompass piece${collection.tetracompassPieces === 1 ? "" : "s"} / set</small>`;
-    } else if (recurring) {
-      secondary = `<small>+${recurring.quantity} ${esc(recurring.name)} / set</small>`;
+const applyRestoredArtefacts = (
+  artefact: import("./types").Artefact,
+  quantity: number,
+): {
+  applied: number;
+  materials: { name: string; quantity: number }[];
+} => {
+  let applied = 0;
+  const materialsUsed = new Map<string, number>();
+  for (let i = 0; i < quantity; i += 1) {
+    const count = getCount(state, artefact.id);
+    if (count.damaged < 1) break;
+    setCount(state, artefact.id, "damaged", count.damaged - 1);
+    setCount(state, artefact.id, "restored", count.restored + 1);
+    for (const entry of artefact.materials) {
+      if (entry.name.includes("(damaged)")) continue;
+      const material = materialByName.get(entry.name.toLowerCase());
+      if (!material) continue;
+      const owned = getMaterial(state, material.id);
+      const take = Math.min(owned, entry.quantity);
+      setMaterial(state, material.id, Math.max(0, owned - entry.quantity));
+      if (take > 0) {
+        materialsUsed.set(
+          material.name,
+          (materialsUsed.get(material.name) ?? 0) + take,
+        );
+      }
     }
+    applied += 1;
   }
-
-  const unrestoredSets = progress.potentialSets - progress.restoredSets;
-  const setBadge = progress.potentialSets
-    ? `<span class="ready-badge ${unrestoredSets && !progress.restoredSets ? "unrestored" : ""}">${progress.restoredSets} restored · ${unrestoredSets} unrestored</span>`
-    : "";
-
-  return `
-    <article class="recommendation ${progress.completeSets ? "ready" : ""}">
-      <div class="reward-icon">${img(uiIcon(iconKey), "item-icon")}</div>
-      <div class="recommendation-main">
-        <div class="title-line">
-          <h3>${esc(collection.name)}</h3>
-          ${favoriteStarButton(collection.id, true)}
-          ${setBadge}
-        </div>
-        <p>${esc(collection.collector)} · Level ${collection.level} · ${collection.artefacts.length} artefacts${options?.label ? ` · <strong>${esc(options.label)}</strong>` : ""}</p>
-        <div class="mini-progress"><span style="width:${(filled / collection.artefacts.length) * 100}%"></span></div>
-      </div>
-      <div class="reward-summary">
-        <strong>${primaryValue}</strong>
-        <span>${esc(primaryLabel)}</span>
-        ${secondary}
-      </div>
-    </article>`;
-};
-
-const renderScanControls = (): string => {
-  const status = getAlt1Status();
-  const canScan = status.pixelPermission && status.linked;
-  const capturing = scanBusy && scanLive && !scanStopRequested;
-  const finishing = scanBusy && (!scanLive || scanStopRequested);
-  const scanDisabled = !canScan || finishing;
-  const scanLabel = capturing || finishing ? "Finish" : "Scan";
-  const scanHint = scanBusy
-    ? esc(scanMessage)
-    : "Bank, workbench, or material storage.";
-
-  const extraHint = !canScan && !scanBusy
-    ? esc(status.message)
-    : scanBusy
-      ? "If more items are off-screen, nudge the scrollbar with its arrow buttons in small steps — then press Finish when the list looks complete."
-      : "";
-
-  return `
-    <section class="scan-bar">
-      <div class="scan-bar-main">
-        ${img(uiIcon("magnifying-glass"), "scan-icon")}
-        <div class="scan-bar-copy">
-          <strong>Scan storage</strong>
-          <span class="scan-live-status">${scanHint}</span>
-        </div>
-        <button class="${capturing ? "secondary-button" : "gold-button"} scan-option-btn" id="start-scan" ${scanDisabled ? "disabled" : ""}>${scanLabel}</button>
-      </div>
-      ${extraHint ? `<p class="scan-hint">${extraHint}</p>` : ""}
-    </section>`;
+  return {
+    applied,
+    materials: [...materialsUsed.entries()].map(([name, qty]) => ({
+      name,
+      quantity: qty,
+    })),
+  };
 };
 
 const renderExcavationRate = (): string => {
@@ -356,8 +490,8 @@ const renderExcavationRate = (): string => {
     return `
       <article class="stat-card excavation-rate" id="excavation-rate">
         <span>Excavation value</span>
-        <strong class="muted-stat">Not currently excavating</strong>
-        <small>GE value of materials from chat finds</small>
+        <strong class="muted-stat">—</strong>
+        <small>Not currently excavating</small>
       </article>`;
   }
 
@@ -376,19 +510,139 @@ const refreshExcavationRateCard = (): void => {
   card.outerHTML = renderExcavationRate().trim();
 };
 
+const companionModeLabel = (
+  mode: "idle" | "excavate" | "restore" | "off" | "starting",
+): { title: string; detail: string; className: string } => {
+  if (mode === "starting") {
+    return {
+      title: "Starting…",
+      detail: "Connecting companion watcher",
+      className: "mode-idle",
+    };
+  }
+  if (mode === "off") {
+    const alt1 = getAlt1Status();
+    let detail = "Open this app inside Alt1";
+    if (alt1.available && !alt1.pixelPermission) {
+      detail = "Enable “View screen” in Alt1 app permissions";
+    } else if (alt1.available && !alt1.linked) {
+      detail = "Link the RuneScape client in Alt1";
+    } else if (alt1.available) {
+      detail = "Watcher not running — try Force idle / reload";
+    }
+    return {
+      title: "Watcher off",
+      detail,
+      className: "",
+    };
+  }
+  if (mode === "excavate") {
+    return {
+      title: "Excavating",
+      detail: "Chat finds + artefact popups",
+      className: "mode-excavate",
+    };
+  }
+  if (mode === "restore") {
+    const status = companionWatcher?.getRestoreStatus();
+    const detail = status?.artefactName
+      ? status.progress
+        ? `Restoring · ${status.artefactName} ${status.progress}`
+        : `Restoring · ${status.artefactName}`
+      : status?.message || "Workbench restore";
+    return {
+      title: "Restoring",
+      detail,
+      className: "mode-restore",
+    };
+  }
+  return {
+    title: "Idle",
+    detail: "Alternating dig ↔ restore probes",
+    className: "mode-idle",
+  };
+};
+
+const companionModeFingerprint = (): string => {
+  if (companionWatcherStarting) return "starting";
+  if (!companionWatcher?.running) {
+    const alt1 = getAlt1Status();
+    return `off:${alt1.available}:${alt1.pixelPermission}:${alt1.linked}`;
+  }
+  const mode = companionWatcher.modeName;
+  if (mode === "restore") {
+    const status = companionWatcher.getRestoreStatus();
+    return `restore:${status.artefactName ?? ""}:${status.progress ?? ""}:${status.message}`;
+  }
+  return mode;
+};
+
+let lastCompanionModeFingerprint = "";
+
+const renderCompanionMode = (): string => {
+  const running = Boolean(companionWatcher?.running);
+  const mode = companionWatcherStarting
+    ? "starting"
+    : running
+      ? companionWatcher!.modeName
+      : "off";
+  const { title, detail, className } = companionModeLabel(mode);
+  const fp = companionModeFingerprint();
+  lastCompanionModeFingerprint = fp;
+  return `
+    <article class="stat-card companion-mode ${className}" id="companion-mode" data-mode-fp="${esc(fp)}">
+      <span>Watcher mode</span>
+      <strong>${esc(title)}</strong>
+      <small title="${esc(detail)}">${esc(detail)}</small>
+      ${running ? `<button type="button" class="text-button mode-reset" id="force-idle-mode" title="Unstick if mode is wrong">Force idle</button>` : ""}
+    </article>`;
+};
+
+const refreshCompanionModeCard = (): void => {
+  const card = document.querySelector("#companion-mode");
+  if (!card) return;
+  const next = companionModeFingerprint();
+  // Avoid rewriting the DOM when nothing changed — that was the flicker.
+  if (next === lastCompanionModeFingerprint && card.getAttribute("data-mode-fp") === next) {
+    return;
+  }
+  lastCompanionModeFingerprint = next;
+  card.outerHTML = renderCompanionMode().trim();
+};
+
+let companionModeTimer: number | undefined;
+
+const syncCompanionModeTimer = (): void => {
+  const want = isDevToolsActive() && Boolean(companionWatcher?.running);
+  if (want && companionModeTimer === undefined) {
+    companionModeTimer = window.setInterval(() => {
+      refreshCompanionModeCard();
+    }, 500);
+  } else if (!want && companionModeTimer !== undefined) {
+    window.clearInterval(companionModeTimer);
+    companionModeTimer = undefined;
+  }
+  if (want) refreshCompanionModeCard();
+};
+
 const syncExcavationRateTimer = (): void => {
   const excavating = excavationSnapshot().excavating;
   if (excavating && excavationRateTimer === undefined) {
-    excavationRateTimer = window.setInterval(refreshExcavationRateCard, 1_000);
+    excavationRateTimer = window.setInterval(() => {
+      refreshExcavationRateCard();
+      syncExcavationRateTimer();
+    }, 1_000);
   } else if (!excavating && excavationRateTimer !== undefined) {
     window.clearInterval(excavationRateTimer);
     excavationRateTimer = undefined;
+    refreshExcavationRateCard();
   }
 };
 
 const recordWatcherFindValue = async (
   event: import("./watcher").WatcherEvent,
 ): Promise<void> => {
+  if (event.type === "tetracompass") return;
   if (event.type === "material") {
     const price =
       priceForName(event.material.name) ??
@@ -403,38 +657,91 @@ const recordWatcherFindValue = async (
   if (price) noteExcavationValue(price * event.quantity, event.quantity);
 };
 
+const renderTetraTracker = (): string => {
+  const open = !collapsed.has("overview:tetra");
+  const ready = tetraCompassesReady(state);
+  const missing = TETRA_PIECE_IDS.filter((id) => getTetraPiece(state, id) < 1).length;
+  const pieces = TETRA_PIECE_IDS.map((id) => {
+    const count = getTetraPiece(state, id);
+    return `<div class="piece ${count ? "have" : "missing"}" title="${esc(tetraPieceLabel(id))}: ${formatNumber(count)}">
+      ${img(tetraPieceIcon(id), "piece-icon")}<span>${count || "–"}</span>
+    </div>`;
+  }).join("");
+
+  const status = ready
+    ? `<div class="tetra-ready"><strong>${ready}×</strong><span>ready to assemble</span></div>`
+    : missing
+      ? `<div class="tetra-ready"><span>${missing} missing</span></div>`
+      : "";
+
+  return `
+    <section class="panel tetra-tracker ${open ? "open" : ""}">
+      <div class="panel-heading">
+        <button type="button" class="panel-collapse" data-collapse="overview:tetra" aria-expanded="${open ? "true" : "false"}">
+          <span class="chevron">▶</span>
+          <h2>Tetracompass</h2>
+          ${open ? `<span class="eyebrow">Owned pieces</span>` : ""}
+        </button>
+        ${open ? status : ""}
+      </div>
+      ${open ? `<div class="pieces">${pieces}</div>` : ""}
+    </section>`;
+};
+
 const renderDashboard = (): string => {
   const ready = progressList().filter((progress) => progress.restoredSets > 0);
-  const opportunities = bestCollectionOpportunities(state);
-  const favorites = state.favoriteCollections
-    .map((id) => archaeologyData.collections.find((collection) => collection.id === id))
-    .filter((collection): collection is Collection => Boolean(collection))
-    .map((collection) => getCollectionProgress(collection, state));
+  const favOpen = !collapsed.has("overview:favourites");
+  const recOpen = !collapsed.has("overview:recommended");
+  const opportunities = recOpen ? bestCollectionOpportunities(state) : [];
+  const favorites = favOpen
+    ? state.favoriteCollections
+        .map((id) => archaeologyData.collections.find((collection) => collection.id === id))
+        .filter((collection): collection is Collection => Boolean(collection))
+        .map((collection) => getCollectionProgress(collection, state))
+    : [];
 
   return `
     <main>
       <section class="stats-grid">
         ${renderExcavationRate()}
-        <article class="stat-card"><span>Owned artefacts</span><strong>${formatNumber(ownedTotal())}</strong><small>damaged + restored</small></article>
-        <article class="stat-card"><span>Restoration XP</span><strong>${formatNumber(pendingXp())}</strong><small>available from damaged</small></article>
-        <article class="stat-card"><span>Ready collections</span><strong>${ready.length}</strong><small>at least one restored set</small></article>
+        <article class="stat-card"><span>Inventory value</span><strong>${formatGp(inventoryMaterialsValue())}</strong><small>GE · materials</small></article>
+        <article class="stat-card"><span>Restoration XP</span><strong>${formatNumber(pendingXp())}</strong><small>Available from damaged</small></article>
+        <article class="stat-card"><span>Ready collections</span><strong>${ready.length}</strong><small>At least one restored set</small></article>
       </section>
-      <section class="panel">
-        <div class="panel-heading"><div><h2>Favourites</h2></div><button class="text-button" data-view="collections">Browse</button></div>
-        <div class="recommendations">
+      ${renderTetraTracker()}
+      <section class="panel ${favOpen ? "open" : ""}">
+        <div class="panel-heading">
+          <button type="button" class="panel-collapse" data-collapse="overview:favourites" aria-expanded="${favOpen ? "true" : "false"}">
+            <span class="chevron">▶</span>
+            <h2>Favourites</h2>
+          </button>
+          ${favOpen ? `<button class="text-button" data-view="collections">Browse</button>` : ""}
+        </div>
+        ${favOpen
+          ? `<div class="collection-grid">
           ${favorites.length
             ? favorites.map((progress) => renderRecommendation(progress)).join("")
             : `<div class="empty">No favourites yet. Open Collections and tap the star on a collection to pin it here.</div>`}
-        </div>
+        </div>`
+          : ""}
       </section>
-      <section class="panel">
-        <div class="panel-heading"><div><h2>Recommended collections</h2><span class="eyebrow">For level ${state.level}</span></div><button class="text-button" data-view="collections">View all</button></div>
-        <p class="scan-hint">Best picks for chronotes, tetracompass pieces${state.level >= 77 ? ", and dung tokens" : ""}.</p>
-        <div class="recommendations">
+      <section class="panel ${recOpen ? "open" : ""}">
+        <div class="panel-heading">
+          <button type="button" class="panel-collapse" data-collapse="overview:recommended" aria-expanded="${recOpen ? "true" : "false"}">
+            <span class="chevron">▶</span>
+            <h2>Recommended collections</h2>
+            ${recOpen ? `<span class="eyebrow">For level ${state.level}</span>` : ""}
+          </button>
+          ${recOpen ? `<button class="text-button" data-view="collections">View all</button>` : ""}
+        </div>
+        ${recOpen
+          ? `<p class="scan-hint">Best picks for chronotes, tetracompass pieces${state.level >= 77 ? ", and dung tokens" : ""}.</p>
+        <div class="collection-grid">
           ${opportunities.length
             ? opportunities.map((entry) => renderRecommendation(entry.progress, { label: entry.label, reason: entry.reason })).join("")
             : `<div class="empty">No collections available at this level yet.</div>`}
-        </div>
+        </div>`
+          : ""}
       </section>
     </main>`;
 };
@@ -494,6 +801,59 @@ const materialTip = (material: MaterialInfo): string => {
   return `${priceBit}\n\nLocated at: ${located}`;
 };
 
+const tetraPieceQuantityControl = (id: TetraPieceId, value: number): string => {
+  if (!isManual()) {
+    return `<span class="qty-readout ${value ? "" : "zero"}">${value}</span>`;
+  }
+  return `
+    <div class="quantity">
+      <button aria-label="Remove one ${id}" data-tetra-adjust="${id}" data-delta="-1">−</button>
+      <input aria-label="${esc(tetraPieceLabel(id))}" inputmode="numeric" min="0" type="number" value="${value}" data-tetra-count="${id}">
+      <button aria-label="Add one ${id}" data-tetra-adjust="${id}" data-delta="1">+</button>
+    </div>`;
+};
+
+const renderTetraPieceTile = (id: TetraPieceId): string => {
+  const count = getTetraPiece(state, id);
+  return `
+    <article class="slot-tile ${count ? "owned" : ""} ${isManual() ? "manual" : "auto"}" data-tetra-row="${id}">
+      ${img(tetraPieceIcon(id), "slot-icon")}
+      <div class="slot-body">
+        <strong>${esc(tetraPieceLabel(id))}</strong>
+        <div class="slot-counts single">${tetraPieceQuantityControl(id, count)}</div>
+      </div>
+      <div class="slot-tip" role="tooltip">${esc(`Dig tracker · excavate chat / bank scan\n\n${id}`)}</div>
+    </article>`;
+};
+
+const tetraGroupMatchesSearch = (query: string): boolean => {
+  if (!query) return true;
+  return (
+    "tetracompass".includes(query) ||
+    "tetra".includes(query) ||
+    TETRA_PIECE_IDS.some(
+      (id) => id.includes(query) || tetraPieceLabel(id).toLowerCase().includes(query),
+    )
+  );
+};
+
+const renderTetraArtefactGroup = (): string => {
+  const key = "culture:Tetracompass";
+  const isOpen = !collapsed.has(key);
+  const owned = TETRA_PIECE_IDS.reduce((sum, id) => sum + getTetraPiece(state, id), 0);
+  const ready = tetraCompassesReady(state);
+  return `
+    <section class="group ${isOpen ? "open" : ""}">
+      <button class="group-header" data-collapse="${key}">
+        <span class="chevron">▶</span>
+        <strong>Tetracompass</strong>
+        <span class="group-count">${TETRA_PIECE_IDS.length}</span>
+        <span class="group-owned">${owned} owned${ready ? ` · ${ready} ready` : ""}</span>
+      </button>
+      ${isOpen ? `<div class="slot-grid">${TETRA_PIECE_IDS.map(renderTetraPieceTile).join("")}</div>` : ""}
+    </section>`;
+};
+
 const renderArtefactTile = (artefact: Artefact): string => {
   const count = getCount(state, artefact.id);
   const owned = count.damaged + count.restored > 0;
@@ -529,9 +889,12 @@ const renderArtefactGroups = (): string => {
     }))
     .filter((group) => group.artefacts.length);
 
-  if (!groups.length) return `<div class="empty">No artefacts match that search.</div>`;
+  const showTetra = tetraGroupMatchesSearch(query);
+  if (!groups.length && !showTetra) {
+    return `<div class="empty">No artefacts match that search.</div>`;
+  }
 
-  return groups.map((group) => {
+  const cultureHtml = groups.map((group) => {
     const key = `culture:${group.culture}`;
     const isOpen = !collapsed.has(key);
     const owned = group.artefacts.reduce((total, artefact) => {
@@ -550,6 +913,8 @@ const renderArtefactGroups = (): string => {
         ${isOpen ? `<div class="slot-grid">${group.artefacts.map(renderArtefactTile).join("")}</div>` : ""}
       </section>`;
   }).join("");
+
+  return `${showTetra ? renderTetraArtefactGroup() : ""}${cultureHtml}`;
 };
 
 const renderArtefactPanel = (): string => `
@@ -620,13 +985,40 @@ const renderMaterialPanel = (): string => `
   <section id="material-list" class="groups">${renderMaterialRows()}</section>`;
 
 
+const inventoryMaterialsValue = (): number => {
+  let total = 0;
+  for (const material of archaeologyMaterials()) {
+    const qty = getMaterial(state, material.id);
+    if (!qty) continue;
+    const price = materialPrice(material.id);
+    if (price !== null) total += price * qty;
+  }
+  return total;
+};
+
+const renderInventorySectionSummary = (): string => {
+  if (inventorySection === "artefacts") {
+    return `<span class="filter-row-summary">${formatNumber(ownedTotal())} owned</span>`;
+  }
+  const priceAtRender = getPriceVersion();
+  void ensureMaterialPrices().then(() => {
+    if (
+      getPriceVersion() !== priceAtRender &&
+      view === "inventory" &&
+      inventorySection === "materials"
+    ) {
+      render();
+    }
+  });
+  return `<span class="filter-row-summary">${formatGp(inventoryMaterialsValue())} gp</span>`;
+};
+
 const renderInventory = (): string => `
   <main>
-    ${renderScanControls()}
-    ${renderScanResults()}
     <div class="filter-row" role="tablist" aria-label="Inventory section">
       <button type="button" data-inventory-section="artefacts" class="${inventorySection === "artefacts" ? "active" : ""}">Artefacts</button>
       <button type="button" data-inventory-section="materials" class="${inventorySection === "materials" ? "active" : ""}">Materials</button>
+      ${renderInventorySectionSummary()}
     </div>
     ${inventorySection === "artefacts" ? renderArtefactPanel() : renderMaterialPanel()}
   </main>`;
@@ -636,71 +1028,94 @@ const renderInventory = (): string => `
 const hasDungTokenReward = (collection: Collection): boolean =>
   Boolean(collection.recurringReward?.name.toLowerCase().includes("dungeoneering"));
 
-const renderCollectionCard = (collection: Collection): string => {
+const renderCollectionCard = (
+  collection: Collection,
+  options?: { label?: string; reason?: "chronotes" | "tetracompass" | "other" },
+): string => {
   const progress = getCollectionProgress(collection, state);
   const locked = collection.level > state.level;
   const perSet = collection.artefactChronotes + collection.bonusChronotes;
   const fav = isFavorite(collection.id);
   const unrestoredSets = progress.potentialSets - progress.restoredSets;
+  const hasSets = progress.potentialSets > 0;
   const recurring =
     collection.recurringReward && collection.recurringReward.name !== "No"
       ? collection.recurringReward
       : null;
-  const tetraCount = progress.completeSets
+  const tetraCount = hasSets
     ? progress.totalTetracompassPieces
     : collection.tetracompassPieces;
-  const setBadge = progress.potentialSets
+  const reason = options?.reason;
+  const setBadge = hasSets
     ? `<div class="set-count">
         <strong>${progress.potentialSets}×</strong>
-        <span>${progress.restoredSets} restored</span>
-        <span class="${unrestoredSets ? "warning" : "success"}">${unrestoredSets} unrestored</span>
+        <span class="${progress.restoredSets ? "on" : ""}">${progress.restoredSets} restored</span>
+        <span class="${unrestoredSets ? "on" : ""}">${unrestoredSets} broken</span>
       </div>`
     : "";
-  const footerRight = progress.restoredSets && !unrestoredSets
-    ? `<span class="success">Ready to hand in</span>`
-    : !progress.potentialSets
-      ? `<span>${progress.missing.length} missing</span>`
-      : "";
-  const restoreMats = progress.restoreMaterials.length
-    ? `<div class="restore-mats">
+  const footerRight =
+    hasSets && progress.restoredSets && !unrestoredSets
+      ? `<span class="success">Ready to hand in</span>`
+      : !hasSets
+        ? `<span>${progress.missing.length} missing</span>`
+        : "";
+  // Mats to restore every remaining unrestored set (hide when nothing left to restore).
+  const restoreMats =
+    unrestoredSets > 0 && progress.restoreMaterials.length
+      ? `<div class="restore-mats">
         <span class="restore-mats-label">Materials to finish</span>
         <div class="restore-mats-list">
-          ${progress.restoreMaterials.map((entry) => {
-            const material = archaeologyData.materials.find((item) => item.name === entry.name);
-            const owned = material ? getMaterial(state, material.id) : 0;
-            const short = owned < entry.quantity;
-            return `<span class="restore-mat ${short ? "short" : ""}" title="${esc(entry.name)}: ${formatNumber(owned)} owned · ${formatNumber(entry.quantity)} needed">
+          ${progress.restoreMaterials
+            .map((entry) => {
+              const material = archaeologyData.materials.find(
+                (item) => item.name === entry.name,
+              );
+              const owned = material ? getMaterial(state, material.id) : 0;
+              const have = owned >= entry.quantity;
+              return `<span class="restore-mat ${have ? "have" : ""}" title="${esc(entry.name)}: ${formatNumber(owned)} owned · ${formatNumber(entry.quantity)} needed">
               ${material ? img(materialIcon(material.id), "tiny-icon") : ""}
               <strong>${formatNumber(entry.quantity)}</strong>
               <em>${esc(entry.name)}</em>
             </span>`;
-          }).join("")}
+            })
+            .join("")}
         </div>
       </div>`
-    : "";
+      : "";
+  const chronotesClass = reason === "chronotes" ? "highlight" : "";
+  const tetraClass = reason === "tetracompass" ? "highlight" : "";
+  const otherClass = reason === "other" ? "highlight" : "";
+  const eyebrow = options?.label
+    ? `<span class="eyebrow"><em class="rec-label">${esc(options.label)}</em> · ${esc(collection.collector)} · Level ${collection.level}</span>`
+    : `<span class="eyebrow">${esc(collection.collector)} · Level ${collection.level}</span>`;
   return `
     <article class="collection-card ${progress.completeSets ? "ready" : ""} ${locked ? "locked" : ""} ${fav ? "favorited" : ""}">
       <div class="collection-top">
-        <div><span class="eyebrow">${esc(collection.collector)} · Level ${collection.level}</span><h3>${esc(collection.name)}</h3></div>
-        <div class="collection-top-actions">
-          ${favoriteStarButton(collection.id)}
-          ${setBadge}
+        <div class="collection-heading">
+          ${eyebrow}
+          <div class="collection-title-line">
+            <h3>${esc(collection.name)}</h3>
+            ${favoriteStarButton(collection.id, true)}
+          </div>
         </div>
+        ${setBadge ? `<div class="collection-top-actions">${setBadge}</div>` : ""}
       </div>
       <div class="collection-rewards">
-        <span>${img(uiIcon("chronotes"), "tiny-icon")}<strong>${formatNumber(progress.completeSets ? progress.totalChronotes : perSet)}</strong>${progress.completeSets ? "owned" : "per set"}</span>
-        ${collection.tetracompassPieces ? `<span>${img(uiIcon("tetracompass"), "tiny-icon")}<strong>${tetraCount}</strong>tetracompass piece${tetraCount === 1 ? "" : "s"}</span>` : ""}
-        ${recurring && !collection.tetracompassPieces ? `<span><strong>${recurring.quantity}</strong>${esc(recurring.name)}</span>` : ""}
+        <span class="${chronotesClass}">${img(uiIcon("chronotes"), "tiny-icon")}<strong>${formatNumber(hasSets ? progress.totalChronotes : perSet)}</strong>${hasSets ? "reward" : "per set"}</span>
+        ${collection.tetracompassPieces ? `<span class="${tetraClass}">${img(uiIcon("tetracompass"), "tiny-icon")}<strong>${tetraCount}</strong>tetracompass piece${tetraCount === 1 ? "" : "s"}</span>` : ""}
+        ${recurring && !collection.tetracompassPieces ? `<span class="${otherClass}"><strong>${recurring.quantity}</strong>${esc(recurring.name)}</span>` : ""}
       </div>
-      <div class="pieces">${collection.artefacts.map((name) => {
-        const artefact = archaeologyData.artefacts.find((item) => item.name === name);
-        if (!artefact) return "";
-        const count = getCount(state, artefact.id);
-        const total = count.damaged + count.restored;
-        return `<div class="piece ${total ? "have" : "missing"}" title="${esc(name)}: ${count.damaged} damaged, ${count.restored} restored">
+      <div class="pieces">${collection.artefacts
+        .map((name) => {
+          const artefact = archaeologyData.artefacts.find((item) => item.name === name);
+          if (!artefact) return "";
+          const count = getCount(state, artefact.id);
+          const total = count.damaged + count.restored;
+          return `<div class="piece ${total ? "have" : "missing"}" title="${esc(name)}: ${count.damaged} damaged, ${count.restored} restored">
           ${img(artefactIcon(artefact.id), "piece-icon")}<span>${total || "–"}</span>
         </div>`;
-      }).join("")}</div>
+        })
+        .join("")}</div>
       ${restoreMats}
       ${footerRight ? `<div class="card-footer">${footerRight}</div>` : ""}
     </article>`;
@@ -842,7 +1257,18 @@ const renderCellTeachChrome = (scan: ScanResult): string => {
     </div>`;
   }
 
-  if (!cellTeach) return "";
+  if (!cellTeach) {
+    if (COMPACT_SCAN_PREVIEW && isHoverTeachActive()) {
+      return `
+    <div class="teach-banner" id="teach-hud">
+      <p class="teach-banner-live" id="teach-hud-live">${esc(hoverTeachHint || "Hover the missed item in your bank — watch for the name in the top-left.")}</p>
+      <div class="teach-banner-pick">
+        <button id="cancel-cell-teach" class="secondary-button">Cancel</button>
+      </div>
+    </div>`;
+    }
+    return "";
+  }
 
   return `
     <div class="teach-banner" id="teach-hud">
@@ -905,10 +1331,64 @@ const renderTeachPanel = (scan: ScanResult): string => {
 const storagePlaceLabel = (kind: ScanResult["interfaceKind"]): string =>
   kind === "bank" ? "bank" : kind === "workbench" ? "workbench" : "material storage";
 
-const renderCapturedGrid = (scan: ScanResult): string => {
-  if (!scan.debugSlots.length && !scan.debugRows) return "";
-  // Hits win over misses on the same cell; a miss may still upgrade another miss
-  // when it carries a screen crop the earlier one lacked.
+/**
+ * Trial layout (easy undo): pack captured hit icons only — no empty gaps —
+ * flowing to the window width, hide the long named list, add a “+” teach slot.
+ * Set to `false` to restore the spatial bank grid + named list.
+ * Also noted in docs/PUBLISH.md under experimental UI.
+ */
+const COMPACT_SCAN_PREVIEW = true;
+
+let compactScrollObserver: ResizeObserver | null = null;
+
+/** Grow square cells so each row fills the scroll area (accounts for scrollbar width). */
+const syncCompactPreviewScrollbar = (): void => {
+  const scroll = document.querySelector<HTMLElement>(
+    ".captured-grid-debug.compact-preview .captured-grid-scroll",
+  );
+  const grid = scroll?.querySelector<HTMLElement>(".captured-grid.compact-flow");
+  if (!scroll || !grid) {
+    compactScrollObserver?.disconnect();
+    compactScrollObserver = null;
+    return;
+  }
+
+  const GAP = 3;
+  const MIN = 42;
+
+  const update = (): void => {
+    const el = document.querySelector<HTMLElement>(
+      ".captured-grid-debug.compact-preview .captured-grid-scroll",
+    );
+    const flow = el?.querySelector<HTMLElement>(".captured-grid.compact-flow");
+    if (!el || !flow) return;
+
+    // A couple passes: cell size can toggle the scrollbar, which changes width.
+    for (let i = 0; i < 3; i += 1) {
+      const width = flow.clientWidth;
+      if (width <= 0) return;
+      const cols = Math.max(1, Math.floor((width + GAP) / (MIN + GAP)));
+      const cell = Math.max(MIN, (width - GAP * (cols - 1)) / cols);
+      flow.style.setProperty("--compact-cell", `${cell}px`);
+      void el.offsetHeight;
+    }
+  };
+
+  compactScrollObserver?.disconnect();
+  update();
+  requestAnimationFrame(() => {
+    update();
+    compactScrollObserver = new ResizeObserver(() => update());
+    const el = document.querySelector<HTMLElement>(
+      ".captured-grid-debug.compact-preview .captured-grid-scroll",
+    );
+    if (el) compactScrollObserver.observe(el);
+  });
+};
+
+const collectPreviewSlots = (
+  scan: ScanResult,
+): (typeof scan.debugSlots)[number][] => {
   const byCell = new Map<string, (typeof scan.debugSlots)[number]>();
   for (const slot of scan.debugSlots) {
     const key = `${slot.row},${slot.column}`;
@@ -930,39 +1410,56 @@ const renderCapturedGrid = (scan: ScanResult): string => {
       byCell.set(key, slot);
     }
   }
-  const cells: string[] = [];
-  const confirmingCell = pendingTeachConfirm;
+
+  const packed: (typeof scan.debugSlots)[number][] = [];
+  if (COMPACT_SCAN_PREVIEW) {
+    // Hits only, reading order — no empties / dashed miss placeholders.
+    for (let row = 0; row < scan.debugRows; row += 1) {
+      for (let column = 0; column < scan.debugColumns; column += 1) {
+        const slot = byCell.get(`${row},${column}`);
+        if (slot?.kind === "hit") packed.push(slot);
+      }
+    }
+    return packed;
+  }
+
+  // Spatial layout: every bank cell, including empties.
   for (let row = 0; row < scan.debugRows; row += 1) {
     for (let column = 0; column < scan.debugColumns; column += 1) {
       const slot = byCell.get(`${row},${column}`);
-      const teachingThis =
-        (cellTeach?.row === row && cellTeach?.column === column) ||
-        (confirmingCell?.row === row && confirmingCell?.column === column);
+      if (slot) packed.push(slot);
+      else packed.push({
+        row,
+        column,
+        key: "",
+        name: "",
+        quantity: 0,
+        iconPath: "",
+        kind: "miss",
+      });
+    }
+  }
+  return packed;
+};
 
-      // Unmatched occupied slots stay blank until clicked for teach.
-      if (slot?.kind === "miss" && slot.cropDataUrl) {
-        if (teachingThis) {
-          const captured = confirmingCell ? " teach-captured" : " teaching";
-          cells.push(`<div class="captured-grid-cell${captured}" data-teach-cell data-row="${row}" data-col="${column}" title="Teaching this slot — hover it in-game (row ${row + 1}, column ${column + 1})">
-            <img class="captured-grid-icon miss-crop" src="${slot.cropDataUrl}" alt="">
-          </div>`);
-        } else {
-          cells.push(`<div class="captured-grid-cell empty teachable" data-teach-cell data-row="${row}" data-col="${column}" title="Click to add this missed icon (row ${row + 1}, column ${column + 1})"></div>`);
-        }
-        continue;
-      }
+const renderCapturedGrid = (scan: ScanResult): string => {
+  if (!scan.debugSlots.length && !scan.debugRows) return "";
 
-      if (!slot || slot.kind === "miss") {
-        const title = slot
-          ? `ignored (not archaeology) (row ${row + 1}, column ${column + 1})`
-          : `empty slot (row ${row + 1}, column ${column + 1})`;
-        cells.push(`<div class="captured-grid-cell empty" title="${title}"></div>`);
-        continue;
-      }
+  const slots = collectPreviewSlots(scan);
+  const cells: string[] = [];
+  const confirmingCell = pendingTeachConfirm;
 
+  for (const slot of slots) {
+    const { row, column } = slot;
+    const teachingThis =
+      (cellTeach?.row === row && cellTeach?.column === column) ||
+      (confirmingCell?.row === row && confirmingCell?.column === column);
+
+    if (COMPACT_SCAN_PREVIEW) {
+      if (slot.kind !== "hit") continue;
       const reteachTitle = teachingThis
         ? `Teaching this slot — hover it in-game (row ${row + 1}, column ${column + 1})`
-        : `Click to correct if misidentified: ${esc(slot.name)} × ${slot.quantity} (row ${row + 1}, column ${column + 1})`;
+        : `Click to correct if misidentified: ${esc(slot.name)} × ${slot.quantity}`;
       const teachState = confirmingCell && teachingThis
         ? " teach-captured"
         : teachingThis
@@ -972,26 +1469,71 @@ const renderCapturedGrid = (scan: ScanResult): string => {
         ${img(`${import.meta.env.BASE_URL}${slot.iconPath}`, "captured-grid-icon")}
         ${slot.quantity > 1 ? `<b>${slot.quantity}</b>` : ""}
       </div>`);
+      continue;
     }
+
+    if (slot.kind === "miss" && slot.cropDataUrl) {
+      if (teachingThis) {
+        const captured = confirmingCell ? " teach-captured" : " teaching";
+        cells.push(`<div class="captured-grid-cell${captured}" data-teach-cell data-row="${row}" data-col="${column}" title="Teaching this slot — hover it in-game (row ${row + 1}, column ${column + 1})">
+          <img class="captured-grid-icon miss-crop" src="${slot.cropDataUrl}" alt="">
+        </div>`);
+      } else {
+        cells.push(`<div class="captured-grid-cell empty teachable" data-teach-cell data-row="${row}" data-col="${column}" title="Click to add this missed icon (row ${row + 1}, column ${column + 1})"></div>`);
+      }
+      continue;
+    }
+
+    if (slot.kind === "miss" || !slot.key) {
+      const title = slot.name
+        ? `ignored (not archaeology) (row ${row + 1}, column ${column + 1})`
+        : `empty slot (row ${row + 1}, column ${column + 1})`;
+      cells.push(`<div class="captured-grid-cell empty" title="${title}"></div>`);
+      continue;
+    }
+
+    const reteachTitle = teachingThis
+      ? `Teaching this slot — hover it in-game (row ${row + 1}, column ${column + 1})`
+      : `Click to correct if misidentified: ${esc(slot.name)} × ${slot.quantity} (row ${row + 1}, column ${column + 1})`;
+    const teachState = confirmingCell && teachingThis
+      ? " teach-captured"
+      : teachingThis
+        ? " teaching"
+        : "";
+    cells.push(`<div class="captured-grid-cell teachable reteachable${teachState}" data-teach-cell data-row="${row}" data-col="${column}" title="${reteachTitle}">
+      ${img(`${import.meta.env.BASE_URL}${slot.iconPath}`, "captured-grid-icon")}
+      ${slot.quantity > 1 ? `<b>${slot.quantity}</b>` : ""}
+    </div>`);
   }
 
-  const layoutNote =
-    "Missed an item? Click its blank dashed cell. Wrong name? Click the icon. Then hover that slot so the top-left options text shows its name.";
+  if (COMPACT_SCAN_PREVIEW) {
+    const adding = isHoverTeachActive() && !cellTeach;
+    cells.push(`
+      <button type="button" class="captured-grid-cell compact-add${adding ? " teaching" : ""}" id="compact-add-item" title="Add a missed item — hover it in your bank">
+        <img class="captured-grid-icon" src="${import.meta.env.BASE_URL}ui/add-slot.png" alt="Add">
+      </button>`);
+  }
+
+  const layoutNote = COMPACT_SCAN_PREVIEW
+    ? "Wrong name? Click the icon, then hover that slot in-game. Missed something? Use + and hover the item in your bank."
+    : "Missed an item? Click its blank dashed cell. Wrong name? Click the icon. Then hover that slot so the top-left options text shows its name.";
 
   const teachChrome = renderCellTeachChrome(scan);
+  const columns = COMPACT_SCAN_PREVIEW
+    ? undefined
+    : Math.max(1, scan.debugColumns);
 
   return `
-    <details class="captured-grid-debug" open>
-      <summary>Scan Preview</summary>
+    <div class="captured-grid-debug${COMPACT_SCAN_PREVIEW ? " compact-preview" : ""}">
       ${teachChrome}
       <p class="scan-hint">${layoutNote}</p>
       <div class="captured-grid-scroll">
-        <div class="captured-grid" style="--debug-columns:${Math.max(1, scan.debugColumns)}">${cells.join("")}</div>
+        <div class="captured-grid${COMPACT_SCAN_PREVIEW ? " compact-flow" : ""}"${columns ? ` style="--debug-columns:${columns}"` : ""}>${cells.join("")}</div>
       </div>
-    </details>`;
+    </div>`;
 };
 
-const renderScanResults = (): string => {
+const renderScanResults = (opts?: { hideActions?: boolean }): string => {
   if (scanBusy) return "";
   if (!lastScan) return "";
   const teach = renderTeachPanel(lastScan);
@@ -1005,21 +1547,36 @@ const renderScanResults = (): string => {
     workbench: "Workbench: damaged only",
     "material-storage": "Material Storage",
   }[lastScan.interfaceKind];
-  return `
-    <section class="panel">
-      ${teach}
-      <div class="panel-heading"><div><span class="eyebrow">${lastScan.hits.length} found · ${lastScan.durationMs} ms · ${interfaceLabel}${lastScan.stitchPreviewUrl ? ` · ${scanPasses} strips` : ""}</span><h2>${{ materials: "Materials", artefacts: "Artefacts", both: "Items" }[lastScan.mode]} found</h2></div></div>
+  const heading = COMPACT_SCAN_PREVIEW
+    ? `<div class="panel-heading"><div><h2>${lastScan.hits.length} unique items found</h2></div></div>`
+    : `<div class="panel-heading"><div><span class="eyebrow">${lastScan.hits.length} found · ${lastScan.durationMs} ms · ${interfaceLabel}${lastScan.stitchPreviewUrl ? ` · ${passLabel(scanPasses)}` : ""}</span><h2>${{ materials: "Materials", artefacts: "Artefacts", both: "Items" }[lastScan.mode]} found</h2></div></div>`;
+  const namedList = COMPACT_SCAN_PREVIEW
+    ? ""
+    : `
       <div class="scan-results">
         ${lastScan.hits.map((hit) => hit.type === "artefact"
           ? `<div class="scan-hit">${img(artefactIcon(hit.artefact.id, hit.kind), "piece-icon")}<div><strong>${esc(hit.artefact.name)}</strong><span>${hit.kind}</span></div><b>${hit.quantity}</b></div>`
+          : hit.type === "tetracompass"
+            ? `<div class="scan-hit">${img(tetraPieceIcon(hit.piece), "piece-icon")}<div><strong>${esc(tetraPieceLabel(hit.piece))}</strong><span>tetracompass</span></div><b>${hit.quantity}</b></div>`
           : `<div class="scan-hit">${img(materialIcon(hit.material.id), "piece-icon")}<div><strong>${esc(hit.material.name)}</strong><span>material</span></div><b>${hit.quantity}</b></div>`,
         ).join("")}
-  </div>
-      ${renderCapturedGrid(lastScan)}
+      </div>`;
+
+  const actions = opts?.hideActions
+    ? ""
+    : `
       <div class="button-row">
-        <button id="add-scan" class="gold-button" title="Save these amounts to your tracked list">Save to my list</button>
+        <button id="add-scan" class="gold-button" title="Add these amounts to your tracked inventory">Add to inventory</button>
         <button id="discard-scan" class="secondary-button">Discard</button>
-  </div>
+      </div>`;
+
+  return `
+    <section class="panel">
+      ${teach}
+      ${heading}
+      ${namedList}
+      ${renderCapturedGrid(lastScan)}
+      ${actions}
       ${!lastScan.unresolved.length && lastScan.nearMisses.length ? `
         <details class="near-misses">
           <summary>Slots that were not matched (${lastScan.nearMisses.length})</summary>
@@ -1034,7 +1591,7 @@ const renderScan = (): string => {
   // Scan controls live on Inventory; keep this tab for results/teach if opened.
   return `
     <main>
-      ${renderScanResults() || `<section class="panel"><div class="empty">Use <strong>Scan</strong> on Inventory to capture bank, workbench, or material storage.</div></section>`}
+      ${renderScanResults() || `<section class="panel"><div class="empty">Use <strong>Run scan again</strong> in Settings to capture bank, workbench, or material storage.</div></section>`}
       <aside class="notice"><strong>Tip</strong><p>Matching uses in-game item sprites, so RuneScape should be at 100% interface scale. Results are always shown for review before anything is saved.</p></aside>
   </main>`;
 };
@@ -1064,28 +1621,45 @@ const renderSettings = (): string => `
       <div class="setup-mode settings-mode">
         <span>Entry mode</span>
         <div class="mode-row">
-          <button type="button" class="mode-chip ${state.entryMode === "auto" ? "active" : ""}" data-entry-mode="auto">
-            <strong>Auto</strong>
-            <small>Scan only · no +/−</small>
-          </button>
-          <button type="button" class="mode-chip ${state.entryMode === "manual" ? "active" : ""}" data-entry-mode="manual">
-            <strong>Manual</strong>
-            <small>Show +/− steppers</small>
-          </button>
-  </div>
-  </div>
-</section>
+          <div class="mode-option">
+            <button type="button" class="mode-chip ${state.entryMode === "auto" ? "active" : ""}" data-entry-mode="auto">
+              Auto
+              <span class="mode-recommended">(Recommended)</span>
+            </button>
+            <p class="mode-desc">Scan your bank and storage to fill in what you own</p>
+          </div>
+          <div class="mode-option">
+            <button type="button" class="mode-chip ${state.entryMode === "manual" ? "active" : ""}" data-entry-mode="manual">Manual</button>
+            <p class="mode-desc">Enter amounts yourself with the + and − controls</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    ${ENABLE_DEV_TOOLS ? `
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Developer</h2><p>Local tools only — omitted from public releases.</p></div></div>
+      <label class="toggle-row"><input id="dev-mode-toggle" type="checkbox" ${state.devMode ? "checked" : ""}><span>Enable developer tools</span></label>
+      ${state.devMode ? `
+      <p class="scan-hint">Watcher mode, Force idle, and Alt1 detection outlines (restore window / scan cells).</p>
+      <div class="settings-dev-watcher">
+        ${renderCompanionMode()}
+      </div>` : ""}
+    </section>` : ""}
     <section class="panel data-panel">
-      <div class="panel-heading"><div><h2>Local data</h2><p>Back up, restore, or wipe your tracked inventory.</p></div></div>
+      <div class="panel-heading"><div><h2>Local data</h2><p>Back up or restore your tracked progress.</p></div></div>
       <div class="data-group">
+        <span class="data-eyebrow">Backup</span>
         <div class="button-row">
           <button id="export-data" class="secondary-button">Export JSON</button>
           <label class="file-button">Import JSON<input id="import-data" type="file" accept="application/json"></label>
         </div>
+      </div>
+      <div class="data-group">
+        <span class="data-eyebrow">Storage scan</span>
         <div class="button-row">
-          <button id="clear-inventory" class="danger-button">Clear saved list</button>
-          <button id="reset-setup" class="secondary-button">Run setup again</button>
+          <button id="rescan-storage" class="secondary-button">Run scan again</button>
         </div>
+        <p class="scan-hint">Clears saved artefacts and materials, then walks you through the storage scan wizard again. Favourites are kept.</p>
       </div>
       ${learnedCount() || ignoredCount() ? `
       <div class="data-group">
@@ -1109,7 +1683,14 @@ const render = (): void => {
   document.documentElement.dataset.density = state.compact ? "compact" : "roomy";
 
   if (!state.setupComplete) {
-    app.innerHTML = `${renderHeader()}<div class="app-body">${renderSetup()}</div>`;
+    app.innerHTML = `<div class="app-body setup-only">${renderSetup()}</div>`;
+    syncCompactPreviewScrollbar();
+    return;
+  }
+
+  if (needsScanWizard()) {
+    app.innerHTML = `<div class="app-body setup-only">${renderScanWizard()}</div>`;
+    syncCompactPreviewScrollbar();
     return;
   }
 
@@ -1119,8 +1700,9 @@ const render = (): void => {
   }[view]();
 
   app.innerHTML = `${renderHeader()}<div class="app-body">${content}</div>`;
-  void ensureWatcherRunning();
+  void ensureCompanionWatcherRunning();
   syncExcavationRateTimer();
+  syncCompactPreviewScrollbar();
 };
 
 /* ----------------------------------------------------------- scan runner */
@@ -1135,7 +1717,7 @@ const modeForInterface = (
 
 const setScanLiveStatus = (message: string): void => {
   scanMessage = message;
-  const label = document.querySelector<HTMLElement>(".scan-live-status");
+  const label = document.querySelector<HTMLElement>(".scan-live-status, .wizard-live");
   if (label) label.textContent = message;
 };
 
@@ -1173,7 +1755,8 @@ const runLiveStitchScan = async (): Promise<void> => {
 
     setScanLiveStatus("Finding storage grid…");
     render();
-    const { detected: located, crop } = await locateStitchCrop();
+    const expect = needsScanWizard() ? nextWizardStep() ?? undefined : undefined;
+    const { detected: located, crop } = await locateStitchCrop(expect);
     const mode = modeForInterface(located.kind);
     setScanLiveStatus(
       `Found ${
@@ -1189,7 +1772,7 @@ const runLiveStitchScan = async (): Promise<void> => {
     // Seed with the current view immediately.
     seedFromCapture(stitch);
     scanPasses = 1;
-    setScanLiveStatus(`Capturing… ${stitch.strips} strip(s)`);
+    setScanLiveStatus(`Capturing… ${passLabel(stitch.strips)}`);
     render();
 
     const settleBrief = async (): Promise<number | null> => {
@@ -1206,7 +1789,7 @@ const runLiveStitchScan = async (): Promise<void> => {
 
     let lastSig: number | null = stitch.lastSignature;
     while (!scanStopRequested) {
-      setScanLiveStatus(`Capturing… ${stitch.strips} strip(s)`);
+      setScanLiveStatus(`Capturing… ${passLabel(stitch.strips)}`);
 
       const settled = await settleBrief();
       if (scanStopRequested) break;
@@ -1223,10 +1806,10 @@ const runLiveStitchScan = async (): Promise<void> => {
       if (status.ok) {
         lastSig = stitch.lastSignature;
         scanPasses = stitch.strips;
-        setScanLiveStatus(`Capturing… ${stitch.strips} strip(s), +${status.appendedPx}px`);
+        setScanLiveStatus(`Capturing… ${passLabel(stitch.strips)}, +${status.appendedPx}px`);
       } else if (status.reason === "no-overlap") {
         joinWarnings += 1;
-        setScanLiveStatus(`Capturing… ${stitch.strips} strip(s) — scroll back a bit (no overlap)`);
+        setScanLiveStatus(`Capturing… ${passLabel(stitch.strips)} — scroll back a bit (no overlap)`);
       } else {
         lastSig = settled;
       }
@@ -1237,7 +1820,7 @@ const runLiveStitchScan = async (): Promise<void> => {
     appendSettledCrop(stitch);
 
     if (!stitch.composite || stitch.composite.height < 32) {
-      showToast("Nothing captured — keep the storage open and try again.", "bad");
+      showToast("Nothing captured — keep the storage open and try again.", "error");
       return;
     }
 
@@ -1263,7 +1846,7 @@ const runLiveStitchScan = async (): Promise<void> => {
       {
         interfaceKind: located.kind,
         advancedMatching: true,
-        debugOverlay: false,
+        debugOverlay: isDevToolsActive(),
         scrolling: false,
         fast: false,
       },
@@ -1279,16 +1862,16 @@ const runLiveStitchScan = async (): Promise<void> => {
     scanPasses = stitch.strips;
     const warn =
       joinWarnings > 0
-        ? ` (${joinWarnings} strip(s) needed more overlap — check the preview)`
+        ? ` (${passLabel(joinWarnings)} needed more overlap — check the preview)`
         : "";
     showToast(
       result.hits.length
-        ? `Found ${result.hits.length} item type(s) from ${stitch.strips} strip(s).${warn}`
-        : `Stitched ${stitch.strips} strip(s) but nothing matched.${warn}`,
-      result.hits.length ? "good" : "bad",
+        ? `Found ${result.hits.length} item type(s) from ${passLabel(stitch.strips)}.${warn}`
+        : `Stitched ${passLabel(stitch.strips)} but nothing matched.${warn}`,
+      result.hits.length ? "detect" : "error",
     );
   } catch (error) {
-    showToast(error instanceof Error ? error.message : "The scan failed.", "bad");
+    showToast(error instanceof Error ? error.message : "The scan failed.", "error");
   } finally {
     scanBusy = false;
     scanLive = false;
@@ -1302,10 +1885,14 @@ const startScan = (): void => {
 
 const applyScan = (): void => {
   if (!lastScan) return;
+  const scannedKind = lastScan.interfaceKind;
   for (const hit of lastScan.hits) {
     if (hit.type === "artefact") {
       const current = getCount(state, hit.artefact.id)[hit.kind];
       setCount(state, hit.artefact.id, hit.kind, current + hit.quantity);
+    } else if (hit.type === "tetracompass") {
+      // Bank is source of truth for owned pieces (same idea as materials).
+      setTetraPiece(state, hit.piece, hit.quantity);
     } else {
       // Material storage / bank: only archaeology dig materials are tracked.
       if (!isArchaeologyMaterial(hit.material)) continue;
@@ -1313,16 +1900,36 @@ const applyScan = (): void => {
     }
   }
   state.lastScanAt = new Date().toISOString();
+  const inWizard = needsScanWizard();
+  const expected = inWizard ? nextWizardStep() : null;
+  if (inWizard && expected && scannedKind === expected) {
+    state.scanWizardDone[expected] = true;
+  } else if (inWizard && WIZARD_STEPS.includes(scannedKind as ScanWizardInterface)) {
+    state.scanWizardDone[scannedKind as ScanWizardInterface] = true;
+  }
   saveStateNow(state);
-  showToast(`Saved ${lastScan.hits.length} item type(s) to your list.`);
+  showToast(`Saved ${lastScan.hits.length} item type(s) to your list.`, "good");
   lastScan = null;
+
+  if (inWizard) {
+    render();
+    return;
+  }
   render();
 };
 
-const learnedKeyForHit = (hit: ScanHit): string =>
+const scanHitLabel = (hit: ScanHit): string =>
   hit.type === "artefact"
-    ? artefactLearnedKey(hit.artefact.id, hit.kind)
-    : materialLearnedKey(hit.material.id);
+    ? hit.artefact.name
+    : hit.type === "material"
+      ? hit.material.name
+      : tetraPieceLabel(hit.piece);
+
+const learnedKeyForHit = (hit: ScanHit): string => {
+  if (hit.type === "artefact") return artefactLearnedKey(hit.artefact.id, hit.kind);
+  if (hit.type === "material") return materialLearnedKey(hit.material.id);
+  return `tetra:${hit.piece}`;
+};
 
 const hitFromLearnedKey = (key: string, quantity: number): ScanHit | null => {
   const parsed = parseLearnedKey(key);
@@ -1349,7 +1956,7 @@ const learnUnresolved = async (index: number): Promise<void> => {
   const select = document.querySelector<HTMLSelectElement>(`select[data-teach="${index}"]`);
   const key = select?.value;
   if (!key) {
-    showToast("Pick the item this icon is first.", "bad");
+    showToast("Pick the item this icon is first.", "error");
     return;
   }
 
@@ -1362,11 +1969,7 @@ const learnUnresolved = async (index: number): Promise<void> => {
     const existing = lastScan.hits.find((other) => learnedKeyForHit(other) === key);
     if (existing) existing.quantity += slot.quantity;
     else lastScan.hits.push(hit);
-    lastScan.hits.sort((a, b) => {
-      const nameA = a.type === "artefact" ? a.artefact.name : a.material.name;
-      const nameB = b.type === "artefact" ? b.artefact.name : b.material.name;
-      return nameA.localeCompare(nameB);
-    });
+    lastScan.hits.sort((a, b) => scanHitLabel(a).localeCompare(scanHitLabel(b)));
   }
 
   // The slot is named now, so it is neither unresolved nor a near miss.
@@ -1376,11 +1979,9 @@ const learnUnresolved = async (index: number): Promise<void> => {
   if (!lastScan.unresolved.length) lastScan.nearMisses = [];
 
   const label = hit
-    ? hit.type === "artefact"
-      ? `${hit.artefact.name} (${hit.kind})`
-      : hit.material.name
+    ? scanHitLabel(hit) + (hit.type === "artefact" ? ` (${hit.kind})` : "")
     : "icon";
-  showToast(`Learned ${label} — it will match on its own next scan.`);
+  showToast(`Learned ${label} — it will match on its own next scan.`, "good");
   render();
 };
 
@@ -1414,7 +2015,7 @@ const learnFromHover = async (key: string, label: string, dataUrl?: string): Pro
   const { clearTargetCache } = await import("./scanner");
   clearTargetCache();
   if (!lastScan) {
-    showToast(`Learned ${label} — it will match on the next scan.`);
+    showToast(`Learned ${label} — it will match on the next scan.`, "good");
     return;
   }
   const taughtCell = cellTeach ?? (
@@ -1450,11 +2051,7 @@ const learnFromHover = async (key: string, label: string, dataUrl?: string): Pro
     const existing = lastScan.hits.find((other) => learnedKeyForHit(other) === key);
     if (!existing) {
       lastScan.hits.push(hit);
-      lastScan.hits.sort((a, b) => {
-        const nameA = a.type === "artefact" ? a.artefact.name : a.material.name;
-        const nameB = b.type === "artefact" ? b.artefact.name : b.material.name;
-        return nameA.localeCompare(nameB);
-      });
+      lastScan.hits.sort((a, b) => scanHitLabel(a).localeCompare(scanHitLabel(b)));
     } else if (taughtCell && taughtSlot?.kind === "miss") {
       existing.quantity += quantity;
     } else if (taughtCell && taughtSlot?.kind === "hit") {
@@ -1493,7 +2090,7 @@ const learnFromHover = async (key: string, label: string, dataUrl?: string): Pro
     cellTeach = null;
     pendingTeachConfirm = null;
     hoverTeachHint = "";
-    showToast(`Learned ${label} from that slot.`);
+    showToast(`Learned ${label} from that slot.`, "good");
     render();
     return;
   }
@@ -1504,8 +2101,39 @@ const learnFromHover = async (key: string, label: string, dataUrl?: string): Pro
     const still = lastScan!.unresolved.some((slot) => slot.cell === miss.cell);
     return still;
   });
+
+  // Compact “+” add: no bank cell — append a hit-looking preview tile so it shows up.
+  if (COMPACT_SCAN_PREVIEW && !taughtCell) {
+    const iconPath = iconPathForLearnedKey(key);
+    const maxRow = lastScan.debugSlots.reduce((m, s) => Math.max(m, s.row), -1);
+    lastScan.debugSlots.push({
+      row: maxRow + 1,
+      column: 0,
+      key: (() => {
+        const parsed = parseLearnedKey(key);
+        if (!parsed) return key;
+        return parsed.type === "artefact"
+          ? `${parsed.id}:${parsed.kind}`
+          : `mat:${parsed.id}`;
+      })(),
+      name: label,
+      quantity,
+      iconPath: iconPath || "",
+      kind: "hit",
+      cropDataUrl: dataUrl,
+    });
+    if (hit) {
+      const existing = lastScan.hits.find((other) => learnedKeyForHit(other) === key);
+      if (existing && existing.quantity < quantity) existing.quantity = quantity;
+    }
+    hoverTeachHint = "";
+    showToast(`Added ${label}.`, "good");
+    render();
+    return;
+  }
+
   hoverTeachHint = `Learned ${label}. Hover another unmatched icon, or stop hover teach.`;
-  showToast(`Learned ${label} from tooltip.`);
+  showToast(`Learned ${label} from tooltip.`, "good");
   render();
 };
 
@@ -1557,12 +2185,12 @@ const cellScreenGate = (
 const startCellTeach = (row: number, column: number): void => {
   if (!lastScan) return;
   if (pendingTeachConfirm) {
-    showToast("Confirm or cancel the pending name first.", "bad");
+    showToast("Confirm or cancel the pending name first.", "error");
     return;
   }
   const mapped = cellScreenGate(lastScan, row, column);
   if (!mapped) {
-    showToast("That cell has no icon crop to teach.", "bad");
+    showToast("That cell has no icon crop to teach.", "error");
     return;
   }
 
@@ -1570,7 +2198,7 @@ const startCellTeach = (row: number, column: number): void => {
     const place = storagePlaceLabel(lastScan.interfaceKind);
     showToast(
       `That icon isn’t in the current ${place} view. Scroll to it and scan again, or pick a cell that’s still on screen.`,
-      "bad",
+      "error",
     );
     return;
   }
@@ -1610,7 +2238,7 @@ const startCellTeach = (row: number, column: number): void => {
             taught.trackable
               ? `Captured “${taught.label}” — confirm to learn it.`
               : `Read “${taught.label}” — not a trackable item.`,
-            taught.trackable ? "good" : "bad",
+            taught.trackable ? "detect" : "error",
           );
           render();
         },
@@ -1626,7 +2254,7 @@ const startCellTeach = (row: number, column: number): void => {
     hoverTeachHint = "";
     showToast(
       error instanceof Error ? error.message : "Could not start cell teach.",
-      "bad",
+      "error",
     );
     render();
   }
@@ -1646,17 +2274,17 @@ const applyManualTeachName = (): void => {
   const select = document.querySelector<HTMLSelectElement>("#teach-name-pick");
   const key = select?.value?.trim() ?? "";
   if (!key) {
-    showToast("Pick an item name first.", "bad");
+    showToast("Pick an item name first.", "error");
     return;
   }
   const parsed = parseLearnedKey(key);
   if (!parsed) {
-    showToast("That name isn’t valid.", "bad");
+    showToast("That name isn’t valid.", "error");
     return;
   }
   const mapped = cellScreenGate(lastScan, cellTeach.row, cellTeach.column);
   if (!mapped) {
-    showToast("That cell has no icon crop to teach.", "bad");
+    showToast("That cell has no icon crop to teach.", "error");
     return;
   }
 
@@ -1706,7 +2334,7 @@ const ignoreCellTeach = (): void => {
       slot.kind === "hit",
   );
   if (!miss?.cropDataUrl && !hit) {
-    showToast("That slot can’t be ignored.", "bad");
+    showToast("That slot can’t be ignored.", "error");
     return;
   }
   const unresolvedIndex = miss?.cropDataUrl
@@ -1727,14 +2355,14 @@ const ignoreCellTeach = (): void => {
   lastScan.debugSlots = lastScan.debugSlots.filter(
     (slot) => !(slot.row === taught.row && slot.column === taught.column),
   );
-  showToast("Ignored — that icon will not be listed again.");
+  showToast("Ignored — that icon will not be listed again.", "bad");
   render();
 };
 
 const confirmPendingTeach = (): void => {
   const pending = pendingTeachConfirm;
   if (!pending?.trackable || !pending.key) {
-    showToast("That isn’t a trackable item — ignore the slot instead.", "bad");
+    showToast("That isn’t a trackable item — ignore the slot instead.", "error");
     return;
   }
   void learnFromHover(pending.key, pending.label, pending.dataUrl);
@@ -1750,6 +2378,33 @@ const cancelPendingTeachConfirm = (): void => {
     showToast("Cancelled — hover the slot again when ready.");
     return;
   }
+  render();
+};
+
+const startCompactAddItem = (): void => {
+  if (isHoverTeachActive()) {
+    stopHoverTeach();
+    hoverTeachHint = "";
+    showToast("Add cancelled.");
+    render();
+    return;
+  }
+  cellTeach = null;
+  pendingTeachConfirm = null;
+  hoverTeachHint = "Hover the missed item in your bank — watch for the name in the top-left.";
+  showToast("Hover the item in your bank to add it.");
+  startHoverTeach(
+    (taught) => {
+      stopHoverTeach();
+      hoverTeachHint = "";
+      void learnFromHover(taught.key, taught.label, taught.dataUrl);
+    },
+    (message) => {
+      hoverTeachHint = message;
+      const live = document.querySelector("#teach-hud-live");
+      if (live) live.textContent = message;
+    },
+  );
   render();
 };
 
@@ -1787,69 +2442,172 @@ const ignoreUnresolved = (index: number): void => {
   lastScan.unresolved.splice(index, 1);
   lastScan.nearMisses = lastScan.nearMisses.filter((miss) => miss.cell !== ignoredCell);
   if (!lastScan.unresolved.length) lastScan.nearMisses = [];
-  showToast("Ignored — that icon will not be listed again.");
+  showToast("Ignored — that icon will not be listed again.", "bad");
   render();
 };
 
-const ensureWatcherRunning = async (): Promise<void> => {
-  if (watcher?.running || watcherStarting) return;
+const ensureCompanionWatcherRunning = async (): Promise<void> => {
+  if (companionWatcher?.running || companionWatcherStarting) {
+    syncCompanionModeTimer();
+    return;
+  }
 
   const status = getAlt1Status();
-  if (!status.available) {
-    return;
-  }
-  if (!status.pixelPermission || !status.linked) {
+  // Pixel permission is enough to capture; rsLinked can flap and was
+  // leaving the watcher stuck on "off" / flashing the mode card.
+  if (!status.available || !status.pixelPermission) {
+    syncCompanionModeTimer();
     return;
   }
 
-  watcherStarting = true;
+  companionWatcherStarting = true;
+  syncCompanionModeTimer();
   try {
     void ensureMaterialPrices();
-    if (!watcher) {
-      const { ExcavationWatcher } = await import("./watcher");
-      watcher = new ExcavationWatcher(
+    if (!companionWatcher) {
+      const { CompanionWatcher } = await import("./companion-watcher");
+      companionWatcher = new CompanionWatcher(
         (event) => {
           if (event.type === "artefact") {
             const current = getCount(state, event.artefact.id).damaged;
             setCount(state, event.artefact.id, "damaged", current + event.quantity);
-            showToast(`Found ${event.artefact.name} (+${event.quantity} damaged).`);
+            showToast(
+              `Found ${event.artefact.name} (+${event.quantity} damaged).`,
+              "good",
+            );
+          } else if (event.type === "tetracompass") {
+            const current = getTetraPiece(state, event.piece);
+            setTetraPiece(state, event.piece, current + event.quantity);
+            showToast(
+              `Found ${tetraPieceLabel(event.piece)} (+${event.quantity}).`,
+              "good",
+            );
           } else {
             const current = getMaterial(state, event.material.id);
             setMaterial(state, event.material.id, current + event.quantity);
-            showToast(`Excavated ${event.material.name} (+${event.quantity}).`);
+            showToast(
+              `Excavated ${event.material.name} (+${event.quantity}).`,
+              "good",
+            );
           }
           void recordWatcherFindValue(event).then(() => {
             syncExcavationRateTimer();
             refreshExcavationRateCard();
+            refreshCompanionModeCard();
           });
-          // setMaterial / setCount only persist; without a redraw the Inventory
-          // tab keeps showing the previous counts.
+          // Inventory counts live in state — redraw so Inventory/Overview stay in sync.
           render();
+          syncCompanionModeTimer();
         },
-        () => {
-          // Chat locate / permission messages — toast only on hard failures.
+        (event) => {
+          const { applied, materials } = applyRestoredArtefacts(
+            event.artefact,
+            event.quantity,
+          );
+          if (!applied) {
+            showToast(
+              `Saw restore of ${event.artefact.name} (${event.progress}), but no damaged copies were tracked.`,
+              "error",
+            );
+            lastRestoreToastAt = Date.now();
+            refreshCompanionModeCard();
+            return;
+          }
+          const matNote = materials.length
+            ? ` · materials withdrawn from inventory: ${materials
+                .map((m) => `${m.quantity}× ${m.name}`)
+                .join(", ")}`
+            : event.artefact.materials.some(
+                  (entry) => !entry.name.includes("(damaged)"),
+                )
+              ? " · (no tracked materials to withdraw)"
+              : "";
+          showToast(
+            applied === 1
+              ? `Restored ${event.artefact.name} (−1 damaged${matNote})`
+              : `Restored ${applied}× ${event.artefact.name} (−${applied} damaged${matNote})`,
+            "bad",
+          );
+          // Keep this toast visible — status probes must not overwrite it.
+          lastRestoreToastAt = Date.now();
+          render();
+          syncCompanionModeTimer();
+        },
+        (status) => {
+          // Don't clobber a fresh "Restored…" inventory toast with probe status.
+          if (Date.now() - lastRestoreToastAt < 2500) {
+            refreshCompanionModeCard();
+            return;
+          }
+          if (status.phase === "ready" || status.phase === "restoring") {
+            showToast(
+              status.artefactName
+                ? status.progress
+                  ? `Restoring · ${status.artefactName} ${status.progress}`
+                  : `Restoring · ${status.artefactName}`
+                : status.message || "Restoration window detected.",
+              "detect",
+            );
+          } else if (/^Restore:|^Looking for restoration/i.test(status.message)) {
+            showToast(status.message, "detect");
+          }
+          refreshCompanionModeCard();
+        },
+        (message) => {
+          // Near-miss paper toasts are noise when idle (dirt / UI false paper).
+          // Only surface them while excavating, and throttle repeats.
+          if (/Artefact popup: paper ok/i.test(message)) {
+            if (isDevToolsActive() && companionWatcher?.modeName === "excavate") {
+              const short = message.replace(/^Artefact popup:\s*/i, "Popup: ");
+              if (short !== lastPopupMissToast) {
+                lastPopupMissToast = short;
+                lastPopupMissToastAt = Date.now();
+                showToast(short, "detect");
+              } else if (Date.now() - lastPopupMissToastAt > 8_000) {
+                lastPopupMissToastAt = Date.now();
+                showToast(short, "detect");
+              }
+            }
+            console.info(message);
+            return;
+          }
+          console.info(message);
         },
       );
     }
-    watcher.start();
+    companionWatcher.start();
+    syncCompanionModeTimer();
   } catch (error) {
-    watcher = null;
+    companionWatcher = null;
     showToast(
       error instanceof Error
         ? error.message
-        : "Couldn’t start the excavation watcher.",
+        : "Couldn’t start the companion watcher.",
+      "error",
     );
   } finally {
-    watcherStarting = false;
+    companionWatcherStarting = false;
+    syncCompanionModeTimer();
   }
 };
 
 /* ---------------------------------------------------------------- events */
 
+const finishScanWizard = (toast?: string): void => {
+  state.scanWizardComplete = true;
+  saveStateNow(state);
+  wizardSkipped.clear();
+  view = "inventory";
+  if (toast) showToast(toast);
+  render();
+};
+
 const completeSetup = (): void => {
   state.setupComplete = true;
+  resetScanWizardProgress(state);
+  wizardSkipped.clear();
+  lastScan = null;
   saveStateNow(state);
-  view = "dashboard";
   render();
 };
 
@@ -1867,7 +2625,7 @@ const loadHiscores = async (
 ): Promise<void> => {
   const name = document.querySelector<HTMLInputElement>(nameSelector)!.value.trim();
   if (!name) {
-    showToast("Enter your RuneScape display name first.", "bad");
+    showToast("Enter your RuneScape display name first.", "error");
     return;
   }
 
@@ -1881,13 +2639,13 @@ const loadHiscores = async (
     state.level = Math.min(120, result.level);
     state.xp = result.xp;
     saveStateNow(state);
-    showToast(`Loaded level ${state.level} from ${result.source}.`);
+    showToast(`Loaded level ${state.level} from ${result.source}.`, "good");
     if (thenSetup) completeSetup();
     else render();
   } catch (error) {
     button.disabled = false;
     button.textContent = original;
-    showToast(error instanceof Error ? error.message : "Could not load hiscores.", "bad");
+    showToast(error instanceof Error ? error.message : "Could not load hiscores.", "error");
   }
 };
 
@@ -1918,7 +2676,7 @@ const handleClick = (event: MouseEvent): void => {
   if (!button || button.disabled) return;
   const {
     view: viewName, adjust, materialAdjust, collapse, filter,
-    theme, kind, delta, favorite,
+    theme, kind, delta, favorite, tetraAdjust,
   } = button.dataset;
 
   if (favorite) {
@@ -1949,14 +2707,41 @@ const handleClick = (event: MouseEvent): void => {
     const input = document.querySelector<HTMLInputElement>(`input[data-material-count="${materialAdjust}"]`);
     if (input) input.value = String(next);
     markOwned(`[data-material-row="${materialAdjust}"]`, next > 0);
+  } else if (tetraAdjust) {
+    const piece = tetraAdjust as TetraPieceId;
+    if (!TETRA_PIECE_IDS.includes(piece)) return;
+    const next = setTetraPiece(
+      state,
+      piece,
+      getTetraPiece(state, piece) + Number(delta),
+    );
+    const input = document.querySelector<HTMLInputElement>(
+      `input[data-tetra-count="${piece}"]`,
+    );
+    if (input) input.value = String(next);
+    markOwned(`[data-tetra-row="${piece}"]`, next > 0);
+    if (view === "dashboard") render();
+    else if (view === "inventory" && inventorySection === "artefacts") {
+      refresh("#artefact-groups", renderArtefactGroups);
+    }
+  } else if (button.id === "assemble-tetra") {
+    if (assembleTetraCompass(state)) {
+      showToast("Marked one tetracompass assembled (−1 of each piece).", "bad");
+      render();
+    }
   } else if (collapse) {
     if (collapsed.has(collapse)) collapsed.delete(collapse);
     else collapsed.add(collapse);
-    if (collapse.startsWith("material:")) refresh("#material-list", renderMaterialRows);
+    if (collapse.startsWith("overview:")) render();
+    else if (collapse.startsWith("material:")) refresh("#material-list", renderMaterialRows);
     else refresh("#artefact-groups", renderArtefactGroups);
   } else if (filter) {
     collectionFilter = filter;
     render();
+  } else if (button.id === "force-idle-mode") {
+    companionWatcher?.resumeIdle();
+    showToast("Watcher forced to idle");
+    refreshCompanionModeCard();
   } else if (button.id === "stop-scan") {
     finishLiveScan();
   } else if (theme) {
@@ -1974,7 +2759,7 @@ const handleClick = (event: MouseEvent): void => {
     const keys =
       inventorySection === "materials"
         ? MATERIAL_CATEGORIES.map((category) => `material:${category}`)
-        : CULTURES.map((culture) => `culture:${culture}`);
+        : ["culture:Tetracompass", ...CULTURES.map((culture) => `culture:${culture}`)];
     if (keys.some((key) => collapsed.has(key))) keys.forEach((key) => collapsed.delete(key));
     else keys.forEach((key) => collapsed.add(key));
     render();
@@ -2000,6 +2785,8 @@ const handleClick = (event: MouseEvent): void => {
     confirmPendingTeach();
   } else if (button.id === "cancel-cell-teach-confirm") {
     cancelPendingTeachConfirm();
+  } else if (button.id === "compact-add-item") {
+    startCompactAddItem();
   } else if (button.id === "hover-teach") {
     toggleHoverTeach();
   } else if (button.dataset.teachSave) {
@@ -2009,20 +2796,13 @@ const handleClick = (event: MouseEvent): void => {
   } else if (button.id === "forget-ignored") {
     if (!confirmDestructive("forget-ignored", "Clear all ignored icons?")) return;
     clearIgnored();
-    showToast("Ignored icons cleared.");
+    showToast("Ignored icons cleared.", "bad");
     render();
   } else if (button.id === "forget-learned") {
     if (!confirmDestructive("forget-learned", "Clear all taught icons?")) return;
     clearLearned();
     void import("./scanner").then(({ clearTargetCache }) => clearTargetCache());
-    showToast("Taught icons cleared.");
-    render();
-  } else if (button.id === "clear-inventory") {
-    if (!confirmDestructive("clear-inventory", "Clear every saved artefact and material count?")) return;
-    state.inventory = {};
-    state.materials = {};
-    saveStateNow(state);
-    showToast("Saved list cleared.");
+    showToast("Taught icons cleared.", "bad");
     render();
   } else if (button.id === "goto-manual") {
     state.entryMode = "manual";
@@ -2045,16 +2825,38 @@ const handleClick = (event: MouseEvent): void => {
   } else if (button.id === "save-profile") {
     readProfileFields("#display-name", "#manual-level", "#manual-xp");
     saveStateNow(state);
-    showToast("Profile saved.");
+    showToast("Profile saved.", "detect");
     render();
-  } else if (button.id === "reset-setup") {
-    state.setupComplete = false;
-    manualSetup = false;
+  } else if (button.id === "rescan-storage") {
+    if (!confirmDestructive(
+      "rescan-storage",
+      "Clear all saved artefacts and materials, then run the storage scan again?",
+    )) return;
+    state.inventory = {};
+    state.materials = {};
+    state.tetraPieces = emptyTetraPieces();
+    // Keep profile, favourites, theme, and taught icons — only re-scan storage.
+    resetScanWizardProgress(state);
+    wizardSkipped.clear();
+    lastScan = null;
     saveStateNow(state);
     render();
+  } else if (button.id === "wizard-skip-step") {
+    const step = nextWizardStep();
+    if (step) wizardSkipped.add(step);
+    lastScan = null;
+    render();
+  } else if (button.id === "wizard-skip-all") {
+    for (const step of WIZARD_STEPS) {
+      if (!state.scanWizardDone[step]) wizardSkipped.add(step);
+    }
+    lastScan = null;
+    render();
+  } else if (button.id === "wizard-finish") {
+    finishScanWizard();
   } else if (button.id === "export-data") {
     exportState(state);
-    showToast("Backup exported.");
+    showToast("Backup exported.", "detect");
   }
 };
 
@@ -2071,19 +2873,42 @@ const handleChange = async (event: Event): Promise<void> => {
     const next = setMaterial(state, input.dataset.materialCount, Number(input.value));
     input.value = String(next);
     markOwned(`[data-material-row="${input.dataset.materialCount}"]`, next > 0);
+  } else if (input.dataset.tetraCount) {
+    const piece = input.dataset.tetraCount as TetraPieceId;
+    if (!TETRA_PIECE_IDS.includes(piece)) return;
+    const next = setTetraPiece(state, piece, Number(input.value));
+    input.value = String(next);
+    markOwned(`[data-tetra-row="${piece}"]`, next > 0);
+    if (view === "dashboard") render();
+    else if (view === "inventory" && inventorySection === "artefacts") {
+      refresh("#artefact-groups", renderArtefactGroups);
+    }
   } else if (input.id === "compact-toggle") {
     state.compact = input.checked;
     saveStateNow(state);
+    render();
+  } else if (input.id === "dev-mode-toggle") {
+    if (!ENABLE_DEV_TOOLS) return;
+    state.devMode = input.checked;
+    setDevModeEnabled(state.devMode);
+    saveStateNow(state);
+    if (!state.devMode) {
+      void import("./restore-watcher").then(({ clearRestoreOutlinesForDev }) => {
+        clearRestoreOutlinesForDev();
+      });
+    }
+    syncCompanionModeTimer();
     render();
   } else if (input.id === "import-data") {
     const file = input.files?.[0];
     if (!file) return;
     try {
       state = await importState(file);
-      showToast("Backup imported.");
+      setDevModeEnabled(state.devMode);
+      showToast("Backup imported.", "good");
       render();
     } catch {
-      showToast("That file is not a valid companion backup.", "bad");
+      showToast("That file is not a valid companion backup.", "error");
     }
   }
 };

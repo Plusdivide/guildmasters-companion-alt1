@@ -1,0 +1,14 @@
+{
+  "basey": 12,
+  "spacewidth": 1,
+  "treshold": 0.3,
+  "color": [
+    255,
+    255,
+    255
+  ],
+  "unblendmode": "blackbg",
+  "shadow": false,
+  "chars": "ABCDEFGHIKLMNOPQRSTUVWYZabcdefghijklmnopqrstuvwxyz0123456789'():,.-!?",
+  "seconds": ".,'!:;"
+}

@@ -13,6 +13,11 @@ declare global {
       rsActive?: boolean;
       compatEnabled?: boolean;
       identifyAppUrl: (url: string) => unknown;
+      /**
+       * Register a global function name for on-screen XP-rise events.
+       * Requires Gamestate permission. Pass "" to clear.
+       */
+      xpRiseListener?: (callback: string) => boolean;
       bindRegion?: (x: number, y: number, w: number, h: number) => number;
       bindReadColorString?: (
         id: number,
@@ -109,18 +114,45 @@ export const identifyAlt1App = (): void => {
 // Recognition is deliberately isolated here. It only reads pixels and never sends
 // mouse or keyboard input to RuneScape. Interface-specific image references will be
 // calibrated against screenshots before automatic quantity writes are enabled.
-export const matchArtefactText = (text: string, artefacts: Artefact[]): Artefact | null => {
-  const normalized = text
+const normalizeArtefactNeedle = (text: string): string =>
+  text
     .toLowerCase()
     .replace(/[’']/g, "'")
+    .replace(/\(damaged\)/gi, "damaged")
     .replace(/[^a-z0-9' -]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
-  return (
-    artefacts.find((artefact) => {
-      const restored = artefact.name.toLowerCase();
-      const damaged = artefact.damagedName.toLowerCase();
-      return normalized.includes(restored) || normalized.includes(damaged);
-    }) ?? null
-  );
+
+const compactArtefactNeedle = (text: string): string =>
+  normalizeArtefactNeedle(text).replace(/ /g, "");
+
+export const matchArtefactText = (text: string, artefacts: Artefact[]): Artefact | null => {
+  const normalized = normalizeArtefactNeedle(text);
+  const compact = compactArtefactNeedle(text);
+  if (normalized.length < 4 && compact.length < 4) return null;
+
+  // Prefer the longest name hit so short substrings don't steal the match.
+  // Also compare space-stripped forms — dig OCR often inserts 1px letter gaps as spaces.
+  let best: Artefact | null = null;
+  let bestLen = 0;
+  for (const artefact of artefacts) {
+    const restored = normalizeArtefactNeedle(artefact.name);
+    const damaged = normalizeArtefactNeedle(artefact.damagedName);
+    const restoredC = restored.replace(/ /g, "");
+    const damagedC = damaged.replace(/ /g, "");
+    if (
+      (normalized.includes(damaged) || compact.includes(damagedC)) &&
+      damagedC.length > bestLen
+    ) {
+      best = artefact;
+      bestLen = damagedC.length;
+    } else if (
+      (normalized.includes(restored) || compact.includes(restoredC)) &&
+      restoredC.length > bestLen
+    ) {
+      best = artefact;
+      bestLen = restoredC.length;
+    }
+  }
+  return best;
 };

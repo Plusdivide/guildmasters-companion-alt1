@@ -46,8 +46,23 @@ export type BankStitchResult = {
   slotSize: number;
   claims: BankStitchClaim[];
   unresolved: BankStitchUnresolved[];
-  /** Slot centres ignored as non-archaeology (e.g. tetracompass pieces). */
+  /** Tetracompass pieces claimed for the dig tracker (not archaeology inventory). */
+  tetraClaims: BankTetraClaim[];
+  /** @deprecated Prefer tetraClaims; kept for older diag scripts (same centres). */
   blanks: { x: number; y: number }[];
+};
+
+export type BankTetraClaim = {
+  piece: "left" | "right" | "dial" | "needle";
+  centreX: number;
+  centreY: number;
+  precision: number;
+  recall: number;
+};
+
+export type BankTetraSprite = {
+  piece: "left" | "right" | "dial" | "needle";
+  fit: MatchSprite;
 };
 
 const SLOT_MIN_INK = 40;
@@ -58,9 +73,9 @@ const SLOT_MIN_INK = 40;
  * hit projection-attuner at 78% / 48% recall; genuine redraws sit ≥ ~75%.
  */
 const BANK_REDRAWN_MIN_RECALL = 0.55;
-/** Tetracompass pieces / similar — treat as blank for archaeology matching. */
-const BLANK_PRECISION = 0.85;
-const BLANK_RECALL = 0.35;
+/** Tetracompass pieces — high precision; small pieces allow lower recall. */
+const TETRA_PRECISION = 0.85;
+const TETRA_RECALL = 0.35;
 
 const cellContent = (
   pixels: ImageData,
@@ -163,6 +178,15 @@ const lineOf = (
 };
 
 export type MatchBankOptions = {
+  /**
+   * Tetracompass piece sprites with ids. Preferred over blankSprites so bank
+   * scans can feed the dig tracker.
+   */
+  tetraSprites?: BankTetraSprite[];
+  /**
+   * @deprecated Prefer tetraSprites. Anonymous fits still reserve the cell so
+   * archaeology matching does not invent a nearby artefact name.
+   */
   blankSprites?: MatchSprite[];
   /** Soft-locate parallelism. Default true. Set false for benches. */
   parallelSoftLocate?: boolean;
@@ -175,7 +199,17 @@ export const matchBankStorageStitch = async (
   options: MatchBankOptions = {},
 ): Promise<BankStitchResult> => {
   const softTargets = targets.filter((target) => target.fit);
-  const blankSprites = (options.blankSprites ?? []).filter((sprite) => sprite.count > 0);
+  const tetraSprites = (options.tetraSprites ?? []).filter(
+    (entry) => entry.fit.count > 0,
+  );
+  // Legacy anonymous blanks → treat as unknown piece tags for cell reservation.
+  const legacyBlanks = (options.blankSprites ?? [])
+    .filter((sprite) => sprite.count > 0)
+    .map((fit, index) => ({
+      piece: (["left", "right", "dial", "needle"] as const)[index] ?? "left",
+      fit,
+    }));
+  const tetraCatalog = tetraSprites.length ? tetraSprites : legacyBlanks;
 
   const anchors = await softLocateAllSprites(
     pixels,
@@ -193,6 +227,7 @@ export const matchBankStorageStitch = async (
       slotSize: 32,
       claims: [],
       unresolved: [],
+      tetraClaims: [],
       blanks: [],
     };
   }
@@ -208,6 +243,7 @@ export const matchBankStorageStitch = async (
       slotSize: 32,
       claims: [],
       unresolved: [],
+      tetraClaims: [],
       blanks: [],
     };
   }
@@ -249,18 +285,36 @@ export const matchBankStorageStitch = async (
   };
   const ranked: Pick[] = [];
   const nearestByCell = new Map<string, { target: BankStitchTarget; fit: Fit }>();
-  const blanks: { x: number; y: number }[] = [];
-  const blankCells = new Set<string>();
+  const tetraClaims: BankTetraClaim[] = [];
+  const tetraCells = new Set<string>();
 
-  const isBlankSprite = (slot: SlotContent, centreX: number, centreY: number): boolean => {
-    for (const sprite of blankSprites) {
-      if (!roughlyFits(pixels, sprite, slot, centreX, centreY)) continue;
-      const fit = measureFit(pixels, sprite, slot, centreX, centreY);
-      if (fit.precision >= BLANK_PRECISION && fit.recall >= BLANK_RECALL) return true;
-      // Needle/dial pieces are small — accept strong precision alone.
-      if (fit.precision >= 0.88 && fit.recall >= 0.3) return true;
+  const matchTetra = (
+    slot: SlotContent,
+    centreX: number,
+    centreY: number,
+  ): BankTetraClaim | null => {
+    let best: BankTetraClaim | null = null;
+    for (const entry of tetraCatalog) {
+      if (!roughlyFits(pixels, entry.fit, slot, centreX, centreY)) continue;
+      const fit = measureFit(pixels, entry.fit, slot, centreX, centreY);
+      const ok =
+        (fit.precision >= TETRA_PRECISION && fit.recall >= TETRA_RECALL) ||
+        (fit.precision >= 0.88 && fit.recall >= 0.3);
+      if (!ok) continue;
+      if (
+        !best ||
+        fit.precision + fit.recall > best.precision + best.recall
+      ) {
+        best = {
+          piece: entry.piece,
+          centreX,
+          centreY,
+          precision: fit.precision,
+          recall: fit.recall,
+        };
+      }
     }
-    return false;
+    return best;
   };
 
   for (const centreY of rows) {
@@ -268,9 +322,10 @@ export const matchBankStorageStitch = async (
       const slot = readSlot(pixels, centreX, centreY, slotSize);
       if (!isOccupied(centreX, centreY, slot)) continue;
       const key = `${centreX.toFixed(1)},${centreY.toFixed(1)}`;
-      if (isBlankSprite(slot, centreX, centreY)) {
-        blanks.push({ x: centreX, y: centreY });
-        blankCells.add(key);
+      const tetra = matchTetra(slot, centreX, centreY);
+      if (tetra) {
+        tetraClaims.push(tetra);
+        tetraCells.add(key);
         continue;
       }
       let nearest: { target: BankStitchTarget; fit: Fit } | null = null;
@@ -311,7 +366,7 @@ export const matchBankStorageStitch = async (
   const claims: BankStitchClaim[] = [];
   for (const pick of ranked) {
     const key = cellKey(pick.centreX, pick.centreY);
-    if (blankCells.has(key) || takenCells.has(key) || takenTargets.has(pick.target)) {
+    if (tetraCells.has(key) || takenCells.has(key) || takenTargets.has(pick.target)) {
       continue;
     }
     takenCells.add(key);
@@ -329,7 +384,7 @@ export const matchBankStorageStitch = async (
   for (const centreY of rows) {
     for (const centreX of columns) {
       const key = cellKey(centreX, centreY);
-      if (blankCells.has(key) || takenCells.has(key)) continue;
+      if (tetraCells.has(key) || takenCells.has(key)) continue;
       const slot = readSlot(pixels, centreX, centreY, slotSize);
       if (!isOccupied(centreX, centreY, slot)) continue;
       const nearest = nearestByCell.get(key);
@@ -353,6 +408,7 @@ export const matchBankStorageStitch = async (
     slotSize,
     claims,
     unresolved,
-    blanks,
+    tetraClaims,
+    blanks: tetraClaims.map((claim) => ({ x: claim.centreX, y: claim.centreY })),
   };
 };

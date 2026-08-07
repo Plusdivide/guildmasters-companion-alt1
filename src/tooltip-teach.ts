@@ -1071,7 +1071,7 @@ export const startHoverTeach = (
 
       const parsed = parseItemName(cleaned);
       if (!parsed) {
-        onStatus?.(`“${cleaned}” isn’t a trackable item — pick a name below.`);
+        onStatus?.(`“${cleaned}” isn’t a trackable item.`);
         return;
       }
 

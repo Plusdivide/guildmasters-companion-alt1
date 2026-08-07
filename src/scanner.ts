@@ -54,7 +54,15 @@ export interface MaterialHit {
   edgeRow: boolean;
 }
 
-export type ScanHit = ArtefactHit | MaterialHit;
+export interface TetraPieceHit {
+  type: "tetracompass";
+  piece: "left" | "right" | "dial" | "needle";
+  quantity: number;
+  exact: boolean;
+  edgeRow: boolean;
+}
+
+export type ScanHit = ArtefactHit | MaterialHit | TetraPieceHit;
 
 export interface ScanResult {
   mode: ScanMode;
@@ -694,32 +702,40 @@ const loadPadlockSprite = (): Promise<MatchSprite | null> => {
   return padlockSprite;
 };
 
-// Tetracompass pieces sit in the bank but are not artefacts/materials — blank
-// those cells so soft matching does not invent a nearby shield name.
-const TETRA_BLANK_FILES = [
-  "tetracompass-piece-left.png",
-  "tetracompass-piece-right.png",
-  "tetracompass-piece-dial.png",
-  "tetracompass-piece-needle.png",
+// Tetracompass pieces sit in the bank — claim them for the dig tracker, not as
+// archaeology artefacts/materials.
+const TETRA_PIECE_FILES: { piece: "left" | "right" | "dial" | "needle"; file: string }[] = [
+  { piece: "left", file: "tetracompass-piece-left.png" },
+  { piece: "right", file: "tetracompass-piece-right.png" },
+  { piece: "dial", file: "tetracompass-piece-dial.png" },
+  { piece: "needle", file: "tetracompass-piece-needle.png" },
 ];
 
-let tetraBlankSprites: Promise<MatchSprite[]> | null = null;
+let tetraPieceSprites: Promise<
+  { piece: "left" | "right" | "dial" | "needle"; fit: MatchSprite }[]
+> | null = null;
 
-const loadTetraBlankSprites = (): Promise<MatchSprite[]> => {
-  tetraBlankSprites ??= (async () => {
+const loadTetraPieceSprites = (): Promise<
+  { piece: "left" | "right" | "dial" | "needle"; fit: MatchSprite }[]
+> => {
+  tetraPieceSprites ??= (async () => {
     const loaded = await Promise.all(
-      TETRA_BLANK_FILES.map(async (file) => {
+      TETRA_PIECE_FILES.map(async ({ piece, file }) => {
         try {
           const image = await decodeSprite(file);
-          return image ? prepareSprite(image) : null;
+          const fit = image ? prepareSprite(image) : null;
+          return fit ? { piece, fit } : null;
         } catch {
           return null;
         }
       }),
     );
-    return loaded.filter((sprite): sprite is MatchSprite => Boolean(sprite));
+    return loaded.filter(
+      (entry): entry is { piece: "left" | "right" | "dial" | "needle"; fit: MatchSprite } =>
+        Boolean(entry),
+    );
   })();
-  return tetraBlankSprites;
+  return tetraPieceSprites;
 };
 
 // Windows resize, so the box is deliberately generous: it only has to contain
@@ -988,6 +1004,9 @@ export const locateStitchCrop = async (
   let rows = clusterCentres(centres.map((c) => c.y));
 
   // Drop the backpack / equipment pane: first wide gap between columns.
+  // Bank: use the RIGHTMOST wide gap — exact seeds often skip material columns,
+  // so the first hole mid-grid is not the inventory (that was clipping live bank
+  // to ~half the pane). Workbench keeps first-gap (closed 5-col strip).
   let paneRight = Infinity;
   if (
     (detected.kind === "workbench" || detected.kind === "bank") &&
@@ -995,12 +1014,22 @@ export const locateStitchCrop = async (
   ) {
     const gaps = columns.slice(1).map((c, i) => c - columns[i]);
     const pitch = [...gaps].sort((a, b) => a - b)[Math.floor(gaps.length / 2)];
-    const cut = gaps.findIndex((gap) => gap > pitch * 1.55);
-    if (cut >= 0) {
-      paneRight = columns[cut] + pitch * 0.5;
-      columns = columns.slice(0, cut + 1);
-      const kept = centres.filter((c) => c.x <= paneRight);
-      rows = clusterCentres(kept.map((c) => c.y));
+    if (detected.kind === "bank") {
+      let cut = -1;
+      for (let index = 0; index < gaps.length; index += 1) {
+        if (gaps[index] > pitch * 1.55) cut = index;
+      }
+      if (cut >= 0) {
+        paneRight = columns[cut] + pitch * 0.5;
+      }
+    } else {
+      const cut = gaps.findIndex((gap) => gap > pitch * 1.55);
+      if (cut >= 0) {
+        paneRight = columns[cut] + pitch * 0.5;
+        columns = columns.slice(0, cut + 1);
+        const kept = centres.filter((c) => c.x <= paneRight);
+        rows = clusterCentres(kept.map((c) => c.y));
+      }
     }
   }
 
@@ -1071,45 +1100,59 @@ export const locateStitchCrop = async (
     paneRight = originX + pitchX * 5;
   }
 
-  // Bank windows resize (column/row count changes). Measure this window's left
-  // grid from seeds + the inventory gap, expand columns/rows to that pane.
-  // Blank floor under the last items is trimmed from the finished stitch.
+  // Bank windows resize (column/row count changes). Crop the full left storage
+  // pane from the title area → inventory gap — same idea as an offline still.
+  // Do NOT anchor left/top on the first exact seed (materials often miss exact,
+  // so seeds start mid-grid and live totals drop to ~half). Workbench unchanged.
   if (detected.kind === "bank") {
-    const originX = columns[0];
-    const originY = rows[0];
+    const seedOriginX = columns[0];
+    const seedPitchX = Math.max(
+      36,
+      Math.min(
+        48,
+        columns.length >= 2
+          ? (columns.at(-1)! - columns[0]) / (columns.length - 1)
+          : 42,
+      ),
+    );
+    pitchX = seedPitchX;
+    pitchY = Math.max(
+      32,
+      Math.min(44, rows.length >= 2 ? pitchY : pitchX * 0.85),
+    );
 
-    // Inventory cut from seeds, or probe for the first wide low-ink gap after
-    // the leftmost bank columns (works when the backpack had no seed hits).
-    if (!Number.isFinite(paneRight)) {
-      paneRight = probeBankPaneRight(
-        pixels,
-        detected.area,
-        originX,
-        pitchX,
-      );
-    }
+    // Always probe the inventory gap. Seed-column holes mid-grid can set a false
+    // paneRight above; do not trust that for the live crop width.
+    paneRight = probeBankPaneRight(
+      pixels,
+      detected.area,
+      Math.min(seedOriginX, detected.area.x + pitchX * 2),
+      pitchX,
+    );
 
-    const rightLimit = Number.isFinite(paneRight)
-      ? paneRight
-      : Math.min(pixels.width, originX + pitchX * 14);
-    // Search / filter strip sits under the slot grid.
-    const bottomLimit =
-      detected.area.y + detected.area.height - Math.max(48, pitchY * 1.15);
+    // Full pane: title-area left → inventory cut; title top → chrome above search.
+    const left = Math.max(0, Math.round(detected.area.x + 4));
+    const top = Math.max(0, Math.round(detected.area.y + 2));
+    const right = Math.min(
+      pixels.width,
+      Math.round(
+        Number.isFinite(paneRight)
+          ? paneRight
+          : detected.area.x + Math.min(detected.area.width, pitchX * 18),
+      ),
+    );
+    const bottom = Math.min(
+      pixels.height,
+      Math.round(detected.area.y + detected.area.height - Math.max(48, pitchY * 1.15)),
+    );
 
-    const expandedCols: number[] = [];
-    for (let x = originX; x <= rightLimit - pitchX * 0.35; x += pitchX) {
-      expandedCols.push(x);
-    }
-    if (expandedCols.length >= 2) columns = expandedCols;
-
-    // Visible slot rows for this window size (resize-safe). Include empty slots
-    // in the live crop so scrolling still feeds new items into the same rect;
-    // trailing blank floor is trimmed from the finished stitch before matching.
-    const candidateRows: number[] = [];
-    for (let y = originY; y <= bottomLimit - pitchY * 0.35; y += pitchY) {
-      candidateRows.push(y);
-    }
-    if (candidateRows.length >= 1) rows = candidateRows;
+    const crop: ScanArea = {
+      x: left,
+      y: top,
+      width: Math.max(40, right - left),
+      height: Math.max(40, bottom - top),
+    };
+    return { detected, crop };
   }
 
   const padX = pitchX * 0.5;
@@ -1176,8 +1219,9 @@ function probeWorkbenchChromeTop(
 
 /**
  * Find the right edge of the bank item grid (before backpack / equipment).
- * Walks right from the first slot column looking for a stretch wider than a
- * normal slot pitch with little icon ink — the gap before inventory.
+ * Walks across the title area looking for quiet gaps between busy strips.
+ * Prefers the RIGHTMOST qualifying gap — quieter mid-bank holes (skipped
+ * material columns / sparse junk) must not win over the inventory split.
  */
 function probeBankPaneRight(
   pixels: ImageData,
@@ -1185,7 +1229,7 @@ function probeBankPaneRight(
   originX: number,
   pitchX: number,
 ): number {
-  const top = Math.max(area.y, Math.round(originX > 0 ? area.y + 40 : area.y));
+  const top = Math.max(area.y, Math.round(area.y + 40));
   const bottom = Math.min(area.y + area.height - 60, pixels.height);
   const stripH = Math.max(20, bottom - top);
   if (stripH < 20) return area.x + area.width * 0.65;
@@ -1204,25 +1248,24 @@ function probeBankPaneRight(
     return ink;
   };
 
-  // Sample per half-pitch from a few columns in; bank stays busy, the gap dips.
-  const start = originX + pitchX * 2.5;
+  // Start near the left of the title area (not mid-grid seeds).
+  const start = Math.max(area.x + pitchX * 2, Math.min(originX, area.x + pitchX * 4));
   const end = Math.min(pixels.width - 8, area.x + area.width - 8);
   let bestGap = -1;
-  let bestScore = Infinity;
   for (let x = start; x < end - pitchX; x += pitchX * 0.5) {
     const gapInk = inkInStrip(x, x + pitchX * 1.2);
     const leftInk = inkInStrip(x - pitchX, x);
     const rightInk = inkInStrip(x + pitchX * 1.2, x + pitchX * 2.2);
-    // A real pane split: quiet gap between two busier regions (bank | inventory).
-    if (leftInk > 30 && rightInk > 20 && gapInk < leftInk * 0.45 && gapInk < bestScore) {
-      bestScore = gapInk;
+    // Quiet gap between two busier regions (bank | inventory). Keep updating so
+    // the rightmost match wins.
+    if (leftInk > 30 && rightInk > 20 && gapInk < leftInk * 0.45) {
       bestGap = x + pitchX * 0.6;
     }
   }
   if (bestGap > 0) return bestGap;
 
-  // Fallback: stop after ~12 columns (common max-ish bank width at 100% UI).
-  return Math.min(end, originX + pitchX * 12.5);
+  // Fallback: stop after ~17 columns (common bank width at 100% UI).
+  return Math.min(end, Math.max(originX, area.x + pitchX * 2) + pitchX * 17.5);
 };
 
 /**
@@ -2262,9 +2305,9 @@ export const scanScreen = async (
 
   if (bankStitchOffline) {
     const bankTargets = wikiStitchTargets();
-    const blankSprites = await loadTetraBlankSprites();
+    const tetraSprites = await loadTetraPieceSprites();
     const matched = await matchBankStorageStitch(pixels, bankTargets, onProgress, {
-      blankSprites,
+      tetraSprites,
     });
 
     // Offline parity: return matcher output as-is. Later chrome/lattice filters
@@ -2291,15 +2334,48 @@ export const scanScreen = async (
         ? `${target.artefact.id}:${target.kind}`
         : `mat:${target.material.id}`;
 
-    const blankCells = new Set(
-      matched.blanks.map(
-        (blank) =>
-          `${nearestIndex(rows, blank.y)},${nearestIndex(columns, blank.x)}`,
+    const tetraCells = new Set(
+      matched.tetraClaims.map(
+        (claim) =>
+          `${nearestIndex(rows, claim.centreY)},${nearestIndex(columns, claim.centreX)}`,
       ),
     );
 
     const merged = new Map<string, ScanHit>();
     const debugHits: DebugSlot[] = [];
+
+    for (const claim of matched.tetraClaims) {
+      const row = nearestIndex(rows, claim.centreY);
+      const column = nearestIndex(columns, claim.centreX);
+      const left = Math.round(claim.centreX - cellWidth / 2);
+      const top = Math.round(claim.centreY - cellHeight / 2);
+      const quantity = Math.max(1, readStackQuantity(pixels, left, top));
+      const key = `tetra:${claim.piece}`;
+      debugHits.push({
+        row,
+        column,
+        key,
+        name: `Tetracompass piece (${claim.piece})`,
+        quantity,
+        iconPath: `sprites-framed/tetracompass-piece-${claim.piece}.png`,
+        kind: "hit",
+        cropDataUrl: cropToDataUrl(pixels, left, top, cellWidth, cellHeight),
+      });
+      const existing = merged.get(key);
+      if (existing && existing.type === "tetracompass") {
+        existing.quantity += quantity;
+        existing.exact ||= claim.precision >= 0.95;
+      } else {
+        merged.set(key, {
+          type: "tetracompass",
+          piece: claim.piece,
+          quantity,
+          exact: claim.precision >= 0.95,
+          edgeRow: false,
+        });
+      }
+    }
+
     for (const claim of matched.claims) {
       const target = claim.target.ref as LoadedTarget;
       const centreX = claim.centreX;
@@ -2308,8 +2384,10 @@ export const scanScreen = async (
       const column = nearestIndex(columns, centreX);
       const left = Math.round(centreX - cellWidth / 2);
       const top = Math.round(centreY - cellHeight / 2);
-      const quantity = readStackQuantity(pixels, left, top);
-      if (quantity === 0) continue;
+      // Matcher already claimed the sprite. OCR "0" is a bank placeholder glyph /
+      // misread — same as tetra/workbench: keep the claim as quantity ≥ 1.
+      // (Do not drop claims here; that was silently cutting live bank totals.)
+      const quantity = Math.max(1, readStackQuantity(pixels, left, top));
 
       debugHits.push({
         row,
@@ -2356,7 +2434,7 @@ export const scanScreen = async (
       const row = nearestIndex(rows, entry.y);
       const column = nearestIndex(columns, entry.x);
       const cellKey = `${row},${column}`;
-      if (blankCells.has(cellKey) || taken.has(cellKey)) continue;
+      if (tetraCells.has(cellKey) || taken.has(cellKey)) continue;
       taken.add(cellKey);
 
       const left = Math.round(entry.x - cellWidth / 2);
@@ -2398,11 +2476,16 @@ export const scanScreen = async (
       }
     }
 
-    const hits = [...merged.values()].sort((a, b) => {
-      const nameA = a.type === "artefact" ? a.artefact.name : a.material.name;
-      const nameB = b.type === "artefact" ? b.artefact.name : b.material.name;
-      return nameA.localeCompare(nameB);
-    });
+    const hitName = (hit: ScanHit): string =>
+      hit.type === "artefact"
+        ? hit.artefact.name
+        : hit.type === "material"
+          ? hit.material.name
+          : `Tetracompass piece (${hit.piece})`;
+
+    const hits = [...merged.values()].sort((a, b) =>
+      hitName(a).localeCompare(hitName(b)),
+    );
 
     onProgress?.(targets.length, targets.length);
 

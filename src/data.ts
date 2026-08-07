@@ -1,7 +1,7 @@
 import rawData from "./data/archaeology.json";
 import spriteManifest from "./data/sprites.json";
 import type {
-  ArchaeologyData, Artefact, Collection, MaterialInfo, PlayerState,
+  ArchaeologyData, Artefact, Collection, MaterialInfo, PlayerState, TetraPieceId,
 } from "./types";
 import { getCount } from "./store";
 
@@ -30,6 +30,13 @@ export const materialIcon = (id: string): string => {
   const file = sprites.materials[id];
   return file ? `${base}sprites/${file}` : uiIcon("materials");
 };
+
+/** Tetracompass piece sprites ship beside materials (not in sprites.json). */
+export const tetraPieceIcon = (id: TetraPieceId): string =>
+  `${base}sprites/tetracompass-piece-${id}.png`;
+
+export const tetraPieceLabel = (id: TetraPieceId): string =>
+  `Tetracompass piece (${id})`;
 
 // Tradeable / shop items the workbench asks for that are not dug up at a site.
 // Kept out of the materials log and out of bank/material scans — this app only

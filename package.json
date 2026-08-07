@@ -11,9 +11,13 @@
     "build-framed-sprites": "node scripts/build-framed-sprites.mjs",
     "build": "vite build",
     "typecheck": "tsc --noEmit",
+    "test:restore": "node --experimental-strip-types scripts/test-restore-detect.mjs",
+    "test:craft": "tsx scripts/test-craft-detect.mjs",
+    "build:dialog-font": "node scripts/build-dialog-font-strip.mjs",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "tsx": "^4.23.5",
     "typescript": "~6.0.2",
     "vite": "^8.1.1"
   },

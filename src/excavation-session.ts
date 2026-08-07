@@ -1,14 +1,14 @@
 /**
  * Live excavation session for Overview GP/h.
  *
- * Fed by the same ExcavationWatcher finds that bump inventory. Idle after
+ * Fed by CompanionWatcher dig finds that bump inventory. Idle after
  * IDLE_MS with no finds → “not currently excavating”.
  *
  * Rate uses a session average blended with a short rolling window, then
  * exponential smoothing on the displayed value (same feel as in-game XP/GP
  * trackers — updates often, numbers ease instead of jumping).
  */
-const IDLE_MS = 120_000;
+const IDLE_MS = 60_000;
 /** Cap early-session inflation until enough time has passed. */
 const MIN_RATE_MS = 30_000;
 /** Recent-activity window mixed into the target rate. */

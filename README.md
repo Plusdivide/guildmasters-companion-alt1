@@ -1,6 +1,6 @@
 # Guildmaster’s Companion
 
-An Alt1 Toolkit app for RuneScape 3 Archaeology. Scan your storage, track artefacts and materials, watch excavation value while you dig, and see what collections you can finish with what’s already banked.
+An Alt1 Toolkit app for RuneScape 3 Archaeology. Scan your storage, track artefacts and materials, watch excavation value while you excavate, and see what collections you can finish with what’s already banked.
 
 **Live:** https://plusdivide.github.io/guildmasters-companion-alt1/
 
@@ -9,8 +9,8 @@ An Alt1 Toolkit app for RuneScape 3 Archaeology. Scan your storage, track artefa
 ## Features
 
 - **Scan storage** — bank, material storage, and Archaeology workbench, so the app knows what you own
-- **Track artefacts & materials** — damaged and restored artefacts plus dig materials in one place, easy to see what you have
-- **Live excavation gp/h** — accurate Grand Exchange value per hour from finds while you dig
+- **Track artefacts & materials** — damaged and restored artefacts plus excavation materials in one place, easy to see what you have
+- **Live excavation gp/h** — accurate Grand Exchange value per hour from finds while you excavate
 - **Restore costs** — materials (and GE value) needed to restore artefacts for collections
 - **Collection rewards** — chronotes, tetracompass pieces, and other rewards from sets you can complete with what’s banked
 
