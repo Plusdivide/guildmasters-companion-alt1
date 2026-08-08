@@ -4,7 +4,7 @@
  * Public release: set `ENABLE_DEV_TOOLS` to false — see docs/PUBLISH.md.
  * When false, the Settings toggle and all gated UI are omitted entirely.
  */
-export const ENABLE_DEV_TOOLS = true;
+export const ENABLE_DEV_TOOLS = false;
 
 let sessionEnabled = false;
 
