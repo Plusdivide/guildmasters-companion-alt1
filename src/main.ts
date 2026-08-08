@@ -776,21 +776,42 @@ const materialQuantity = (id: string, value: number, name: string): string => {
     </div>`;
 };
 
-const digSiteTip = (artefact: Artefact): string => {
-  const sites = artefact.sources.length
-    ? artefact.sources.join(" · ")
-    : "No dig site listed";
+/** Wiki order in data: excavation hotspot, then dig site. */
+const artefactFindLocationHtml = (artefact: Artefact): string => {
+  const parts = artefact.sources.filter((s) => s && s !== "None");
+  if (!parts.length) {
+    return `<div>Location</div><div>No excavation spot listed</div>`;
+  }
+  const [hotspot, digsite] = parts;
+  const lines = ["<div>Location</div>"];
+  if (digsite) lines.push(`<div>Dig site: ${esc(digsite)}</div>`);
+  if (hotspot) lines.push(`<div>Hotspot: ${esc(hotspot)}</div>`);
+  return lines.join("");
+};
+
+/** Shared artefact tip — inventory tiles and collection pieces. Returns HTML. */
+const artefactTip = (artefact: Artefact): string => {
   const count = getCount(state, artefact.id);
   const each = artefactRestoreCost(artefact);
-  const location = `Dig sites: ${sites}`;
-  if (each === null) return `Lv ${artefact.level}\n\n${location}`;
-  let restore = `Cost to restore: ${formatGp(each)} gp each`;
-  if (count.damaged > 1) {
-    restore += ` · ${formatGp(each * count.damaged)} gp for ${count.damaged} damaged`;
-  } else if (count.damaged === 1) {
-    restore += ` · ${formatGp(each)} gp for 1 damaged`;
+  let restore: string;
+  if (each === null) {
+    restore = "Restore cost: —";
+  } else {
+    restore = `Restore cost: ${formatGp(each)} gp each`;
+    if (count.damaged > 1) {
+      restore += ` · ${formatGp(each * count.damaged)} gp for ${count.damaged} damaged`;
+    } else if (count.damaged === 1) {
+      restore += ` · ${formatGp(each)} gp for 1 damaged`;
+    }
   }
-  return `${restore}\n\nLv ${artefact.level} · ${location}`;
+  /* Compact HTML — no interstitial text nodes (pre-line would turn them into gaps). */
+  return [
+    `<div>${esc(artefact.name)} · Lv ${artefact.level}</div>`,
+    `<div>${count.damaged} damaged · ${count.restored} restored</div>`,
+    `<div>${esc(restore)}</div>`,
+    `<div class="tip-gap" aria-hidden="true"></div>`,
+    artefactFindLocationHtml(artefact),
+  ].join("");
 };
 
 const materialTip = (material: MaterialInfo): string => {
@@ -867,7 +888,7 @@ const renderArtefactTile = (artefact: Artefact): string => {
           <span class="slot-tag">R</span>${quantityControl(artefact.id, "restored", count.restored)}
         </div>
       </div>
-      <div class="slot-tip" role="tooltip">${esc(digSiteTip(artefact))}</div>
+      <div class="slot-tip" role="tooltip">${artefactTip(artefact)}</div>
     </article>`;
 };
 
@@ -1111,8 +1132,9 @@ const renderCollectionCard = (
           if (!artefact) return "";
           const count = getCount(state, artefact.id);
           const total = count.damaged + count.restored;
-          return `<div class="piece ${total ? "have" : "missing"}" title="${esc(name)}: ${count.damaged} damaged, ${count.restored} restored">
+          return `<div class="piece ${total ? "have" : "missing"}">
           ${img(artefactIcon(artefact.id), "piece-icon")}<span>${total || "–"}</span>
+          <div class="slot-tip" role="tooltip">${artefactTip(artefact)}</div>
         </div>`;
         })
         .join("")}</div>
@@ -1577,7 +1599,7 @@ const renderScanResults = (opts?: { hideActions?: boolean }): string => {
       ${namedList}
       ${renderCapturedGrid(lastScan)}
       ${actions}
-      ${!lastScan.unresolved.length && lastScan.nearMisses.length ? `
+      ${!COMPACT_SCAN_PREVIEW && !lastScan.unresolved.length && lastScan.nearMisses.length ? `
         <details class="near-misses">
           <summary>Slots that were not matched (${lastScan.nearMisses.length})</summary>
           <p class="scan-hint">Closest unmatched icons — useful if something was skipped.</p>
@@ -1679,6 +1701,11 @@ const renderSettings = (): string => `
 /* ---------------------------------------------------------------- render */
 
 const render = (): void => {
+  // Full innerHTML rebuilds wipe scroll — keep the user's place (find toasts /
+  // watcher ticks used to yank the list back to the top every dig).
+  const scroller = document.querySelector<HTMLElement>(".app-body");
+  const savedScroll = scroller?.scrollTop ?? 0;
+
   document.documentElement.dataset.theme = state.theme;
   document.documentElement.dataset.density = state.compact ? "compact" : "roomy";
 
@@ -1703,6 +1730,9 @@ const render = (): void => {
   void ensureCompanionWatcherRunning();
   syncExcavationRateTimer();
   syncCompactPreviewScrollbar();
+
+  const next = document.querySelector<HTMLElement>(".app-body");
+  if (next && savedScroll > 0) next.scrollTop = savedScroll;
 };
 
 /* ----------------------------------------------------------- scan runner */
@@ -2932,6 +2962,57 @@ app.addEventListener("click", handleClick);
 app.addEventListener("change", (event) => void handleChange(event));
 app.addEventListener("input", handleInput);
 window.addEventListener("beforeunload", () => saveStateNow(state));
+
+/** Keep artefact tips inside the viewport (escape .app-body overflow). */
+const clearFixedArtefactTip = (tip: HTMLElement): void => {
+  tip.classList.remove("is-fixed");
+  tip.style.left = "";
+  tip.style.top = "";
+};
+
+const tipHostFrom = (target: EventTarget | null): HTMLElement | null => {
+  const el = (target as HTMLElement | null)?.closest?.(".piece, .slot-tile");
+  return el instanceof HTMLElement && app.contains(el) ? el : null;
+};
+
+const placeFixedArtefactTip = (host: HTMLElement): void => {
+  const tip = host.querySelector<HTMLElement>(":scope > .slot-tip");
+  if (!tip) return;
+  tip.classList.add("is-fixed");
+  tip.style.left = "0px";
+  tip.style.top = "0px";
+  const icon = host.getBoundingClientRect();
+  const box = tip.getBoundingClientRect();
+  const pad = 8;
+  let left = icon.left;
+  let top = icon.bottom + 4;
+  if (left + box.width > window.innerWidth - pad) {
+    left = Math.max(pad, window.innerWidth - box.width - pad);
+  }
+  if (left < pad) left = pad;
+  if (top + box.height > window.innerHeight - pad) {
+    top = Math.max(pad, icon.top - box.height - 4);
+  }
+  tip.style.left = `${Math.round(left)}px`;
+  tip.style.top = `${Math.round(top)}px`;
+};
+
+app.addEventListener("pointerover", (event) => {
+  const host = tipHostFrom(event.target);
+  if (!host) return;
+  const from = event.relatedTarget;
+  if (from instanceof Node && host.contains(from)) return;
+  placeFixedArtefactTip(host);
+});
+
+app.addEventListener("pointerout", (event) => {
+  const host = tipHostFrom(event.target);
+  if (!host) return;
+  const to = event.relatedTarget;
+  if (to instanceof Node && host.contains(to)) return;
+  const tip = host.querySelector<HTMLElement>(":scope > .slot-tip");
+  if (tip) clearFixedArtefactTip(tip);
+});
 
 identifyAlt1App();
 render();
